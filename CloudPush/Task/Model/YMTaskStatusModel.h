@@ -19,6 +19,30 @@
 //订单状态
 @property(nonatomic,copy)NSString* myTaskStatus;
 
+//待处理
+@property(nonatomic,strong)NSArray* pending;
+@property(nonatomic,strong)NSArray* taskProject;
+//审核中。
+@property(nonatomic,strong)NSArray* audit_count;
+@property(nonatomic,strong)NSArray* audit;
+//审核成功
+@property(nonatomic,strong)NSArray* orderSuccess;
+@property(nonatomic,strong)NSArray* success;
+
+
+//任务状态 1 待处理
+@property(nonatomic,copy)NSString* del_status;
+@property(nonatomic,copy)NSString* end_time;
+@property(nonatomic,copy)NSString* id;
+//价格
+@property(nonatomic,copy)NSString* price;
+
+@property(nonatomic,copy)NSString* task_title;
+
+//失效原因 
+@property(nonatomic,copy)NSString* audit_status;
+//图片链接
+@property(nonatomic,copy)NSString* imgPath;
 
 //+ (NSDictionary *)mj_replacedKeyFromPropertyName;//替换模型与字典中不同的key
 

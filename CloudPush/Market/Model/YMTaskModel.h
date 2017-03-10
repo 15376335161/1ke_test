@@ -31,6 +31,7 @@
 //总的单数
 @property(nonatomic,copy)NSString* task_nums;
 
+//0 已完成  1 进行中
 @property(nonatomic,strong)NSNumber* task_status;
 @property(nonatomic,copy)NSString* task_type_id;
 //任务标题

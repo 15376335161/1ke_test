@@ -29,7 +29,7 @@
    // headCell.model = self.model;
     
     headCell.outTimeLabel.text = [NSString stringWithFormat:@"截止日期：%@",_dicData[@"myTaskList"][@"end_time"]];
-    headCell.leftCountLabel.text = [NSString stringWithFormat:@"剩余单数：%d",([_dicData[@"myTaskList"][@"task_nums"] intValue] - [_dicData[@"myTaskList"][@"COUNT(id)"] intValue] )];
+    headCell.leftCountLabel.text = [NSString stringWithFormat:@"剩余单数：%d",([_dicData[@"myTaskList"][@"task_nums"] intValue] - [_dicData[@"myTaskList"][@"count_num"] intValue] )];
     //headCell.
     self.tableView.tableHeaderView = headCell;
     
@@ -57,12 +57,14 @@
         {
             if (indexPath.row == 0) {
                 YMTaskTitleCell * cell = [YMTaskTitleCell shareCell];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 // cell.model = self.model;
-                [cell.iconImgView sd_setImageWithURL:[NSURL URLWithString:@"imgPath"] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+                [cell.iconImgView sd_setImageWithURL:[NSURL URLWithString:self.dicData[@"myTaskList"][@"img_path"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
                  cell.titlLabel.text = self.dicData[@"myTaskList"][@"task_title"];
                 return cell;
             }else{
                 YMCommissionCell * cell = [YMCommissionCell shareCell];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.commissionLabel.text = [NSString stringWithFormat:@"佣金：¥%@元／单",self.dicData[@"myTaskList"][@"price"]];
                 [YMTool labelColorWithLabel:cell.commissionLabel font:Font(14) range:NSMakeRange(3, cell.commissionLabel.text.length - 3)  color:NavBarTintColor];
                 return cell;
@@ -72,6 +74,7 @@
         case 1:
         {
             YMReceFootCell* cell = [YMReceFootCell shareCell];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //去掉分割线
             cell.layoutMargins = UIEdgeInsetsZero;
             cell.separatorInset = UIEdgeInsetsMake(0, SCREEN_WIDTH, 0, 0);

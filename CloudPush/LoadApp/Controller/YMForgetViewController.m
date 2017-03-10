@@ -7,6 +7,7 @@
 //
 
 #import "YMForgetViewController.h"
+#import "YMResetPasswordController.h"
 
 @interface YMForgetViewController ()
 
@@ -34,6 +35,7 @@
     _nextBtn.backgroundColor = _nextBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
     //设置layer
     [YMTool viewLayerWithView:_getCodeBtn cornerRadius:4 boredColor:BackGroundColor borderWidth:1];
+    [YMTool viewLayerWithView:_nextBtn cornerRadius:4 boredColor:ClearColor borderWidth:1];
    
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -66,7 +68,6 @@
     
 }
 - (IBAction)getCodeBtnClick:(id)sender {
-
     if (_phoneTextFd.text.length == 0) {
         [MBProgressHUD showFail:@"请输入手机号码！" view:self.view];
         return;
@@ -77,14 +78,17 @@
     }
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
     [param setObject:_phoneTextFd.text forKey:@"phone"];
+    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"findPhoneCaptcha"];
     
-    [[HttpManger sharedInstance]callWebHTTPReqAPI:RegstSendCode params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
+    [[HttpManger sharedInstance]callWebHTTPReqAPI:ForgetSendCodeURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
         DDLog(@"res == %@",responseObject);
-        // NSString* status = responseObject[@"status"];
+        NSString* status = responseObject[@"status"];
         NSString* msg    = responseObject[@"msg"];
         //显示提示信息
         [MBProgressHUD showFail:msg view:self.view];
-        _timer   = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getCodeMessage) userInfo:nil repeats:YES];
+        if ([SUCCESS isEqualToString:status]) {
+             _timer   = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getCodeMessage) userInfo:nil repeats:YES];
+        }
     }];
 }
 -(void)getCodeMessage{
@@ -111,7 +115,41 @@
 #pragma mark - 按钮点击事情
 - (IBAction)nextBtnClick:(id)sender{
     DDLog(@"点击啦密码下一步");
+    if (_phoneTextFd.text.length == 0) {
+        [MBProgressHUD showFail:@"请输入手机号码！" view:self.view];
+        return;
+    }
+    if (![NSString isMobileNum:_phoneTextFd.text]) {
+        [MBProgressHUD showFail:@"手机号码有误，请重新输入！" view:self.view];
+        return;
+    }
+    if (_passwordTextFd.text.length < 4) {
+        [MBProgressHUD showFail:@"手机验证码格式不正确，请重新输入！" view:self.view];
+        return;
+    }
+    NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
+    [param setObject:_passwordTextFd.text forKey:@"phoneCode"];
+    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"findPhoneCaptcha"];
     
+    YMWeakSelf;
+    [[HttpManger sharedInstance]callWebHTTPReqAPI:ForgetCheckPhoneURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
+        
+        NSNumber* status = responseObject[@"status"];
+        NSString* msg    = responseObject[@"msg"];
+        if (status.longValue == 1) {
+            [kUserDefaults setObject:responseObject[@"data"][@"token"] forKey:kToken];
+            [kUserDefaults synchronize];
+            
+            YMResetPasswordController* rvc = [[YMResetPasswordController alloc]init];
+            rvc.title = @"找回密码-重置密码";
+            [weakSelf.navigationController pushViewController:rvc animated:YES];
+        }else{
+          //显示提示信息
+          [MBProgressHUD showFail:msg view:weakSelf.view];
+        }
+        
+    }];
+
 }
 
 

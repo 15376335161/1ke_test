@@ -53,4 +53,27 @@
     }
     return cell;
 }
+
+-(void)setModel:(YMTaskModel *)model{
+    _model = model;
+
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:model.del_status] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    _titleLabel.text = model.task_title;
+    _timeLabel.text = [NSString stringWithFormat:@"剩余时间:5天"];
+    _priceLabel.text = [NSString stringWithFormat:@"¥%@元/单",model.price];
+    
+}
+
+-(void)setCountModel:(YMTaskNumModel *)countModel{
+    _countModel = countModel;
+     _leftCountLabel.text = [NSString stringWithFormat:@"剩余单数：%d",([self.model.task_nums intValue] - [countModel.count_num intValue])];
+    
+}
+- (IBAction)btnClick:(id)sender {
+
+    if (self.actionBlock) {
+        self.actionBlock(sender);
+    }
+}
+
 @end

@@ -39,4 +39,20 @@
     return cell;
 }
 
+-(void)setModel:(YMTaskModel *)model{
+    _model = model;
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:model.img_path] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
+    _titlLabel.text = model.task_title;
+    
+    _leftTimeLabel.text = [NSString stringWithFormat:@"剩余时间:5天"];
+   
+    _priceLabel.text = [NSString stringWithFormat:@"¥%@元/单",model.price];
+     _statusLabel.text = @"通过审核";
+    _timeLabel.text = [NSString stringWithFormat:@"审核时间:%@",model.end_time];
+}
+-(void)setCountModel:(YMTaskNumModel *)countModel{
+    _countModel = countModel;
+    _leftCountLabel.text = [NSString stringWithFormat:@"剩余单数：%d",([self.model.task_nums intValue] - [countModel.count_num intValue])];
+}
 @end

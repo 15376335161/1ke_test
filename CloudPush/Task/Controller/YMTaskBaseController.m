@@ -135,7 +135,7 @@
        btn.selected = YES;
     }
     button.selected = NO;
-    DDLog(@"btn status == %d",button.selected);
+   // DDLog(@"btn status == %d",button.selected);
    // [button setTitleColor:NavBarTintColor forState:UIControlStateSelected];
     //动态改变flag.方便详情,支付页面的跳转
     self.flag = button.tag;
@@ -155,7 +155,7 @@
     button.enabled = NO;
     self.selectedBtn = button;
    // self.selectedBtn.selected = YES;
-    DDLog(@"buttom frame ===== %.2f\n",button.frame.origin.x);
+   // DDLog(@"buttom frame ===== %.2f\n",button.frame.origin.x);
     //动画
     [UIView animateWithDuration:0.25 animations:^{
         self.indicatorView.width = button.titleLabel.width;

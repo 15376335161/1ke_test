@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YMTaskStatusModel.h"
+
 
 @interface YMTaskInvalidCell : UITableViewCell
 
+@property(nonatomic,strong)YMTaskStatusModel* model;
 
 +(instancetype)cellDequeueReusableCellWithTableView:(UITableView* )tableView;
 @end

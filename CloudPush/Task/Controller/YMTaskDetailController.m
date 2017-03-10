@@ -38,7 +38,6 @@
     //设置滚动视图
     UIScrollView* scrollView = [[UIScrollView alloc]init];
     [self.view addSubview:scrollView];
-//    scrollView.backgroundColor = 
     scrollView.sd_layout.leftEqualToView(self.view).rightEqualToView(self.view).topEqualToView(self.view).bottomSpaceToView(self.view,40);
     
     UIView* contentView = [[UIView alloc]init];
@@ -50,6 +49,7 @@
     
     //头部
     YMTaskHeadCell*  cell = [YMTaskHeadCell shareCell];
+    cell.model = self.model;
     [contentView addSubview:cell];
     //业务概要
     YMBusinessView * bussView = [[YMBusinessView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(cell.frame) + 7, SCREEN_WIDTH, 100) title:@"业务概况：" content:self.model.outline];
@@ -120,11 +120,12 @@
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
     if (![kYMUserInstance isValidLogin]) {
         //登陆
-        
+        [kYMUserInstance pushToLoginWithViewController:self];
+        return;
     }
     //用户id
-    NSString* usrId = [kUserDefaults valueForKey:kUid];
-    [param setObject:usrId forKey:@"user_id"];
+   // NSString* usrId = [kUserDefaults valueForKey:kUid];
+    [param setObject:@"1422" forKey:@"user_id"];
     [param setObject:model.id forKey:@"task_id"];
     [[HttpManger sharedInstance]callHTTPReqAPI:TaskReciveURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
         

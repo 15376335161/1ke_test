@@ -85,7 +85,7 @@ typedef NS_ENUM(NSInteger, TaskTypeStatus) {
 #define TabBarHeigh       48
 #define TitleViewHeigh    40
 
-
+#define kSessionCookie      @"sessionCookies"
 #define kUserDefaults            [NSUserDefaults standardUserDefaults]
 #define kYMUserInstance          [YMUserManager shareInstance]
 #define kWidthRate               SCREEN_WIDTH / 375

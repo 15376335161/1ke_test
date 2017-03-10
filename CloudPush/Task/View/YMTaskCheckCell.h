@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YMTaskModel.h"
+#import "YMTaskNumModel.h"
+
 
 @interface YMTaskCheckCell : UITableViewCell
+
+@property(nonatomic,strong)YMTaskModel* model;
+@property(nonatomic,strong)YMTaskNumModel* countModel;
 
 
 +(instancetype)cellDequeueReusableCellWithTableView:(UITableView* )tableView;

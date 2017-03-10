@@ -107,7 +107,7 @@
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
     [param setObject:_phoneTextFd.text forKey:@"phone"];
     
-    [[HttpManger sharedInstance]callWebHTTPReqAPI:RegstSendCode params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
+    [[HttpManger sharedInstance]callWebHTTPReqAPI:RegstSendCodeURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
         DDLog(@"res == %@",responseObject);
        // NSString* status = responseObject[@"status"];
         NSString* msg    = responseObject[@"msg"];
@@ -151,15 +151,15 @@
 //注册用户
 - (IBAction)regestBtnClick:(id)sender {
     DDLog(@"注册用户");
-    if (self.isAgree == nil) {
-        [MBProgressHUD showFail:@"请同意诱梦用户协议！" view:self.view];
-        return;
-    }
+//    if (self.isAgree == nil) {
+//        [MBProgressHUD showFail:@"请同意诱梦用户协议！" view:self.view];
+//        return;
+//    }
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
     [param setObject:_phoneTextFd.text forKey:@"username"];
     [param setObject:_codeTextFd.text forKey:@"phoneCaptcha"];
     [param setObject:_passwordTextFd.text forKey:@"passwd"];
-    [param setObject:self.isAgree forKey:@"isAgreement"];
+    [param setObject:@"1" forKey:@"isAgreement"];
     if (_inviteCodeTextFd.text) {
          [param setObject:_inviteCodeTextFd.text forKey:@"code"];
     }

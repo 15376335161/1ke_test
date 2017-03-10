@@ -21,4 +21,7 @@
  *  圆型图片
  */
 -(UIImage *)circleImage;
+
+/** 取消searchBar背景色 */
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
 @end

@@ -138,8 +138,9 @@
     if (self.dataArr.count >= 15) {
         //设置行高
         //self.tableView.rowHeight = 10 * 2 + 75 ;
-        UIButton* bottomBtn = [Factory createButtonWithTitle:@"点击加载全部任务" frame:CGRectMake(0, 0, SCREEN_WIDTH, 40) titleFont:14 textColor:NavBarTintColor backgroundColor:BackGroundColor target:self selector:@selector(loadAllData:)];
-        self.tableView.tableFooterView = bottomBtn;
+//        UIButton* bottomBtn = [Factory createButtonWithTitle:@"点击加载全部任务" frame:CGRectMake(0, 0, SCREEN_WIDTH, 40) titleFont:14 textColor:NavBarTintColor backgroundColor:BackGroundColor target:self selector:@selector(loadAllData:)];
+//        self.tableView.tableFooterView = bottomBtn;
+       // self.tableView.mj_footer.
     }
 }
 -(void)loadAllData:(UIButton* )btn{
@@ -304,7 +305,7 @@
 }
 -(void)requestTaskDetailByModel:(YMTaskModel*)model{
     YMWeakSelf;
-    [[HttpManger sharedInstance]getHTTPReqAPI:[NSString stringWithFormat:@"%@/task_list/task_details?id_task=%@",TaskDetailURL,model.id.stringValue] params:@{@"id_task":model.id.stringValue} view:self.view loading:YES tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
+    [[HttpManger sharedInstance]getHTTPReqAPI:[NSString stringWithFormat:@"%@?id_task=%@",TaskDetailURL,model.id.stringValue] params:@{@"id_task":model.id.stringValue} view:self.view loading:YES tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
         YMTaskDetailController* tvc = [[YMTaskDetailController alloc]init];
         tvc.title = @"任务详情";
         tvc.hidesBottomBarWhenPushed = YES;

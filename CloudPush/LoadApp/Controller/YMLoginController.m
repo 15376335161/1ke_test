@@ -8,7 +8,7 @@
 
 #import "YMLoginController.h"
 #import "YMRegistViewController.h"
-#import "YMForgetViewController.h"
+#import "YMForgetFirstController.h"
 #import "HyperlinksButton.h"
 #import "UserModel.h"
 #import "YMUserManager.h"
@@ -31,16 +31,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"登录有盟账号";
-    self.loginBtn.layer.cornerRadius = 4;
-    self.loginBtn.clipsToBounds = YES;
     //注册按钮--设置下划线
     [_registBtn setColor:NavBarTintColor];
     
+    //监听字体处理按钮颜色
+    _loginBtn.enabled = [_phoneTextFd.text length] > 0 && [_passwordTextFd.text length] > 0  ;
+    _loginBtn.backgroundColor = _loginBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
+
+    
+    [YMTool viewLayerWithView:_loginBtn cornerRadius:4 boredColor:ClearColor borderWidth:1];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //监听输入框的 字体 变化
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textDidChangeHandle:)
+                                                 name:UITextFieldTextDidChangeNotification
+                                               object:nil];
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UITextFieldTextDidChangeNotification
+                                                  object:nil];
+}
+-(void)textDidChangeHandle:(NSNotification* )noti{
+    //监听字体处理按钮颜色
+    _loginBtn.enabled = [_phoneTextFd.text length] > 0 && [_passwordTextFd.text length] > 0  ;
+    _loginBtn.backgroundColor = _loginBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
+    
+}
 #pragma mark - 按钮点击事件
 - (IBAction)loginBtnClick:(id)sender {
     DDLog(@"点击啦登录");
@@ -76,8 +100,8 @@
 }
 - (IBAction)forgetBtnClick:(id)sender {
     DDLog(@"忘记密码点击啦");
-    YMForgetViewController* fvc = [[YMForgetViewController alloc]init];
-    fvc.title = @"找回密码";
+    YMForgetFirstController* fvc = [[YMForgetFirstController alloc]init];
+    fvc.title = @"找回密码-填写账号信息";
     [self.navigationController pushViewController:fvc animated:YES];
 }
 - (IBAction)registBtnClick:(id)sender {

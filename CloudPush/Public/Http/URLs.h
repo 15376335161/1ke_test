@@ -33,7 +33,27 @@
 //注册
 #define RegstURL          @"http://passport.youmeng.com/reg"
 //注册验证码
-#define RegstSendCode     @"http://passport.youmeng.com/reg/sendphoneregcode"
+#define RegstSendCodeURL     @"http://passport.youmeng.com/reg/sendphoneregcode"
+//找回密码获取验证码
+#define ForgetSendCodeURL    @"http://passport.youmeng.com/find/sendphonecaptcha"
+//修改密码 短信验证
+#define ForgetCheckPhoneURL   @"http://passport.youmeng.com/find/checkphonecaptcha"
+
+//修改密码 设置密码
+#define ForgetSetPasswdURL    @"http://passport.youmeng.com/find/resetpasswd"
+
+//我的任务列表 待处理
+#define MyTaskListPending      [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_pending"]
+
+//我的任务列表  审核中
+#define MyTaskListAudit        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_audit"]
+//我的任务列表  审核成功
+#define MyTaskListSuccess        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_success"]
+//我的任务列表  已失效
+#define MyTaskListFailed        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_failed"]
+//我的任务 放弃任务
+#define AuditMyTaskURL        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_audit_status"]
+
 
 
 #endif /* URLs_h */

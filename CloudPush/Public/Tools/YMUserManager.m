@@ -60,9 +60,19 @@
 }
 
 - (void)pushToLoginWithViewController:(UIViewController* )viewController{
-    YMLoginController* lvc = [[YMLoginController alloc]init];
-    
-    [viewController.navigationController pushViewController:lvc animated:YES];
+    UIAlertController* alerC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您还没有登录，是否登录？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        YMLoginController* lvc = [[YMLoginController alloc]init];
+        lvc.hidesBottomBarWhenPushed = YES;
+        [viewController.navigationController pushViewController:lvc animated:YES];
+    }];
+    [alerC addAction:cancelAction];
+    [alerC addAction:sureAction];
+    [viewController presentViewController:alerC animated:YES completion:nil];
     
 }
 @end
