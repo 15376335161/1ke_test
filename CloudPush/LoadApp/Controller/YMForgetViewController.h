@@ -10,4 +10,5 @@
 
 @interface YMForgetViewController : BaseViewController
 
+
 @end

@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface YMTool : NSObject<UIGestureRecognizerDelegate>
-//过去的时间处理
-+ (NSString *)distanceTimeWithBeforeTime:(double)beTime;
 
+//用属性字符串修改label 上字体的颜色和大小
 + (void)labelColorWithLabel:(UILabel* )label  font:(id)font range:(NSRange)range color:(UIColor* )color;
 
 //设置layer
@@ -20,6 +19,7 @@
 //afn判断是否联网
 + (BOOL)connectedToNetwork;
 
+//用AFN 获取网络状态
 +(NSInteger)getNetTypeByAFN;
 
 //系统方法判断网络情况
@@ -35,30 +35,7 @@
 //添加手势
 + (void)addTapGestureOnView:(UIView*)view target:(id)target selector:(SEL)selector viewController:(UIViewController* )viewController;
 
-
-//将 时间秒数字符串 转成 date
-+(NSDate* )getDateWithDateStr:(NSString* )otherDateStr formate:(NSString*)format;
-//获取当前时间 格式化 如 yy-MM-dd HH:mm:ss
-+(NSDate* )getCurrentDateWithFormat:(NSString* )format;
-
-
-//以固定格式 比较时间的大小
-+(int)compareCurrentDateWithOtherDateStr:(NSString* )otherDateStr format:(NSString* )format;
-//格式化时间比较
-+ (int)compareDateWithFormatDate:(NSDate*)date1 withDate:(NSDate*)date2;
-//时间比较
-+ (int)compareDate:(NSString*)date01 withDate:(NSString*)date02;
-
-
-//时间格式化
-+ (NSString *)timeForDateFormatted:(NSString*)totalSeconds format:(NSString* )format;
-
-//将原来的时间格式化字符串  转化成 特定 格式的 时间字符串
-+ (NSString* )timeForDateFormatStr:(NSString* )dateFormatStr format:(NSString* )format newFormat:(NSString* )newFormat;
-
-+ (NSString* )getYearTimeWithFormatDateTime:(NSString* )dateTime format:(NSString* )format;
-
-//判断大小写
+//判断大小写 是否相同 -- 验证码
 +(BOOL)isEquailWithStr:(NSString* )str otherStr:(NSString* )otherStr;
 
 

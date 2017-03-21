@@ -45,7 +45,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
 }
 -(void)layoutSubviews{
     _regionLabel.text = @"区域：全国";

@@ -38,6 +38,8 @@
 #define ForgetSendCodeURL    @"http://passport.youmeng.com/find/sendphonecaptcha"
 //修改密码 短信验证
 #define ForgetCheckPhoneURL   @"http://passport.youmeng.com/find/checkphonecaptcha"
+//修改密码 图形验证码
+#define ForgetImgCodeCheckURL   @"http://passport.youmeng.com/find/checkfindcaptcha"
 
 //修改密码 设置密码
 #define ForgetSetPasswdURL    @"http://passport.youmeng.com/find/resetpasswd"
@@ -54,6 +56,11 @@
 //我的任务 放弃任务
 #define AuditMyTaskURL        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_audit_status"]
 
-
+//我的钱包 信息
+#define UserPayInfoURL         [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/UserPay/GetUserPayinfo"]
+//绑定银行卡
+#define AddBankCardURL       [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/UserPay/FirstAddPayAccount"]
+//绑定支付宝
+#define AddZFBAccountURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/payaccount/bindpayaccount"]
 
 #endif /* URLs_h */

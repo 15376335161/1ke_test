@@ -10,7 +10,13 @@
 #import "YMMeIconCell.h"
 #import "YMTitleCell.h"
 #import "UIImage+Extension.h"
-#import "YMLoginController.h"
+
+#import "YMTeamListController.h"
+#import "YMWalletController.h"
+#import "YZTShareController.h"
+#import "YMMsgListController.h"
+#import "YMFeedBackController.h"
+#import "YMSetController.h"
 
 
 @interface YMMeViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -32,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    //处理导航 透明问题
+   //处理导航 透明问题
    //  _barImageView = self.navigationController.navigationBar.subviews.firstObject;
    //  _barImageView.alpha = 0;
     
@@ -70,7 +76,6 @@
     // _barImageView.alpha = 1;
 //    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 //    [self.navigationController.navigationBar setShadowImage:nil];
-    
     navBarHairlineImageView.hidden = NO;
 }
 
@@ -128,10 +133,48 @@
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DDLog(@"点击啦 某一行");
-    YMLoginController* mvc = [[YMLoginController alloc]init];
-    mvc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:mvc animated:YES];
-   // [self presentViewController:mvc animated:YES completion:nil];
+    if ([[YMUserManager shareInstance] isValidLogin]) {
+        switch (indexPath.section) {
+            case 0:
+            {
+                if (indexPath.row == 0) {
+                    [self requestUserData];
+                }else if (indexPath.row == 1){
+                    YMTeamListController* tvc = [[YMTeamListController alloc]init];
+                    tvc.title = @"团队列表";
+                    tvc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:tvc animated:YES];
+                }else{
+                    YZTShareController* tvc = [[YZTShareController alloc]init];
+                    tvc.title = @"我的邀请";
+                    tvc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:tvc animated:YES];
+                }
+                
+            }
+                break;
+            case 1:
+            {
+                if (indexPath.row == 0) {
+                    YMMsgListController* pvc = [[YMMsgListController alloc]init];
+                    pvc.title = @"消息中心";
+                    pvc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:pvc animated:YES];
+                }else if (indexPath.row == 1){
+                    YMFeedBackController* tvc = [[YMFeedBackController alloc]init];
+                    tvc.title = @"意见反馈";
+                    tvc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:tvc animated:YES];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    //未登录跳转到登录
+    }else{
+        [[YMUserManager shareInstance] pushToLoginWithViewController:self];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,9 +186,40 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
+-(void)requestUserData{
+    YMWeakSelf;
+    NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
+    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];//@"4a70ef79952fbb9cd62eefd0edc139a6"
+    
+    [[HttpManger sharedInstance]callHTTPReqAPI:UserPayInfoURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
+        
+        YMWalletController* pvc = [[YMWalletController alloc]init];
+        pvc.title = @"钱包";
+        pvc.usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
+        //存储用户信息
+        [[YMUserManager shareInstance] saveUserInfoByUsrModel:pvc.usrModel];
+        pvc.hidesBottomBarWhenPushed = YES;
+        [weakSelf.navigationController pushViewController:pvc animated:YES];
+              
+    }];
+    
+//    YMWalletController* pvc = [[YMWalletController alloc]init];
+//    pvc.title = @"钱包";
+//   // pvc.usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
+//    //存储用户信息
+//    [[YMUserManager shareInstance] saveUserInfoByUsrModel:pvc.usrModel];
+//    pvc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:pvc animated:YES];
+
+}
 #pragma mark -  按钮响应方法
 -(void)setBtnClick:(UIButton* )btn{
     DDLog(@"设置按钮点击啦");
+    YMSetController* svc = [[YMSetController alloc]init];
+    svc.title = @"设置";
+    svc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:svc animated:YES];
 }
 #pragma mark - lazy
 -(NSArray *)titileArr{

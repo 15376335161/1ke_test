@@ -46,7 +46,7 @@
     }
 
 //    //时间过期
-    if (![YMTool compareCurrentDateWithOtherDateStr:model.end_time format:@"yyyy-MM-dd HH:mm:ss"]) {
+    if (![YMDateTool compareCurrentDateWithOtherDateStr:model.end_time format:@"yyyy-MM-dd HH:mm:ss"]) {
        reasonStr = @"已过期";
     }
     

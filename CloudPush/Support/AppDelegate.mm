@@ -13,6 +13,8 @@
 #import "YMWelcomeController.h"
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
 #import "WXApi.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "UIView+YSTextInputKeyboard.h"
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
 // iOS10注册APNs所需头文件
@@ -20,7 +22,7 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-@interface AppDelegate ()<BMKGeneralDelegate,WXApiDelegate,JPUSHRegisterDelegate>
+@interface AppDelegate ()<BMKGeneralDelegate,WXApiDelegate,JPUSHRegisterDelegate,TCAPIRequestDelegate>
 
 @end
 
@@ -37,11 +39,10 @@
     //设置导航栏按钮的颜色
     [[UINavigationBar appearance]setTintColor:NavBarTintColor];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
     //监听网络情况
     [GLobalRealReachability startNotifier];
     if (![YMTool isNetConnect]) {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"请连接网络" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"请连接网络" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
     
@@ -99,8 +100,67 @@
     self.window.backgroundColor = WhiteColor;
     [self.window makeKeyAndVisible];
 
+    //您可以统一设置键盘遮挡时的默认偏移值
+    [YSKeyboardMoving appearance].offset = 50;
     return YES;
 }
+
+#pragma mark - 处理回调 微信 或 QQ 等
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    if([sourceApplication isEqualToString:@"com.tencent.xin"] ||
+       [sourceApplication isEqualToString:@"com.apple.MobileSMS"]){
+        
+        [WXApi handleOpenURL:url delegate:self];
+        
+    }else if([sourceApplication isEqualToString:@"com.tencent.mqq"] ){
+        [TencentOAuth HandleOpenURL:url];
+    }
+    return YES;
+    
+}
+
+#pragma mark - WXApiDelegate
+//onReq是微信终端向第三方程序发起请求，要求第三方程序响应。第三方程序响应完后必须调用sendRsp返回。在调用sendRsp返回时，会切回到微信终端程序界面。
+-(void) onReq:(BaseReq*)req{
+    DDLog(@"resp == %@",req);
+    //消息
+    if([req isKindOfClass:[GetMessageFromWXReq class]]){
+        
+    }else if([req isKindOfClass:[ShowMessageFromWXReq class]]){
+        
+    }else if([req isKindOfClass:[LaunchFromWXReq class]]){
+        
+    }
+}
+
+//如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面。
+-(void) onResp:(BaseResp*)resp{
+    
+    DDLog(@"resp == %@",resp);
+    if([resp isKindOfClass:[SendMessageToWXResp class]])
+    {
+        
+    }
+}
+
+#pragma mark --- app
+- (void)applicationWillResignActive:(UIApplication *)application {
+   
+}
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+   [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+}
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    [application setApplicationIconBadgeNumber:0];
+    [application cancelAllLocalNotifications];
+}
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+   
+}
+- (void)applicationWillTerminate:(UIApplication *)application {
+  
+}
+#pragma mark - 联网状态监听
 - (void)onGetNetworkState:(int)iError
 {
     if (0 == iError) {
@@ -120,7 +180,8 @@
         DDLog(@"onGetPermissionState %d",iError);
     }
 }
-#pragma mark - 注册极光推送 上报 deviceToken 
+
+#pragma mark - 注册极光推送 上报 deviceToken
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     /// Required - 注册 DeviceToken
@@ -166,63 +227,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];
-}
-
-#pragma mark - 处理回调 微信 或 QQ 等
--(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-    return [WXApi handleOpenURL:url delegate:self];
-}
--(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    return [WXApi handleOpenURL:url delegate:self];
-}
-
-#pragma mark - WXApiDelegate
-//onReq是微信终端向第三方程序发起请求，要求第三方程序响应。第三方程序响应完后必须调用sendRsp返回。在调用sendRsp返回时，会切回到微信终端程序界面。
--(void) onReq:(BaseReq*)req{
-    //消息
-    if([req isKindOfClass:[GetMessageFromWXReq class]]){
-        
-    }else if([req isKindOfClass:[ShowMessageFromWXReq class]]){
-        
-    }else if([req isKindOfClass:[LaunchFromWXReq class]]){
-        
-    }
-
-}
-
-//如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面。
--(void) onResp:(BaseResp*)resp{
-    if([resp isKindOfClass:[SendMessageToWXResp class]])
-    {
-        
-    }
-}
-
-#pragma mark --- app
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-}
-
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-}
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 

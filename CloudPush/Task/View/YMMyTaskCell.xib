@@ -47,7 +47,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQh-eA-FW8">
-                        <rect key="frame" x="65" y="29" width="24" height="11"/>
+                        <rect key="frame" x="65" y="34" width="24" height="11"/>
                         <fontDescription key="fontDescription" type="system" pointSize="9"/>
                         <color key="textColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -104,7 +104,7 @@
                     <constraint firstItem="X4P-sh-Hok" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Qpl-46-z8t"/>
                     <constraint firstItem="NQh-eA-FW8" firstAttribute="leading" secondItem="UEE-Hi-Z36" secondAttribute="leading" id="ShP-gx-9k2"/>
                     <constraint firstItem="MCm-KJ-Y6g" firstAttribute="leading" secondItem="6uC-7q-rsZ" secondAttribute="trailing" constant="20" id="azR-NJ-pxl"/>
-                    <constraint firstItem="NQh-eA-FW8" firstAttribute="bottom" secondItem="vcy-AH-c36" secondAttribute="bottom" id="eRz-5A-dYh"/>
+                    <constraint firstItem="NQh-eA-FW8" firstAttribute="bottom" secondItem="vcy-AH-c36" secondAttribute="bottom" constant="5" id="eRz-5A-dYh"/>
                     <constraint firstItem="MCm-KJ-Y6g" firstAttribute="trailing" secondItem="mq5-2W-WQm" secondAttribute="trailing" id="fob-ww-Tth"/>
                     <constraint firstItem="wCL-fE-MVU" firstAttribute="leading" secondItem="UEE-Hi-Z36" secondAttribute="leading" id="gp0-bo-dcD"/>
                     <constraint firstItem="vcy-AH-c36" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="iLJ-Wk-PYz"/>
@@ -126,7 +126,7 @@
                 <outlet property="timeLabel" destination="NQh-eA-FW8" id="rM3-HI-nbD"/>
                 <outlet property="titleLabel" destination="UEE-Hi-Z36" id="vG9-Nd-gK5"/>
             </connections>
-            <point key="canvasLocation" x="-551" y="-460"/>
+            <point key="canvasLocation" x="-712" y="-598"/>
         </tableViewCell>
     </objects>
     <resources>

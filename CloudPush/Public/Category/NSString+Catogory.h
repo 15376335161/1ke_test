@@ -46,4 +46,7 @@
 //根据类型 返回 中文名
 + (NSString* )couponTypeByType:(NSString* )type;
 
+//替换字符串例如用 *** 代替 数字
++(NSString* )string:(NSString *)str replaceStrInRange:(NSRange)range withString:(NSString*)placeStr;
+
 @end

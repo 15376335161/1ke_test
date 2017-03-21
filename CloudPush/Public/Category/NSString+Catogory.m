@@ -277,4 +277,12 @@
     }
 }
 
++(NSString* )string:(NSString *)str replaceStrInRange:(NSRange)range withString:(NSString*)placeStr{
+    NSMutableString* newStr = str.mutableCopy;
+    if (newStr.length > 4) {
+        [newStr replaceCharactersInRange:range withString:placeStr];
+    }
+    return newStr;
+}
+
 @end

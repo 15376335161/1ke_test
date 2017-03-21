@@ -13,6 +13,10 @@
 
 @property(nonatomic,copy)void(^taskBlock)(UIButton* btn);
 
+
+//创建普通的view  例如消息底部的view
+- (instancetype)initWithFrame:(CGRect)frame titlesArr:(NSArray* )titlesArr bgColorsHexStrArr:(NSArray* )bgColorsHexStrArr textColor:(UIColor*)textColor  selectColor:(UIColor*)selectColor taskBlock:(void (^)(UIButton* btn))taskBlock;
+
 - (instancetype)initWithFrame:(CGRect)frame titlesArr:(NSArray* )titlesArr backGgColorsArr:(NSArray* )backGgColorsArr taskBlock:(void (^)(UIButton* btn))taskBlock;
 
 @end

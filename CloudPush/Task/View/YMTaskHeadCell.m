@@ -58,19 +58,20 @@
     _titlLabel.text = model.task_title;
    
      NSString* formatStr = @"yyyy-MM-dd HH:mm:ss";
-    _timeLabel.text = [NSString stringWithFormat:@"至%@",[YMTool timeForDateFormatStr:model.end_time format:formatStr newFormat:@"yyyy-MM-dd"]];
+    _timeLabel.text = [NSString stringWithFormat:@"至%@",[YMDateTool timeForDateFormatStr:model.end_time format:formatStr newFormat:@"yyyy-MM-dd"]];
     _priceLabel.text = [NSString stringWithFormat:@"%@元/单",model.price];
     _areaLabel.text  = model.spread_area;
-    _crowdLabel.text = [NSString stringWithFormat:@"目标人群：%@",model.target];
+    _crowdLabel.text = [NSString stringWithFormat:@"目标人群：%@",model.targetPeople];
+    DDLog(@"target ==== %@",model.targetPeople);
     _leftCountLabel.text = [NSString stringWithFormat:@"剩余单数／总单数：%@／%@",model.surplu_nums,model.task_nums] ;
     
    
-   NSDate* currentDate = [YMTool getCurrentDateWithFormat:formatStr];
+   NSDate* currentDate = [YMDateTool getCurrentDateWithFormat:formatStr];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:formatStr];
     NSDate *otherDate  = [formatter dateFromString:model.end_time];
-    if ([YMTool compareDateWithFormatDate:currentDate withDate:otherDate]) {
+    if ([YMDateTool compareDateWithFormatDate:currentDate withDate:otherDate]) {
         //已失效
         _statusImgView.image = [UIImage imageNamed:@"yishixiao"];
     }

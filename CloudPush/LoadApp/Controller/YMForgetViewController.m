@@ -36,6 +36,10 @@
     //设置layer
     [YMTool viewLayerWithView:_getCodeBtn cornerRadius:4 boredColor:BackGroundColor borderWidth:1];
     [YMTool viewLayerWithView:_nextBtn cornerRadius:4 boredColor:ClearColor borderWidth:1];
+    
+    if ([kUserDefaults valueForKey:kPhone]) {
+        _phoneTextFd.text = [kUserDefaults valueForKey:kPhone];
+    }
    
 }
 -(void)viewWillAppear:(BOOL)animated{

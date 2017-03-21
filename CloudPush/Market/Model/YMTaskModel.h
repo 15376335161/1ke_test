@@ -46,7 +46,7 @@
 //计费模式
 @property(nonatomic,copy)NSString* billing_mode;
 //推广目标
-@property(nonatomic,copy)NSString* target;
+@property(nonatomic,copy)NSString* targetPeople;
 //推广区域
 @property(nonatomic,copy)NSString* spread_area;
 

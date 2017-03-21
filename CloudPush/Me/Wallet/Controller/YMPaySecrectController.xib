@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="firstNameLabel" destination="h4w-h7-WHR" id="igK-bd-krg"/>
                 <outlet property="firstTextFd" destination="Xn2-ul-LVd" id="sTy-uf-NZy"/>
+                <outlet property="getCodeBtn" destination="pfN-e7-GWm" id="t44-FE-j37"/>
                 <outlet property="secondNameLabel" destination="I2g-O1-wAu" id="VZa-ta-o9w"/>
                 <outlet property="secondTextFd" destination="QUI-tV-aam" id="mFh-sg-0VL"/>
                 <outlet property="sureBtn" destination="oc3-Se-3hq" id="ExC-oC-6Fe"/>
@@ -61,13 +62,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入银行卡号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xn2-ul-LVd">
-                            <rect key="frame" x="115" y="0.0" width="230" height="40"/>
+                            <rect key="frame" x="105" y="0.0" width="104" height="40"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入真实姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QUI-tV-aam">
-                            <rect key="frame" x="115" y="41" width="230" height="40"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入真实姓名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QUI-tV-aam">
+                            <rect key="frame" x="105" y="41" width="104" height="40"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -78,9 +79,24 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfN-e7-GWm">
+                            <rect key="frame" x="285" y="7" width="80" height="27"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="eRZ-nD-9Cn"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="获取验证码">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="getBtnClick:" destination="-1" eventType="touchUpInside" id="WbL-Hl-07G"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="pfN-e7-GWm" secondAttribute="trailing" constant="10" id="13c-03-Q3a"/>
+                        <constraint firstItem="QUI-tV-aam" firstAttribute="leading" secondItem="I2g-O1-wAu" secondAttribute="trailing" constant="20" id="3Y7-4f-rPK"/>
                         <constraint firstItem="ZqF-eb-3GN" firstAttribute="top" secondItem="Xn2-ul-LVd" secondAttribute="bottom" id="3Zy-QW-JM9"/>
                         <constraint firstAttribute="trailing" secondItem="ZqF-eb-3GN" secondAttribute="trailing" id="58K-0u-AlF"/>
                         <constraint firstAttribute="height" constant="80" id="6JO-yf-i64"/>
@@ -91,13 +107,12 @@
                         <constraint firstItem="Xn2-ul-LVd" firstAttribute="top" secondItem="kAF-5y-HKQ" secondAttribute="top" id="MX5-Rn-YWf"/>
                         <constraint firstItem="Xn2-ul-LVd" firstAttribute="centerY" secondItem="h4w-h7-WHR" secondAttribute="centerY" id="REv-CD-Fq2"/>
                         <constraint firstItem="ZqF-eb-3GN" firstAttribute="leading" secondItem="kAF-5y-HKQ" secondAttribute="leading" constant="15" id="S3p-wg-xjv"/>
-                        <constraint firstAttribute="trailing" secondItem="Xn2-ul-LVd" secondAttribute="trailing" constant="30" id="TwE-HE-e5e"/>
                         <constraint firstItem="QUI-tV-aam" firstAttribute="centerY" secondItem="I2g-O1-wAu" secondAttribute="centerY" id="Zqr-7v-A5P"/>
                         <constraint firstItem="QUI-tV-aam" firstAttribute="leading" secondItem="Xn2-ul-LVd" secondAttribute="leading" id="a0l-Ic-LQk"/>
                         <constraint firstItem="ZqF-eb-3GN" firstAttribute="top" secondItem="kAF-5y-HKQ" secondAttribute="top" constant="40" id="io4-6g-mI0"/>
+                        <constraint firstItem="pfN-e7-GWm" firstAttribute="centerY" secondItem="h4w-h7-WHR" secondAttribute="centerY" id="l5N-b8-VSm"/>
                         <constraint firstItem="QUI-tV-aam" firstAttribute="height" secondItem="Xn2-ul-LVd" secondAttribute="height" id="tam-b6-nfv"/>
                         <constraint firstItem="QUI-tV-aam" firstAttribute="trailing" secondItem="Xn2-ul-LVd" secondAttribute="trailing" id="vZf-dP-wf2"/>
-                        <constraint firstItem="Xn2-ul-LVd" firstAttribute="leading" secondItem="h4w-h7-WHR" secondAttribute="trailing" constant="30" id="vZq-lY-c2e"/>
                     </constraints>
                 </view>
             </subviews>
@@ -115,7 +130,8 @@
                 <constraint firstItem="kAF-5y-HKQ" firstAttribute="top" secondItem="Ysm-p1-a1R" secondAttribute="bottom" constant="10" id="oos-Vf-68R"/>
                 <constraint firstItem="h4w-h7-WHR" firstAttribute="leading" secondItem="Ysm-p1-a1R" secondAttribute="leading" id="ykQ-kl-i2l"/>
             </constraints>
-            <point key="canvasLocation" x="-168.5" y="-1.5"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-420" y="-52"/>
         </view>
     </objects>
 </document>

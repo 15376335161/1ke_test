@@ -23,6 +23,26 @@ typedef NS_ENUM(NSInteger, TaskTypeStatus) {
     TaskTypeStatusInvalid      = 3
 };
 
+typedef NS_ENUM(NSInteger,SetType) {
+    SetTypePayWordUnSet       = 0,
+    SetTypePayWordModify,//设置支付密码
+    SetTypePayWordUnSetTwice,//设置支付密码 第二步
+    
+    SetTypeZhiFuBaoUnSet,//设置支付宝账户
+    SetTypeZhiFuBaoModify,//修改支付宝账户 第一步
+    SetTypeZhiFuBaoModifyTwice,//修改支付宝账户 第二步
+    
+    SetTypeBankCardUnSet,//设置银联卡账户
+    SetTypeBankCardModify
+
+};
+
+typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
+    WithDrawCrashStyleZfb       = 0,// 提现方式支付宝
+    WithDrawCrashStyleBankCard      // 提现方式 银行卡
+};
+
+
 #define kJPushAppKey    @"a4e14f9c3a2ff72f5a400b3e"
 #define kChannel        @"appStore"
 #define kIsProduct      YES
@@ -31,12 +51,12 @@ typedef NS_ENUM(NSInteger, TaskTypeStatus) {
 #define kAutoLogin   @"kAutoLogin"
 
 
-#define WeChat_AppId  @"wx1705d06974c1200e"
+#define WeChat_AppId      @"wxdcc23700247f2571"  // wx1705d06974c1200e//wxd930ea5d5a258f4f
 #define WeChatAppSecrect  @"1851a8f91573e7e32700b88b1f1b2832"
 //#define WeChat_Secret   @"tiaoshi@86goodfood.com"
 
-#define QQ_AppId        @"1105952616"         //  @"1105155505"
-#define QQ_Secrect      @"hakMWER4GGmtZ4my"   // @"KYJZQznciNcbiAs4"
+#define QQ_AppId        @"1105935609"         //  @"1105155505"
+#define QQ_Secrect      @"bUfLXNbJWYH5PgLf"   // @"KYJZQznciNcbiAs4"
 
 
 
@@ -96,9 +116,17 @@ typedef NS_ENUM(NSInteger, TaskTypeStatus) {
 #define kUid         @"uid"
 #define kUsername    @"username"
 #define kDate        @"date"
+#define kZfb_realName        @"zfb_realName"
+#define kZfb_accountName     @"zfb_accountName"
+#define kCard_realName       @"isCard_realName"
+#define kCard_accountName    @"isCard_accountName"
+
 
 #define kPasswd      @"passwd"
 
+static NSString *kAuthScope = @"snsapi_message,snsapi_userinfo,snsapi_friend,snsapi_contact";//授权域
+//static NSString *kAuthOpenID = @"0c806938e2413ce73eef92cc3";
+static NSString *kAuthState = @"xxx";
 
 //7.0以上的系统
 #define IOS7      ([UIDevice currentDevice].systemVersion.doubleValue >= 7.0)

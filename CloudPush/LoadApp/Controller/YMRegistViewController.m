@@ -13,6 +13,7 @@
 #import "YMWebViewController.h"
 #import "YMUserManager.h"
 #import "UserModel.h"
+#import "UIView+YSTextInputKeyboard.h"
 
 
 @interface YMRegistViewController ()<UIGestureRecognizerDelegate>
@@ -56,6 +57,15 @@
     _registBtn.backgroundColor = _registBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
     
     _totalTime = 60;
+    
+//    //通过offset的设置可以设置某个输入框特殊偏移量。
+//    self.inviteCodeTextFd.kbMoving.offset = 50;
+//    
+//    //你也可以通过设置一个具体的移动的视图而不是默认的父视图
+//    self.inviteCodeTextFd.kbMoving.kbMovingView = self.view;
+//    
+//    self.inviteCodeTextFd.kbMoving.offset = 0;
+
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

@@ -7,6 +7,7 @@
 //
 
 #import "BaseModel.h"
+#import "NSString+Catogory.h"
 
 @implementation BaseModel
 

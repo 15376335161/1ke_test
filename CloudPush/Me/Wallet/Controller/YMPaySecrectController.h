@@ -10,4 +10,8 @@
 
 @interface YMPaySecrectController : BaseViewController
 
+//设置修改的类型
+@property(nonatomic,assign)SetType setType;
+
+@property(nonatomic,copy)void(^refreshDataBlock)();
 @end

@@ -24,7 +24,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -45,7 +44,7 @@
     
     _titlLabel.text = model.task_title;
     
-    _leftTimeLabel.text = [NSString stringWithFormat:@"剩余时间:5天"];
+    _leftTimeLabel.text = [NSString stringWithFormat:@"剩余时间:%@",[YMDateTool futureTimeWithfutureTime:model.end_time format:@"yyyy-MM-dd HH:mm:ss"]];
    
     _priceLabel.text = [NSString stringWithFormat:@"¥%@元/单",model.price];
      _statusLabel.text = @"通过审核";

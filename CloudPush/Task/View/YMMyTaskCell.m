@@ -7,6 +7,8 @@
 
 
 #import "YMMyTaskCell.h"
+#import "YMDateTool.h"
+
 
 @interface YMMyTaskCell ()
 
@@ -59,7 +61,7 @@
 
     [_imgView sd_setImageWithURL:[NSURL URLWithString:model.del_status] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     _titleLabel.text = model.task_title;
-    _timeLabel.text = [NSString stringWithFormat:@"剩余时间:5天"];
+    _timeLabel.text = [NSString stringWithFormat:@"剩余时间:%@",[YMDateTool futureTimeWithfutureTime:model.end_time format:@"yyyy-MM-dd HH:mm:ss"]];
     _priceLabel.text = [NSString stringWithFormat:@"¥%@元/单",model.price];
     
 }

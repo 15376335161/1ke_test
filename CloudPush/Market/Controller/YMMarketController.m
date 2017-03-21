@@ -75,6 +75,8 @@
         DDLog(@"page = %ld",(long)_page);
         [weakSelf requestDataWithPage:_page isLoading:YES type:@""];
     }];
+    //表尾
+    self.tableView.tableFooterView = [UIView new];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

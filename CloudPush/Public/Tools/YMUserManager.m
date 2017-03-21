@@ -22,8 +22,6 @@
 
 //存储用户信息
 - (void)saveUserInfoByUsrModel:(UserModel* )model{
-    //[kUserDefaults
-    
     if (model.uid) {
         [kUserDefaults setObject:model.uid forKey:kUid];
     }
@@ -39,6 +37,19 @@
     if (model.token) {
         [kUserDefaults setObject:model.token forKey:kToken];
     }
+    //支付宝  银行卡
+    if (model.isZfb_realName) {
+        [kUserDefaults setObject:model.isZfb_realName forKey:kZfb_realName];
+    }
+    if (model.isZfb_accountName) {
+        [kUserDefaults setObject:model.isZfb_accountName forKey:kZfb_accountName];
+    }
+    if (model.isCard_realName) {
+        [kUserDefaults setObject:model.isCard_realName forKey:kCard_realName];
+    }
+    if (model.isCard_accountName) {
+        [kUserDefaults setObject:model.isCard_accountName forKey:kCard_accountName];
+    }
     [kUserDefaults synchronize];
 }
 
@@ -50,9 +61,15 @@
     [kUserDefaults setObject:@"" forKey:kToken];
     [kUserDefaults setObject:@"" forKey:kDate];
     
+    [kUserDefaults setObject:@"" forKey:kZfb_accountName];
+    [kUserDefaults setObject:@"" forKey:kZfb_realName];
+    [kUserDefaults setObject:@"" forKey:kCard_accountName];
+    [kUserDefaults setObject:@"" forKey:kCard_realName];
+    [kUserDefaults synchronize];
+    
 }
 - (BOOL)isValidLogin{
-    if ([kUserDefaults valueForKey:kUid] ) {
+    if ([[kUserDefaults valueForKey:kUid] integerValue] > 0) {
         return YES;
     }else{
         return NO;

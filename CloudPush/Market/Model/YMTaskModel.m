@@ -10,4 +10,9 @@
 
 @implementation YMTaskModel
 
++(NSDictionary*)mj_replacedKeyFromPropertyName{
+    return @{
+             @"target":@"targetPeople"
+             };
+}
 @end

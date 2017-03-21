@@ -10,16 +10,39 @@
 
 @interface UserModel : BaseModel
 
-@property(nonatomic,strong)NSString* date;
+//登录的时间
+@property(nonatomic,copy)NSString* date;
 //用户名
-@property(nonatomic,strong)NSString* phone;
+@property(nonatomic,copy)NSString* phone;
 //token
-@property(nonatomic,strong)NSString* token;
-
-@property(nonatomic,strong)NSString* uid;
+@property(nonatomic,copy)NSString* token;
+//user_id
+@property(nonatomic,copy)NSString* uid;
 //用户名
-@property(nonatomic,strong)NSString* username;
+@property(nonatomic,copy)NSString* username;
 
+//累计收入
+@property(nonatomic,copy)NSString* grandTotalMoeny;
 
+//待发金额
+@property(nonatomic,copy)NSString* readyMoney;
+//可用余额
+@property(nonatomic,copy)NSString* withdraw;
+//余额账户
+@property(nonatomic,copy)NSString* useMoeny;
 
+//是否绑定支付宝
+@property(nonatomic,copy)NSNumber* isCard;
+//是否设置密码
+@property(nonatomic,copy)NSNumber* isSetPasswd;
+//是否绑定支付宝
+@property(nonatomic,copy)NSNumber* isZfb;
+
+//支付宝账户 真实姓名
+@property(nonatomic,copy)NSString* isZfb_accountName;
+@property(nonatomic,copy)NSString* isZfb_realName;
+
+//银行卡账户 真实姓名
+@property(nonatomic,copy)NSString* isCard_accountName;
+@property(nonatomic,copy)NSString* isCard_realName;
 @end

@@ -17,4 +17,10 @@
 
 //获取文字的宽度
 +(CGFloat)widthForText:(NSString* )text fontSize:(CGFloat)fontSize;
+
+//计算图片的宽度
++ (CGFloat)getImgWidthByImgsArr:(NSArray* )imgsArr spaceX:(CGFloat)spaceX margin:(CGFloat)margin  rightMarin:(CGFloat)rightMargin;
+
+//计算图片数组 总的 高度
++ (CGFloat)getHeighByImgsArr:(NSArray* )imgsArr spaceX:(CGFloat)spaceX margin:(CGFloat)margin rightMarin:(CGFloat)rightMargin;
 @end

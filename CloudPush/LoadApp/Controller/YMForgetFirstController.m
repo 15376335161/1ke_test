@@ -221,7 +221,8 @@
     
    // [httpMgr.requestSerializer setValue:self.cookiesStr forHTTPHeaderField:@"Cookie"];
     //设置cookie
-    [httpMgr POST:@"http://passport.youmeng.com/find/checkfindcaptcha" parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+
+    [httpMgr POST:ForgetImgCodeCheckURL parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         id resObj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
          DDLog(@"res == %@",resObj);

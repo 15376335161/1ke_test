@@ -13,7 +13,8 @@
 #import "UserModel.h"
 #import "YMUserManager.h"
 
-@interface YMLoginController ()
+
+@interface YMLoginController ()<UITextFieldDelegate>
 //手机号
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextFd;
 
@@ -28,6 +29,8 @@
 @end
 
 @implementation YMLoginController
+
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"登录有盟账号";
@@ -67,6 +70,14 @@
 }
 #pragma mark - 按钮点击事件
 - (IBAction)loginBtnClick:(id)sender {
+    //清除缓存
+    //[[NSURLCache sharedURLCache] removeAllCachedResponses];
+    //清除某一站的 cookie
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://passport.youmeng.com"]];
+    for (int i = 0; i < [cookies count]; i++) {
+       NSHTTPCookie *cookie = (NSHTTPCookie *)[cookies objectAtIndex:i];
+       [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
     DDLog(@"点击啦登录");
     if (![NSString isMobileNum:_phoneTextFd.text]) {
         [MBProgressHUD showFail:@"手机号码不正确！请重新输入！" view:self.view];
@@ -94,7 +105,6 @@
         }else{
             [MBProgressHUD showSuccess:msg view:self.view];
         }
-        
     }];
     
 }
@@ -112,6 +122,22 @@
 //    };
     rvc.tag = 1;
     [self.navigationController pushViewController:rvc animated:YES];
+}
+#pragma mark - UITextFieldDelegate
+//-(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+//    if (textField == _passwordTextFd) {
+//        [self loginBtnClick:_loginBtn];
+//        return YES;
+//    }
+//    return YES;
+//}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == _passwordTextFd) {
+        [self loginBtnClick:_loginBtn];
+        return YES;
+    }
+    return YES;
+
 }
 
 @end
