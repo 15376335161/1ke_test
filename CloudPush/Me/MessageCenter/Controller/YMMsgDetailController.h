@@ -11,6 +11,8 @@
 
 @interface YMMsgDetailController : UIViewController
 
+//刷新block
+@property(nonatomic,copy)void(^refreshBlock)();
 //消息模型
 @property(nonatomic,strong)YMMsgModel* model;
 @end

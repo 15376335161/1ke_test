@@ -7,6 +7,7 @@
 //
 
 #import "YMResetPasswordController.h"
+#import "RSAEncryptor.h"
 
 @interface YMResetPasswordController ()
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextFd;
@@ -24,7 +25,6 @@
     //监听字体处理按钮颜色
     _doneBtn.enabled = [_passwordTextFd.text length] > 0 && [_secondPasswordTextFd.text length] > 0  ;
     _doneBtn.backgroundColor = _doneBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
-    
     //设置颜色
     [YMTool viewLayerWithView:_doneBtn cornerRadius:4 boredColor:ClearColor borderWidth:1];
     
@@ -70,18 +70,22 @@
         [MBProgressHUD showFail:@"两次输入的密码不一致，请重新输入！" view:self.view];
         return;
     }
-    NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
-    [param setObject:[kUserDefaults  valueForKey:kToken] forKey:@"checkPhoneCaptcha"];
-    [param setObject:_secondPasswordTextFd.text forKey:@"passwd"];
-    
     YMWeakSelf;
-    [[HttpManger sharedInstance]callWebHTTPReqAPI:ForgetSetPasswdURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
-        
+    NSString* urlStr;
+    if (self.passwordType == PasswordTypeModify) {
+        urlStr = updatePasswordURL;//修改密码
+    }else{
+        urlStr = updatePasswordURL ;//忘记密码
+    }
+    NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
+    [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
+    [param setObject:[RSAEncryptor encryptString:_passwordTextFd.text publicKey:kPublicKey] forKey:@"passwd"];
+    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+    [[HttpManger sharedInstance]callHTTPReqAPI:updatePasswordURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
+
         NSNumber* status = responseObject[@"status"];
         NSString* msg    = responseObject[@"msg"];
-        if (status.longValue == 1) {
-           // [kUserDefaults setObject:responseObject[@"data"][@"token"] forKey:kToken];
-           // [kUserDefaults synchronize];
+        if (status.integerValue == 1) {
             
             BOOL flag = NO;
             for (UIViewController* vc in self.navigationController.childViewControllers) {
@@ -94,13 +98,13 @@
                 YMLoginController* lvc = [[YMLoginController alloc]init];
                 [self.navigationController pushViewController:lvc animated:YES];
             }
-           
         }else{
             //显示提示信息
             [MBProgressHUD showFail:msg view:weakSelf.view];
         }
+
     }];
-    
+
 }
 
 

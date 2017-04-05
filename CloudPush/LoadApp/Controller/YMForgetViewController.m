@@ -7,7 +7,8 @@
 //
 
 #import "YMForgetViewController.h"
-#import "YMResetPasswordController.h"
+#import "YMResetPasswordController.h" //忘记重置密码
+#import "YMModifyPasswdController.h"  //修改密码
 
 @interface YMForgetViewController ()
 
@@ -37,10 +38,13 @@
     [YMTool viewLayerWithView:_getCodeBtn cornerRadius:4 boredColor:BackGroundColor borderWidth:1];
     [YMTool viewLayerWithView:_nextBtn cornerRadius:4 boredColor:ClearColor borderWidth:1];
     
-    if ([kUserDefaults valueForKey:kPhone]) {
-        _phoneTextFd.text = [kUserDefaults valueForKey:kPhone];
+    //修改密码
+    if (self.passwordType == PasswordTypeModify) {
+        if ([kUserDefaults valueForKey:kPhone]) {
+            _phoneTextFd.text = [kUserDefaults valueForKey:kPhone];
+            _phoneTextFd.userInteractionEnabled = NO;
+        }
     }
-   
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -49,7 +53,6 @@
                                              selector:@selector(textDidChangeHandle:)
                                                  name:UITextFieldTextDidChangeNotification
                                                object:nil];
-
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -59,7 +62,6 @@
     //取消定时器
     [_timer invalidate];
     _timer = nil;
-
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -67,9 +69,8 @@
 }
 -(void)textDidChangeHandle:(NSNotification* )noti{
     //监听字体处理按钮颜色
-    _nextBtn.enabled = [_phoneTextFd.text length] > 0 && [_passwordTextFd.text length] > 0  ;
-    _nextBtn.backgroundColor = _nextBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
-    
+    _nextBtn.enabled = [_phoneTextFd.text length] > 0 && [_passwordTextFd.text length] > 0 ;
+    _nextBtn.backgroundColor = _nextBtn.enabled ? NavBarTintColor : NavBar_UnabelColor;
 }
 - (IBAction)getCodeBtnClick:(id)sender {
     if (_phoneTextFd.text.length == 0) {
@@ -80,23 +81,23 @@
         [MBProgressHUD showFail:@"手机号码有误，请重新输入！" view:self.view];
         return;
     }
-    NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
+    NSMutableDictionary* param = [[NSMutableDictionary alloc] init];
     [param setObject:_phoneTextFd.text forKey:@"phone"];
-    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"findPhoneCaptcha"];
-    
-    [[HttpManger sharedInstance]callWebHTTPReqAPI:ForgetSendCodeURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
-        DDLog(@"res == %@",responseObject);
-        NSString* status = responseObject[@"status"];
+    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+    [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];           //[kUserDefaults valueForKey:kUid]
+    [param setObject:@"updatePasswd" forKey:@"method"];
+    [[HttpManger sharedInstance]callHTTPReqAPI:SendMsgCodeURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
+        NSNumber* status = responseObject[@"status"];
         NSString* msg    = responseObject[@"msg"];
         //显示提示信息
         [MBProgressHUD showFail:msg view:self.view];
-        if ([SUCCESS isEqualToString:status]) {
+        if (status.integerValue == 1) {
              _timer   = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getCodeMessage) userInfo:nil repeats:YES];
         }
     }];
 }
 -(void)getCodeMessage{
-    DDLog(@"获取验证码 倒计时");
+   // DDLog(@"获取验证码 倒计时");
     _totalTime --;
     if (_totalTime != 0 ) {
         _getCodeBtn.userInteractionEnabled = NO;
@@ -115,7 +116,6 @@
         [_timer invalidate];
     }
 }
-
 #pragma mark - 按钮点击事情
 - (IBAction)nextBtnClick:(id)sender{
     DDLog(@"点击啦密码下一步");
@@ -132,30 +132,28 @@
         return;
     }
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
-    [param setObject:_passwordTextFd.text forKey:@"phoneCode"];
-    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"findPhoneCaptcha"];
-    
+    [param setObject:_phoneTextFd.text forKey:@"phone"];
+    [param setObject:_passwordTextFd.text forKey:@"captcha"];//[kUserDefaults valueForKey:kToken]
+    [param setObject:@"update-passwd" forKey:@"type"];       //修改密码
     YMWeakSelf;
-    [[HttpManger sharedInstance]callWebHTTPReqAPI:ForgetCheckPhoneURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
-        
+    [[HttpManger sharedInstance]callHTTPReqAPI:ValidateMsgURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
         NSNumber* status = responseObject[@"status"];
         NSString* msg    = responseObject[@"msg"];
-        if (status.longValue == 1) {
-            [kUserDefaults setObject:responseObject[@"data"][@"token"] forKey:kToken];
-            [kUserDefaults synchronize];
-            
+        if (status.integerValue == 1) {
             YMResetPasswordController* rvc = [[YMResetPasswordController alloc]init];
-            rvc.title = @"找回密码-重置密码";
+            rvc.passwordType = self.passwordType;
+            if (self.passwordType == PasswordTypeModify) {
+                rvc.title = @"修改密码";
+            }else{
+                rvc.title = @"找回密码-重置密码";
+            }
             [weakSelf.navigationController pushViewController:rvc animated:YES];
         }else{
-          //显示提示信息
-          [MBProgressHUD showFail:msg view:weakSelf.view];
+             //显示提示信息
+             [MBProgressHUD showFail:msg view:weakSelf.view];
         }
-        
     }];
-
 }
-
 
 
 @end

@@ -217,9 +217,11 @@
     }
     else if (distanceTime <= 24* 60 * 60 && distanceTime >= 60 * 60) {
         distanceStr = [NSString stringWithFormat:@"%d时%d分",hours ,minus];
+        
     }
     else {
-        distanceStr = [NSString stringWithFormat:@"%d天%d时%d分",days,hours,minus];
+       // distanceStr = [NSString stringWithFormat:@"%d天%d时%d分",days,hours,minus];
+        distanceStr = [NSString stringWithFormat:@"%d天",days];
     }
     
     return distanceStr;

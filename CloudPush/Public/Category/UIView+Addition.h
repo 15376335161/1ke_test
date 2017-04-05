@@ -60,4 +60,12 @@
 - (void)setSize:(CGSize)size;
 
 
+//绘制虚线
++ (UIView *)createDashedLineWithFrame:(CGRect)lineFrame
+                           lineLength:(int)length
+                          lineSpacing:(int)spacing
+                            lineColor:(UIColor *)color;
+
+//毛玻璃效果  Avilable in iOS 8.0 and later
++ (UIVisualEffectView *)effectViewWithFrame:(CGRect)frame;
 @end

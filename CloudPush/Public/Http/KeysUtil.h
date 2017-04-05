@@ -23,22 +23,27 @@ typedef NS_ENUM(NSInteger, TaskTypeStatus) {
     TaskTypeStatusInvalid      = 3
 };
 
+typedef NS_ENUM(NSInteger, PasswordType) {
+    PasswordTypeModify         = 0,       //修改密码
+    PasswordTypeForget         = 1        //忘记密码
+};
 typedef NS_ENUM(NSInteger,SetType) {
     SetTypePayWordUnSet       = 0,
-    SetTypePayWordModify,//设置支付密码
-    SetTypePayWordUnSetTwice,//设置支付密码 第二步
+    SetTypePayWordModify,      //设置支付密码
+    SetTypePayWordModifyTwice,  //设置支付密码 第二步
     
-    SetTypeZhiFuBaoUnSet,//设置支付宝账户
-    SetTypeZhiFuBaoModify,//修改支付宝账户 第一步
+    SetTypeZhiFuBaoUnSet,      //设置支付宝账户
+    SetTypeZhiFuBaoModify,     //修改支付宝账户 第一步
     SetTypeZhiFuBaoModifyTwice,//修改支付宝账户 第二步
     
-    SetTypeBankCardUnSet,//设置银联卡账户
-    SetTypeBankCardModify
-
+    SetTypeBankCardUnSet,      //设置银联卡账户
+    SetTypeBankCardModify,     //修改银联卡 第一步
+    SetTypeBankCardModifyTwice //修改银联卡 第二步
+    
 };
 
 typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
-    WithDrawCrashStyleZfb       = 0,// 提现方式支付宝
+    WithDrawCrashStyleZfb       = 1,// 提现方式支付宝
     WithDrawCrashStyleBankCard      // 提现方式 银行卡
 };
 
@@ -46,6 +51,10 @@ typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
 #define kJPushAppKey    @"a4e14f9c3a2ff72f5a400b3e"
 #define kChannel        @"appStore"
 #define kIsProduct      YES
+
+#define kUMAppKey       @"58b3ea40c62dca548d0023b4"
+#define kBaiduKey       @"0GQKawZkRIxTNjLLUQGNzYfX"
+
 
 #define kFirstOpen   @"firstOpen"
 #define kAutoLogin   @"kAutoLogin"
@@ -63,9 +72,11 @@ typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
 #define kNotification_Login     @"kNotificationLogin"
 #define kNotification_LoginOut  @"kNotificationLoginOut"
 #define kNotification_LoginStatusChanged  @"kNotificationLoginStatusChanged"
+
+#define kNotification_UserDataChanged     @"kNotification_UserDataChanged"
 #define kUserDefaults         [NSUserDefaults standardUserDefaults]
 
-
+#define kPublicKey         @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCYYnvi6O8mOJxcRTsBRukgZ/b4KcCHKK4sTxV/7MZOkaU26jutR9MLgQe9vwiIkzmY8bC80YBpjT0griFJxub2ok7bCLxyLDwsNkooqv6j5qKPMKnsHtHex7J46zHO+pdhbQ4xyUqMoVGdJoDmMCIoOJPMiDQOC0ieh/NFcuBtmQIDAQAB"
 //系统的颜色
 #define BlackColor      [UIColor blackColor]
 #define WhiteColor      [UIColor whiteColor]
@@ -77,7 +88,9 @@ typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
 #define ClearColor      [UIColor clearColor]
 //背景色
 #define BackGroundColor       HEX(@"F0F0F0")// RGBA(239, 239, 244, 1)
-#define NavBarTintColor       HEX(@"2196F3")//RGBA(90, 162, 238, 1)
+#define NavBarTintColor       HEX(@"414b4d")//RGBA(90, 162, 238, 1)  HEX(@"2196F3")
+
+#define TabBarTintColor       HEX(@"ef5316")
 
 //不可点击颜色
 #define NavBar_UnabelColor    RGBA(90, 162, 238, 0.5)

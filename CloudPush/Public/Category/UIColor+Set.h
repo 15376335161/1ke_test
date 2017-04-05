@@ -14,6 +14,9 @@
 #define PayOderBtnUnable  [UIColor colorWithHex:[UIColor hexWithString:@"df0d0d"] andAlpha:0.3]
 #define CoupBackgroundColor  [UIColor colorwithHexString:@"f59600"]
 
+//两种颜色的比较 http://stackoverflow.com/a/8899384/1931781
+- (BOOL)isEqualToColor:(UIColor *)otherColor ;
+
 +(UIColor *)colorWith255Red:(NSInteger)red greed:(NSInteger)greed blue:(NSInteger )blue alpha:(CGFloat)alpha;
 
 //16进制字符转 long

@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *tagImgView;
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 
+//改变图像
+@property(nonatomic,copy)void(^changeIconBlock)();
 
-+(instancetype)shareCell;
+//设置头像
+-(instancetype)shareCellWithChangeIconBlock:(void(^)())changeIconBlock;
 @end

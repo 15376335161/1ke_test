@@ -14,4 +14,8 @@
 
 - (NSString *)jsonString;
 
+//解决uniCode
+- (NSString *)descriptionWithLocale:(id)locale;
+
+
 @end

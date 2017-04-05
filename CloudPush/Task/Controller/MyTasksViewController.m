@@ -98,10 +98,12 @@
            if (weakSelf.tag == 3){
                self.dataArr = [YMTaskStatusModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
            }
-
-            [self.tableView reloadData];
+           [self.tableView reloadData];
         }];
     }else{
+        //停止刷新
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
          [[YMUserManager shareInstance] pushToLoginWithViewController:self];
     }
 }

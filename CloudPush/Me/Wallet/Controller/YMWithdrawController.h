@@ -12,12 +12,11 @@
 
 @interface YMWithdrawController : BaseViewController
 
-//@property(nonatomic,copy)void(^typeBlock)(NSNumber* type);
-
 //用户模型数据
 @property(nonatomic,strong)UserModel* usrModel;
 //类型数组
 @property(nonatomic,strong)TitleModel* model;
 
 @property(nonatomic,assign)WithDrawCrashStyle withdrawStyle;
+
 @end

@@ -8,10 +8,17 @@
 
 #import "BaseViewController.h"
 #import "UserModel.h"
+#import "TitleModel.h"
 
 @interface YMWithdrawStyleController : BaseViewController
 
+//选择提现方式
+@property(nonatomic,copy)void(^typeBlock)(WithDrawCrashStyle type,TitleModel* model);
+
 //用户模型数据
 @property(nonatomic,strong)UserModel* usrModel;
+
+//支付方式
+@property(nonatomic,assign)WithDrawCrashStyle withdrawStyle;
 
 @end

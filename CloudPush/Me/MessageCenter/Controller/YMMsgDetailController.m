@@ -22,12 +22,11 @@
     [super viewDidLoad];
     
     self.tableView.tableFooterView = [UIView new];
-    
-    self.model = [[YMMsgModel alloc]init];
-    self.model.content = @"哈哈减肥啦啊发酵；发 啦放假啦发几个拉萨了张家口 v 拉萨布局啊邻居啊世界杯 v 了就啦赶紧送表格啦就是个垃圾股 i 哦啦就是光荣 i 诶基本 v了竟然公然举办借款人规律就是大肉包裤薄但是人家奔跑疾病";
-    [self.tableView reloadData];
-    
+
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageNamed:@"del" target:self action:@selector(deleteMsgClick:)];
+    
+    //请求消息详情
+    [self requestMessageDetail];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,9 +34,37 @@
 }
 -(void)deleteMsgClick:(UIButton* )btn{
     DDLog(@"删除了按钮");
-    
+    NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
+    [param setObject:_model.type forKey:@"type_message"];
+    //消息id
+    [param setObject:_model.id forKey:@"id_message"];
+    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+    [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
+    [[HttpManger sharedInstance]callHTTPReqAPI:MessageDeleteURL params:param view:self.view  loading:YES tableView:self.tableView  completionHandler:^(id task, id responseObject, NSError *error) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
+#pragma mark - requestNetWork
+-(void)requestMessageDetail {
+    NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
+    [param setObject:_model.type forKey:@"type_message"];
+    [param setObject:_model.id forKey:@"id_message"];
+    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+    [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
 
+    NSString* urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@&type_message=%@&id_message=%@",MessageDetailURL,
+                        @"1422",
+                        [kUserDefaults valueForKey:kToken],
+                        _model.type,
+                        _model.id];
+    YMWeakSelf;
+    [[HttpManger sharedInstance] getHTTPReqAPI:urlStr params:param view:self.view loading:YES tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
+        
+        weakSelf.model = [YMMsgModel mj_objectWithKeyValues:responseObject[@"data"]];
+        [weakSelf.tableView reloadData];
+    }];
+}
 #pragma mark - UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

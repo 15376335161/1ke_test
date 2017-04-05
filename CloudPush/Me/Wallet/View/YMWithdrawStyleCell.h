@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "TitleModel.h"
+#import "UserModel.h"
+
 
 @interface YMWithdrawStyleCell : UITableViewCell
 
@@ -17,6 +19,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *titlLabel;
 //图标
 @property (weak, nonatomic) IBOutlet UIImageView *iconImgView;
+
+//选中图标
+@property (weak, nonatomic) IBOutlet UIImageView *selectImgView;
+
+//用户类型
+@property(nonatomic,strong)UserModel* usrModel;
 
 //复用
 +(instancetype)cellDequeueReusableCellWithTableView:(UITableView* )tableView;

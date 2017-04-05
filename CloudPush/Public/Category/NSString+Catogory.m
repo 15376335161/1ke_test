@@ -11,6 +11,27 @@
 
 
 @implementation NSString (Catogory)
+//获取设备 IP 地址
++ (NSString *)getIPAddress{
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        temp_addr = interfaces;
+        while(temp_addr != NULL) {
+            if(temp_addr->ifa_addr->sa_family == AF_INET) {
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                }
+            }
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    freeifaddrs(interfaces);
+    return address;
+}
 
 + (NSString *)showDistance:(NSString *)str
 {
@@ -126,7 +147,53 @@
         return object;
     }
 }
+ //判断字符串是否全部为数字
++ (BOOL)isAllNum:(NSString *)string{
+    unichar c;
+    for (int i=0; i<string.length; i++) {
+        c=[string characterAtIndex:i];
+        if (!isdigit(c)) {
+            return NO;
+        }
+    }
+    return YES;
+}
 
+//判断字符串中是否含有中文
++ (BOOL)isHaveChineseInString:(NSString *)string{
+    for(NSInteger i = 0; i < [string length]; i++){
+        int a = [string characterAtIndex:i];
+        if (a > 0x4e00 && a < 0x9fff) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+//正则表达式验证 判断邮箱格式是否正确
++ (BOOL)isAvailableEmail:(NSString *)email {
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:email];
+}
+//判断字符串中是否含有某个字符串
++ (BOOL)isHaveString:(NSString *)string1 InString:(NSString *)string2{
+    NSRange _range = [string2 rangeOfString:string1];
+    if (_range.location != NSNotFound) {
+        return YES;
+    }else {
+        return NO;
+    }
+}
+//判断字符串中是否含有空格
++ (BOOL)isHaveSpaceInString:(NSString *)string{
+    NSRange _range = [string rangeOfString:@" "];
+    if (_range.location != NSNotFound) {
+        return YES;
+    }else {
+        return NO;
+    }
+}
 +(NSString*)numberStringWithnumberString:(NSString*)numberStr{
     NSArray *strArr = [numberStr componentsSeparatedByString:@"."];
     if (strArr.count > 1) {
@@ -163,7 +230,7 @@
      20 * 中国电信：China Telecom
      21 * 133,1349,153,180,189,177
      22 */
-    NSString * CT = @"^1((33|53|8[09]|7[0-9])[0-9]|349)\\d{7}$";
+    NSString * CT = @"^1((33|53|8[0-9]|7[0-9])[0-9]|349)\\d{7}$";
     
     NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
     NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
@@ -284,5 +351,72 @@
     }
     return newStr;
 }
+//汉字转化为国际码
++(NSString*)stringEncodingWithStr:(NSString* )str CFStringEncoding:(CFStringEncoding )encoding
+{
+    //得到的国标码（GB2312-80）字符串编码
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(encoding);//kCFStringEncodingGB_18030_2000
+    //下面是转化示例
+    NSData *dataString = [str dataUsingEncoding:enc];
+    
+    return  [[NSString alloc] initWithData:dataString encoding:enc];
+    
+}
 
+#pragma mark - 如何通过一个整型的变量来控制数值保留的小数点位数。以往我们通类似@"%.2f"来指定保留2位小数位，现在我想通过一个变量来控制保留的位数
++(NSString *)newFloat:(float)value withNumber:(int)numberOfPlace
+{
+    NSString *formatStr = @"%0.";
+    formatStr = [formatStr stringByAppendingFormat:@"%df", numberOfPlace];
+    NSLog(@"____%@",formatStr);
+    
+    formatStr = [NSString stringWithFormat:formatStr, value];
+    NSLog(@"____%@",formatStr);
+    
+    printf("formatStr %s\n", [formatStr UTF8String]);
+    return formatStr;
+}
+#pragma mark - 使用subString去除float后面无效的0
++(NSString *)changeFloatWithString:(NSString *)stringFloat
+
+{
+    const char *floatChars = [stringFloat UTF8String];
+    NSUInteger length = [stringFloat length];
+    NSUInteger zeroLength = 0;
+    NSInteger i = length-1;
+    for(; i>=0; i--)
+    {
+        if(floatChars[i] == '0') {
+            zeroLength++;
+        } else {
+            if(floatChars[i] == '.')
+                i--;
+            break;
+        }
+    }
+    NSString *returnString;
+    if(i == -1) {
+        returnString = @"0";
+    } else {
+        returnString = [stringFloat substringToIndex:i+1];
+    }
+    return returnString;
+}
+
+#pragma mark - 去除float后面无效的0
++(NSString *)changeFloatWithFloat:(CGFloat)floatValue
+
+{
+    return [self changeFloatWithString:[NSString stringWithFormat:@"%f",floatValue]];
+}
+
++ (NSString *)base64StringFromText:(NSString *)text {
+    
+    NSData *data = [text dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *base64String = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    DDLog(@"text == %@  data == %@  base64String == %@",text,data,base64String);
+    return base64String;
+}
 @end

@@ -27,7 +27,6 @@
         CGFloat width =  [_titlLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}].width;
         _titlLabel.sd_layout.leftSpaceToView(self,15).topEqualToView(self).bottomEqualToView(self).widthIs(width);
         
-      
        // CGFloat y = (frame.size.height - image.size.height)/2;
         _imgView = [[UIImageView alloc]init];
          [self addSubview:_imgView];
@@ -37,9 +36,7 @@
         UIImage *image = [UIImage imageNamed:@"city"];
         _imgView.image = image;
         _imgView.contentMode = UIViewContentModeScaleAspectFit;
-        
     }
-
     return self;
 }
 

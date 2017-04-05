@@ -10,6 +10,27 @@
 
 @implementation UIColor (Set)
 
+//两种颜色的比较 http://stackoverflow.com/a/8899384/1931781
+- (BOOL)isEqualToColor:(UIColor *)otherColor {
+    
+    CGColorSpaceRef colorSpaceRGB = CGColorSpaceCreateDeviceRGB();
+    
+    UIColor *(^convertColorToRGBSpace)(UIColor *) = ^(UIColor *color) {
+        if (CGColorSpaceGetModel(CGColorGetColorSpace(color.CGColor)) == kCGColorSpaceModelMonochrome) {
+            const CGFloat *oldComponents = CGColorGetComponents(color.CGColor);
+            CGFloat components[4] = {oldComponents[0], oldComponents[0], oldComponents[0], oldComponents[1]};
+            return [UIColor colorWithCGColor:CGColorCreate(colorSpaceRGB, components)];
+        } else {
+            return color;
+        }
+    };
+    
+    UIColor *selfColor = convertColorToRGBSpace(self);
+    otherColor = convertColorToRGBSpace(otherColor);
+    CGColorSpaceRelease(colorSpaceRGB);
+    
+    return [selfColor isEqual:otherColor];
+}
 
 //使用十进制设置背景颜色
 +(UIColor *)colorWith255Red:(NSInteger)red greed:(NSInteger)greed blue:(NSInteger)blue alpha:(CGFloat)alpha

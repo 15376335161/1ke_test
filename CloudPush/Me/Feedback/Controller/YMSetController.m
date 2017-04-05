@@ -80,12 +80,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
         case 0:
-           
             break;
         case 1:
         {
             YMForgetViewController* fvc = [[YMForgetViewController alloc]init];
             fvc.title = @"修改密码";
+            fvc.passwordType = PasswordTypeModify;
             [self.navigationController pushViewController:fvc animated:YES];
         }
             break;

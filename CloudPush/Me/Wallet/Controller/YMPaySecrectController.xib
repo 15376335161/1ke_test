@@ -80,12 +80,12 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfN-e7-GWm">
-                            <rect key="frame" x="285" y="7" width="80" height="27"/>
+                            <rect key="frame" x="285" y="7.5" width="80" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="eRZ-nD-9Cn"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="获取验证码">
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <state key="normal" title="  获取验证码">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>

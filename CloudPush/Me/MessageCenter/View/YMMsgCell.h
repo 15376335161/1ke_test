@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YMMsgModel.h"
 
 @interface YMMsgCell : UITableViewCell
+
+
 @property (weak, nonatomic) IBOutlet UILabel *titlLabel;
+
+//消息模型
+@property(nonatomic,strong)YMMsgModel* model;
 //复用
 +(instancetype)cellDequeueReusableCellWithTableView:(UITableView* )tableView;
 @end

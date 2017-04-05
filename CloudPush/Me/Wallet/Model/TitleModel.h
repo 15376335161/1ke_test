@@ -13,6 +13,9 @@
 @property(nonatomic,copy)NSString* title;
 @property(nonatomic,copy)NSString* icon;
 
+//提现方式
+@property(nonatomic,assign)WithDrawCrashStyle withdrawStyle;
+
 //添加标记 便于判断 跳转
 @property(nonatomic,strong)NSNumber* isCard;
 @property(nonatomic,strong)NSNumber* isZfb;

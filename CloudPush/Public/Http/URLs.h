@@ -16,9 +16,22 @@
 #define FAILURE_TOKEN   @"API_FAILURE_TOKEN"
 
 
-
 #define  BaseApi    @"http://apiyzt.youmeng.com/"
 
+//请求首页数据
+#define HomeDataURL        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/home"]
+////修改支付宝 支付密码 手机验证   注册 修改密码 快捷登录 修改手机发送给旧手机 修改手机发送给新手机
+#define  SendMsgCodeURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/sms_interface/send"]
+
+//注册
+#define RegisterURL          @"http://apiyzt.youmeng.com/Api/Site/register"
+//修改密码  短信验证
+#define ValidateMsgURL       [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/Sms_interface/validate"]
+//修改密码
+#define updatePasswordURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/Site/updatePasswd"]
+
+//上传头像
+#define uploadUserPicURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/upload_pic_interface/upload"]
 //任务列表
 #define  TaskListURL         [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list"]
 //任务详情
@@ -58,9 +71,34 @@
 
 //我的钱包 信息
 #define UserPayInfoURL         [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/UserPay/GetUserPayinfo"]
-//绑定银行卡
+
+//绑定 修改 支付宝 银行卡
 #define AddBankCardURL       [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/UserPay/FirstAddPayAccount"]
-//绑定支付宝
+//绑定 修改 支付宝
 #define AddZFBAccountURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/payaccount/bindpayaccount"]
+
+// 设置 修改支付密码
+#define SetPassWordURL       [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/UserPay/FirstSetUserPayPass"]
+//支付密码 验证手机号
+#define  CheckPwdCaptchaURL   [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/sms_interface/check_reset_pwd_captcha"]
+//#define ResetPassWordCheckPhoneURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/sms_interface/send"]
+
+
+
+//支付宝 验证手机号
+#define  CheckAliCaptchaURL   [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/sms_interface/check_reset_alipay_captcha"]
+
+//#define ModifyAccountURL  [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/payaccount/ModifyAlipay"]
+//提现接口
+#define GetWithdrawMoneyURL   [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/UserPay/getWithdrawMoney"]
+
+//消息列表
+#define MessageListURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/message_list/index"]
+//消息详情
+#define MessageDetailURL   [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/message_list/message_details"]
+//删除消息
+#define MessageDeleteURL   [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/message_list/delUserMessage"]
+
+
 
 #endif /* URLs_h */

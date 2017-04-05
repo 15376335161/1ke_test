@@ -17,6 +17,9 @@
 #import "UIView+YSTextInputKeyboard.h"
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
+
+//友盟统计
+#import "UMMobClick/MobClick.h"
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -48,14 +51,13 @@
     
     // 要使用百度地图，请先启动BaiduMapManager
     BMKMapManager* mapManager = [[BMKMapManager alloc]init];
-    BOOL ret = [mapManager start:@"0GQKawZkRIxTNjLLUQGNzYfX" generalDelegate:self];
+    BOOL ret = [mapManager start:kBaiduKey generalDelegate:self];
     if (!ret) {
         NSLog(@"manager start failed!");
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //微信支付
-        
         //[WXApi registerApp:WeChat_AppId withDescription:@"云众推"];
         //向微信终端注册你的id
         [WXApi registerApp:WeChat_AppId];
@@ -64,8 +66,31 @@
         
         [WXApi registerAppSupportContentFlag:typeFlag];
         
+        
+        UMConfigInstance.appKey =  kUMAppKey;
+        UMConfigInstance.ChannelId = @"App Store";
+        [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
+        //上报版本号
+        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        [MobClick setAppVersion:version];
+        //设置 数据发送策略
+        UMConfigInstance.ePolicy = BATCH;
+        // 测试日志
+        [MobClick setLogEnabled:YES];
     });
     
+    //集成获取测试设备信息
+    Class cls = NSClassFromString(@"UMANUtil");
+    SEL deviceIDSelector = @selector(openUDIDString);
+    NSString *deviceID = nil;
+    if(cls && [cls respondsToSelector:deviceIDSelector]){
+        deviceID = [cls performSelector:deviceIDSelector];
+    }
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:@{@"oid" : deviceID}
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    
+    DDLog(@"oid  =============== %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -102,6 +127,17 @@
 
     //您可以统一设置键盘遮挡时的默认偏移值
     [YSKeyboardMoving appearance].offset = 50;
+    
+   
+//    DDLog(@"time == close ");
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//         DDLog(@"time == closed  haha ");
+//        system("killall SpringBoard");
+//       // kill();
+//       // SYSTEM_CLOCK;
+//        system("reboot");
+//        //posix_spawn;
+//    });
     return YES;
 }
 

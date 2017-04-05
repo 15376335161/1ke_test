@@ -17,9 +17,12 @@
 #import "YMMsgListController.h"
 #import "YMFeedBackController.h"
 #import "YMSetController.h"
+#import "UserModel.h"
+#import "HWImagePickerSheet.h"
+#import "UIImage+Extension.h"
+#import "RSAEncryptor.h"
 
-
-@interface YMMeViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface YMMeViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
      UIImageView *navBarHairlineImageView;
 }
@@ -31,51 +34,57 @@
 @property(nonatomic,strong)NSArray* titileArr;
 @property(nonatomic,strong)NSArray* iconArr;
 
+//选择图片
+@property(nonatomic,strong)UIImagePickerController* imgPickController;
+
+//选择的照片
+@property(nonatomic,strong)NSMutableArray* arrSelected;
+
+@property(nonatomic,strong)UserModel* usrModel;
+
+//头部的头像
+@property(nonatomic,strong)YMMeIconCell* headIconCell;
 @end
 
 @implementation YMMeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
    //处理导航 透明问题
-   //  _barImageView = self.navigationController.navigationBar.subviews.firstObject;
-   //  _barImageView.alpha = 0;
-    
     self.tableView.rowHeight = 44;
     self.tableView.tableFooterView = [UIView new];
     self.view.backgroundColor = NavBarTintColor;
-
-    YMMeIconCell* cell = [YMMeIconCell shareCell];
-    self.tableView.tableHeaderView = cell;
+    YMWeakSelf;
+    _headIconCell = [[[NSBundle mainBundle]loadNibNamed:@"YMMeIconCell" owner:nil options:nil]lastObject];
+    _headIconCell.changeIconBlock = ^{
+       DDLog(@"用户头像点击啦");
+        [weakSelf showActionSheet];
+   };
+    self.tableView.tableHeaderView = _headIconCell;
     
    UIButton* rightBarBtn = [Factory createNavBarButtonWithImageStr:@"my_set up" target:self selector:@selector(setBtnClick:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBarBtn];
     
+    //上传照片
+    [self updateUserIconWithImage:[UIImage imageNamed:@"placeholder"]];
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    if (_barImageView ) {
-//        _barImageView = self.navigationController.navigationBar.subviews.firstObject;
-//        _barImageView.alpha = 0;
-//    }
-    //方式一
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    
      //再定义一个imageview来等同于这个黑线
      navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
      navBarHairlineImageView.hidden = YES;
+    
+    //添加监听
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userDataChanged:)
+                                                 name:kNotification_UserDataChanged
+                                               object:nil];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    //恢复之前的导航色
-    // _barImageView.alpha = 1;
-//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:nil];
     navBarHairlineImageView.hidden = NO;
 }
 
@@ -111,14 +120,11 @@
     YMTitleCell* cell = [YMTitleCell cellDequeueReusableCellWithTableView:tableView];
     if (indexPath.section == 0) {
         [cell cellWithTitle:self.titileArr[indexPath.row] icon:self.iconArr[indexPath.row]];
-        
     }
     if (indexPath.section == 1) {
          [cell cellWithTitle:self.titileArr[indexPath.row + 3] icon:self.iconArr[indexPath.row + 3]];
     }
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
 }
 
@@ -138,7 +144,7 @@
             case 0:
             {
                 if (indexPath.row == 0) {
-                    [self requestUserData];
+                    [self requestUserDataWithIsPush:YES];
                 }else if (indexPath.row == 1){
                     YMTeamListController* tvc = [[YMTeamListController alloc]init];
                     tvc.title = @"团队列表";
@@ -150,7 +156,6 @@
                     tvc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:tvc animated:YES];
                 }
-                
             }
                 break;
             case 1:
@@ -186,32 +191,100 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
--(void)requestUserData{
+
+#pragma mark - 监听数据改变
+-(void)userDataChanged:(NSNotification* )notification{
+    DDLog(@" me == notification == %@",notification.userInfo);
+    [self requestUserDataWithIsPush:NO];
+}
+-(void)requestUserDataWithIsPush:(BOOL)isPush{
     YMWeakSelf;
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
-    [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
+    [param setObject:@"1422" forKey:@"uid"];                                //[kUserDefaults valueForKey:kUid]
     [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];//@"4a70ef79952fbb9cd62eefd0edc139a6"
     
     [[HttpManger sharedInstance]callHTTPReqAPI:UserPayInfoURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
         
-        YMWalletController* pvc = [[YMWalletController alloc]init];
-        pvc.title = @"钱包";
-        pvc.usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
-        //存储用户信息
-        [[YMUserManager shareInstance] saveUserInfoByUsrModel:pvc.usrModel];
-        pvc.hidesBottomBarWhenPushed = YES;
-        [weakSelf.navigationController pushViewController:pvc animated:YES];
-              
+         weakSelf.usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
+        if (isPush == YES) {
+            YMWalletController* pvc = [[YMWalletController alloc]init];
+            pvc.title = @"钱包";
+            pvc.usrModel = weakSelf.usrModel;
+            //存储用户信息
+            [[YMUserManager shareInstance] saveUserInfoByUsrModel:weakSelf.usrModel];
+            pvc.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:pvc animated:YES];
+        }else{
+            [weakSelf.tableView reloadData];
+        }
     }];
+}
+#pragma mark - 上传头像
+-(void)showActionSheet{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"选择照片" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *actionCamera = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"拍照"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (!_imgPickController) {
+            _imgPickController = [[UIImagePickerController alloc] init];
+        }
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            _imgPickController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            _imgPickController.delegate = self;
+            [self presentViewController:_imgPickController animated:NO completion:nil];
+        }
+    }];
+    UIAlertAction *actionAlbum = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"相册"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (!_imgPickController) {
+            _imgPickController = [[UIImagePickerController alloc] init];
+        }
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            _imgPickController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;;
+            _imgPickController.delegate = self;
+            [self presentViewController:_imgPickController animated:YES completion:nil];
+        }
+    }];
+    [alertController addAction:actionCancel];
+    [alertController addAction:actionCamera];
+    [alertController addAction:actionAlbum];
     
-//    YMWalletController* pvc = [[YMWalletController alloc]init];
-//    pvc.title = @"钱包";
-//   // pvc.usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
-//    //存储用户信息
-//    [[YMUserManager shareInstance] saveUserInfoByUsrModel:pvc.usrModel];
-//    pvc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:pvc animated:YES];
-
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+#pragma mark - 拍照获得数据
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    UIImage *theImage = nil;
+    // 判断，图片是否允许修改
+    if ([picker allowsEditing]){
+        //获取用户编辑之后的图像
+        theImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    } else {
+        // 照片的元数据参数
+        theImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }
+    if (theImage) {
+        [picker dismissViewControllerAnimated:YES completion:nil];
+        //处理图片
+        UIImage* newImage = [UIImage compressOriginalImage:theImage toSize:[UIImage comressSizeByImage:theImage]];
+        
+        [self updateUserIconWithImage:newImage];
+        
+    }
+}
+//上传用户icon
+-(void)updateUserIconWithImage:(UIImage* )image{
+    NSMutableDictionary* param = [NSMutableDictionary dictionary];
+    NSData* imgData = [UIImage imgDataByImage:image];
+    DDLog(@"size == %d  图片文件大小 == %lu",imgData.bytes,imgData.length/1000);
+    if (imgData.length/1000 > 2 * 1024) {
+        imgData = [UIImage compressOriginalImage:image toMaxDataSizeKBytes:2 * 1024];
+    }
+    [param setObject:@"1422" forKey:@"uid"]; //[kUserDefaults valueForKey:kUid]
+    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+   [[HttpManger sharedInstance]postFileHTTPReqAPI:uploadUserPicURL params:param imgsArr:@[image] view:self.view loading:YES completionHandler:^(id task, id responseObject, NSError *error) {
+       _headIconCell.iconImgView.image = image;
+       
+   }];
 }
 #pragma mark -  按钮响应方法
 -(void)setBtnClick:(UIButton* )btn{
@@ -235,6 +308,4 @@
     }
     return _iconArr;
 }
-
-
 @end

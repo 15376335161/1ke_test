@@ -17,6 +17,7 @@
 #import "WXApi.h"
 #import "WXApiObject.h"
 #import "WXMediaMessage+messageConstruct.h"
+//#import "MobClickSocialAnalytics.h"    //友盟社交统计
 //#import "WXMediaMessage.h"
 
 

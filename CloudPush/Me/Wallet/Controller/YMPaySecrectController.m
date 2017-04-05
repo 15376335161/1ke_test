@@ -8,6 +8,7 @@
 
 #import "YMPaySecrectController.h"
 #import "YMWalletController.h"
+#import "NSString+Catogory.h"
 
 @interface YMPaySecrectController ()
 //警告label
@@ -35,7 +36,6 @@
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     //修改view
     [self modifyView];
     
@@ -43,10 +43,11 @@
     //监听字体处理按钮颜色
     [YMTool viewLayerWithView:_sureBtn cornerRadius:4 boredColor:ClearColor borderWidth:1];
     _sureBtn.enabled = [_secondTextFd.text length] > 0 && [_firstTextFd.text length] > 0  ;
-    _sureBtn.backgroundColor = _sureBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
+    _sureBtn.backgroundColor = _sureBtn.enabled ? NavBarTintColor : NavBar_UnabelColor;
     
     //设置layer
     [YMTool viewLayerWithView:_getCodeBtn cornerRadius:4 boredColor:BackGroundColor borderWidth:1];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -71,22 +72,22 @@
     [super didReceiveMemoryWarning];
 }
 #pragma mark - UI
--(void)modifyView{
-    //设置支付密码
+-(void)modifyView {
+    //设置支付密码  或者  修改密码
     self.getCodeBtn.hidden = YES;
-    if (self.setType == SetTypePayWordUnSetTwice) {
+    if (self.setType == SetTypePayWordUnSet ||
+        self.setType == SetTypePayWordModifyTwice) {
         DDLog(@"设置密码");
         _firstNameLabel.text  = @"支付密码";
         _secondNameLabel.text = @"确认支付密码";
         _firstTextFd.placeholder = @"请输入支付密码";
         _secondTextFd.placeholder = @"请输入确认支付密码";
-    }
-    else if (self.setType == SetTypePayWordModify){
-        DDLog(@"修改密码");
-        _firstNameLabel.text  = @"支付密码";
-        _secondNameLabel.text = @"确认支付密码";
-        _firstTextFd.placeholder = @"请输入支付密码";
-        _secondTextFd.placeholder = @"请输入确认支付密码";
+        
+        if (self.setType == SetTypePayWordModifyTwice) {
+            _firstTextFd.text = [kUserDefaults valueForKey:kPasswd];
+            
+            //_secondTextFd.placeholder = @"请输入确认支付密码";
+        }
     }
     //设置支付宝账户
     else if (self.setType == SetTypeZhiFuBaoUnSet){
@@ -96,31 +97,23 @@
         _firstTextFd.placeholder = @"请输入支付宝账号";
         _secondNameLabel.text = @"真实姓名";
         _secondTextFd.placeholder = @"请输入真实姓名";
-    }else if (self.setType == SetTypeZhiFuBaoModify ||
-              self.setType == SetTypePayWordUnSet){//设置支付密码 第一步 验证手机号
+    }else if ( self.setType == SetTypeZhiFuBaoModify || //修改支付宝密码第一步
+               self.setType == SetTypePayWordModify   ||//修改支付密码第一步
+               self.setType == SetTypeBankCardModify ){ //修改银行卡第一步  验证手机号
         DDLog(@"修改支付宝");
         self.getCodeBtn.hidden = NO;
         _warnLabel.text = @"为了您的账户安全，请完成手机验证";
         _firstNameLabel.text = @"手机号";
         _firstTextFd.placeholder = @"请输入手机号码";
-        _secondNameLabel.text = @"验证码";
+        _secondNameLabel.text     = @"验证码";
         _secondTextFd.placeholder = @"请输入验证码";
         //键盘类型
         _firstTextFd.keyboardType  = UIKeyboardTypeNumberPad;
         _secondTextFd.keyboardType = UIKeyboardTypeNumberPad;
         [_sureBtn setTitle:@"下一步" forState:UIControlStateNormal];
-    }else if (self.setType == SetTypeZhiFuBaoModifyTwice){
-        DDLog(@"修改支付宝");
-        self.getCodeBtn.hidden = YES;
-        _firstNameLabel.text = @"支付宝账号";
-        _firstTextFd.placeholder = @"请输入支付宝账号";
-        _secondNameLabel.text = @"真实姓名";
-        _secondTextFd.placeholder = @"请输入真实姓名";
-        //支付宝账户
-        _firstTextFd.text = [kUserDefaults valueForKey:kZfb_accountName];
-        _secondTextFd.text = [kUserDefaults valueForKey:kZfb_realName];
+        //手机号
+        _firstTextFd.text         = [kUserDefaults valueForKey:kPhone];
     }
-    
     //设置银行卡
     else if (self.setType == SetTypeBankCardUnSet){
         DDLog(@"设置银行卡");
@@ -128,16 +121,35 @@
         _firstTextFd.placeholder = @"请输入银行卡号";
         _secondNameLabel.text = @"真实姓名";
         _secondTextFd.placeholder = @"请输入真实姓名";
-    }else if (self.setType == SetTypeBankCardModify){
+    }
+    //修改支付宝 第二步
+    else if (self.setType == SetTypeZhiFuBaoModifyTwice){
+        DDLog(@"修改支付宝");
+        self.getCodeBtn.hidden = YES;
+        _firstNameLabel.text = @"支付宝账号";
+        _firstTextFd.placeholder = @"请输入支付宝账号";
+        _secondNameLabel.text = @"真实姓名";
+        _secondTextFd.placeholder = @"请输入真实姓名";
+        //支付宝账户
+        //NSString* accountName = [kUserDefaults valueForKey:kZfb_accountName];
+        _firstTextFd.text  = [kUserDefaults valueForKey:kZfb_accountName];
+        //[NSString string:accountName replaceStrInRange:NSMakeRange(4, accountName.length - 4) withString:@"****"];
+        _secondTextFd.text = [kUserDefaults valueForKey:kZfb_realName];
+        
+        _secondTextFd.text = @"更改支付宝";
+    }
+    //修改银行卡 第二步
+    else if (self.setType == SetTypeBankCardModifyTwice){
         DDLog(@"修改");
         _firstNameLabel.text = @"银行卡号";
         _firstTextFd.placeholder = @"请输入银行卡号";
         _secondNameLabel.text = @"真实姓名";
         _secondTextFd.placeholder = @"请输入真实姓名";
+        //修改银行卡
+        _firstTextFd.text = [kUserDefaults valueForKey:kCard_accountName];
+        _secondTextFd.text = [kUserDefaults valueForKey:kCard_realName];
         
-         //修改银行卡
-         _firstTextFd.text = [kUserDefaults valueForKey:kCard_accountName];
-         _secondTextFd.text = [kUserDefaults valueForKey:kCard_realName];
+        _secondTextFd.text = @"更改银行卡";
     }
 }
 -(void)textDidChangeHandle:(NSNotification* )noti{
@@ -145,8 +157,6 @@
     _sureBtn.enabled = [_secondTextFd.text length] > 0 && [_firstTextFd.text length] > 0  ;
     _sureBtn.backgroundColor = _sureBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
 }
-
-
 
 #pragma mark - 按钮点击事件
 - (IBAction)sureBtnClick:(id)sender {
@@ -162,75 +172,142 @@
         //真实的用户名
         [param setObject:_secondTextFd.text forKey:@"realName"];
         [self setBankCardRequestWithParam:param urlStr:AddBankCardURL];
-    }else if (self.setType == SetTypeBankCardModify){
+    
+       //修改银行卡
+    }
+    //设置支付宝
+    else if (self.setType == SetTypeZhiFuBaoUnSet){
+        [param setObject:@"1422" forKey:kUid];    //
+        [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+        [param setObject:@"1" forKey:@"pay_type"];//
+        //账户名
+        [param setObject:_firstTextFd.text forKey:@"accountName"];
+        //真实的用户名
+        [param setObject:_secondTextFd.text forKey:@"realName"];
+        
+        [self setBankCardRequestWithParam:param urlStr:AddZFBAccountURL];
+    }
+    //修改支付宝。 银联卡。第一步。验证手机号
+    else if (self.setType == SetTypeZhiFuBaoModify ||
+             self.setType == SetTypeBankCardModify ||
+             self.setType == SetTypePayWordModify){
+        [param setObject:@"1422" forKey:kUid];//
+        [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+        //手机号
+        [param setObject:_firstTextFd.text forKey:@"phone"];
+        //验证码
+        [param setObject:_secondTextFd.text forKey:@"phoneCode"];
+        //验证支付密码
+        if (self.setType == SetTypePayWordModify) {
+             [self setBankCardRequestWithParam:param urlStr:CheckPwdCaptchaURL];
+        }else{
+           // 验证 支付宝
+           [self setBankCardRequestWithParam:param urlStr:CheckAliCaptchaURL];
+        }
+    }
+    //修改支付宝。第二步
+    else if (self.setType == SetTypeZhiFuBaoModifyTwice){
+        [param setObject:@"1422" forKey:kUid];//
+        [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+        [param setObject:@"1" forKey:@"pay_type"];//
+        
+        //账户名 @ . 后台需要解码
+        [param setObject:_firstTextFd.text forKey:@"accountName"];//
+        //真实的用户名
+        [param setObject:[_secondTextFd.text stringByReplacingPercentEscapesUsingEncoding:kCFStringEncodingUTF8]  forKey:@"realName"];
+        //[_secondTextFd.text stringByReplacingPercentEscapesUsingEncoding:kCFStringEncodingUTF8]
+        //[_secondTextFd.text stringByAddingPercentEscapesUsingEncoding:kCFStringEncodingUTF8]
+        //[NSString stringEncodingWithStr:_secondTextFd.text CFStringEncoding:kCFStringEncodingUTF8]
+        //[NSString base64StringFromText:_secondTextFd.text]
+        
+        [self setBankCardRequestWithParam:param urlStr:AddBankCardURL];
+    }
+    //修改银行卡第 二步
+    else if (self.setType == SetTypeBankCardModifyTwice){
         [param setObject:@"1422" forKey:kUid];//
         [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
         [param setObject:@"4" forKey:@"pay_type"];//
         //账户名
-        [param setObject:_firstTextFd.text forKey:@"accountName"];
+        [param setObject: _firstTextFd.text forKey:@"accountName"];
         //真实的用户名
-        [param setObject:_secondTextFd.text forKey:@"realName"];
+        [param setObject:_secondTextFd.text forKey:@"realName"];//[NSString base64StringFromText:_secondTextFd.text]
+        
         [self setBankCardRequestWithParam:param urlStr:AddBankCardURL];
-    }
-    //设置支付宝
-    else if (self.setType == SetTypeZhiFuBaoUnSet){
-        [param setObject:@"1422" forKey:kUid];//
-        [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
-        [param setObject:@"1" forKey:@"pay_type"];//
-        //账户名
-        [param setObject:_firstTextFd.text forKey:@"accountName"];
-        //真实的用户名
-        [param setObject:_secondTextFd.text forKey:@"realName"];
-        [self setBankCardRequestWithParam:param urlStr:AddZFBAccountURL];
-    }//获取验证码
-    else if (self.setType == SetTypeZhiFuBaoModify){
-        
-       
-    }else if (self.setType == SetTypeZhiFuBaoModifyTwice){
-        [param setObject:@"1422" forKey:kUid];//
-        [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
-        [param setObject:@"1" forKey:@"pay_type"];//
-        //账户名
-        [param setObject:_firstTextFd.text forKey:@"accountName"];
-        //真实的用户名
-        [param setObject:_firstTextFd.text forKey:@"realName"];
-        
-        [self setBankCardRequestWithParam:param urlStr:AddZFBAccountURL];
     }
     //设置支付密码
     else if (self.setType == SetTypePayWordUnSet){
+        [param setObject:_firstTextFd.text forKey:@"passwd"];
+        [param setObject:_secondTextFd.text forKey:@"passwd_code"];
         
-    }else if (self.setType == SetTypePayWordModify){
+        [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+        [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
         
+        [self setBankCardRequestWithParam:param urlStr:SetPassWordURL];
+    }
+    //修改支付密码
+    else if (self.setType == SetTypePayWordModifyTwice) {
+        [param setObject:_firstTextFd.text forKey:@"passwd"];
+        [param setObject:_secondTextFd.text forKey:@"passwd_code"];
+        
+        [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+        [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
+        
+        [self setBankCardRequestWithParam:param urlStr:SetPassWordURL];
     }
 }
-//
+//设置 或 修改 支付宝 银行卡账户
 -(void)setBankCardRequestWithParam:(NSDictionary* )param urlStr:(NSString* )urlStr{
     YMWeakSelf;
     //银行卡绑定
     [[HttpManger sharedInstance]callHTTPReqAPI:urlStr params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
         DDLog(@"msg == %@",responseObject[@"msg"]);
-        if (weakSelf.setType == SetTypeZhiFuBaoModifyTwice) {
+        
+        if (weakSelf.setType == SetTypeZhiFuBaoModifyTwice ||
+            weakSelf.setType == SetTypeBankCardModifyTwice ||
+            weakSelf.setType == SetTypePayWordModifyTwice) {
             for (UIViewController* vc in self.navigationController.childViewControllers) {
                 if ([vc isKindOfClass:[YMWalletController class]]) {
-                    [self.navigationController popToViewController:vc animated:YES];
+                    //数据改变
+                    [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_UserDataChanged object:nil];
+                    [weakSelf.navigationController popToViewController:vc animated:YES];
                     break;
                 }
             }
-        }else if (weakSelf.setType == SetTypeZhiFuBaoModify){
-            YMPaySecrectController* pvc = [[YMPaySecrectController alloc]init];
-            pvc.setType = SetTypeZhiFuBaoModifyTwice;
-            [self.navigationController pushViewController:pvc animated:YES];
-        }else{
-            
-            [self.navigationController popViewControllerAnimated:YES];
+//             DDLog(@"self child == %@   %@",self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 2],self.navigationController.childViewControllers);
+//            YMWalletController* vc = weakSelf.navigationController.childViewControllers[weakSelf.navigationController.childViewControllers.count - 2];
+//            //数据改变
+//            [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_UserDataChanged object:@"dataChanged"];
+//            [weakSelf.navigationController popToViewController:vc animated:YES];
         }
-        
+        //修改支付宝。手机号验证
+        else if (weakSelf.setType == SetTypeZhiFuBaoModify ||
+                 weakSelf.setType == SetTypeBankCardModify ||
+                 weakSelf.setType == SetTypePayWordModify){
+            YMPaySecrectController* pvc = [[YMPaySecrectController alloc]init];
+            if (weakSelf.setType == SetTypeBankCardModify) {
+                 pvc.title   = @"更改银行卡";
+                 pvc.setType = SetTypeBankCardModifyTwice;
+            }else if (weakSelf.setType == SetTypeZhiFuBaoModify){
+                 pvc.title   = @"更改支付宝";
+                 pvc.setType = SetTypeZhiFuBaoModifyTwice;
+            }else{
+                pvc.title   = @"更改支付密码";
+                pvc.setType = SetTypePayWordModifyTwice;
+            }
+            [weakSelf.navigationController pushViewController:pvc animated:YES];
+        }
+        else{
+            //数据改变
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_UserDataChanged object:nil];
+            if (weakSelf.refreshDataBlock) {
+                weakSelf.refreshDataBlock();
+            }
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
     }];
 }
 
-
-//获取验证码
+//修改支付宝账号  获取验证码
 - (IBAction)getBtnClick:(id)sender {
     if (_firstTextFd.text.length == 0) {
         [MBProgressHUD showFail:@"请输入手机号码！" view:self.view];
@@ -242,31 +319,58 @@
     }
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
     [param setObject:_firstTextFd.text forKey:@"phone"];
-    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"findPhoneCaptcha"];
-    
-    [[HttpManger sharedInstance]callWebHTTPReqAPI:ForgetSendCodeURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
-        DDLog(@"res == %@",responseObject);
-        NSString* status = responseObject[@"status"];
+    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+
+    //修改支付密码  短信验证
+    if (self.setType == SetTypePayWordModify) {
+        [param setObject:@"ModifyPwdSmsCaptcha" forKey:@"method"];
+    }
+    //修改支付宝 银行卡 共一个短信验证
+    else{
+        [param setObject:@"ModifyAlipay" forKey:@"method"];
+    }
+    [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
+    // BaseApi
+    //http://apiyzt.youmeng.com/
+    YMWeakSelf;
+    [[HttpManger sharedInstance]callHTTPReqAPI:SendMsgCodeURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
+        NSNumber* status = responseObject[@"status"];
         NSString* msg    = responseObject[@"msg"];
         //显示提示信息
-        [MBProgressHUD showFail:msg view:self.view];
-        if ([SUCCESS isEqualToString:status]) {
+        [MBProgressHUD showFail:msg view:weakSelf.view];
+        if (status.integerValue == 1) {
             _timer   = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getCodeMessage) userInfo:nil repeats:YES];
         }
+        //状态 5 验证次数过多
+        else if(status.integerValue == 5){
+            weakSelf.sureBtn.enabled = NO;
+        }
     }];
+    
+//    [[HttpManger sharedInstance]callWebHTTPReqAPI:@"http://apiyzt.youmeng.com/Api/sms_interface/send" params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
+//        DDLog(@"res == %@",responseObject);
+//        NSString* status = responseObject[@"status"];
+//        NSString* msg    = responseObject[@"msg"];
+//        //显示提示信息
+//        [MBProgressHUD showFail:msg view:self.view];
+//        if ([SUCCESS isEqualToString:status]) {
+//            _timer   = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getCodeMessage) userInfo:nil repeats:YES];
+//        }
+//    }];
+    
 }
 -(void)getCodeMessage{
-    DDLog(@"获取验证码 倒计时");
+   // DDLog(@"获取验证码 倒计时");
     _totalTime --;
     if (_totalTime != 0 ) {
         _getCodeBtn.userInteractionEnabled = NO;
         [_getCodeBtn setBackgroundColor:LightGrayColor];
         [_getCodeBtn setTitleColor:WhiteColor forState:UIControlStateNormal];
-        _getCodeBtn.titleLabel.text = [NSString stringWithFormat:@"   已发送%lds",(long)_totalTime];
+        _getCodeBtn.titleLabel.text = [NSString stringWithFormat:@" 已发送%lds",(long)_totalTime];
     }
     else{
         _getCodeBtn.userInteractionEnabled = YES;
-        _getCodeBtn.titleLabel.text = @"  获取验证码";
+        _getCodeBtn.titleLabel.text = @" 获取验证码";
         _getCodeBtn.backgroundColor  = WhiteColor;
         [_getCodeBtn setTitleColor:BlackColor forState:UIControlStateNormal];
         _totalTime = 60;
@@ -275,6 +379,7 @@
         [_timer invalidate];
     }
 }
+
 
 
 @end

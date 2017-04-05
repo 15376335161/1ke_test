@@ -23,7 +23,13 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 }
-
+-(void)setModel:(YMMsgModel *)model{
+    _model = model;
+    _titlLabel.text = @"";
+    _msgLabel.text  = model.content;
+    _timeLabel.text = model.add_time;
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }

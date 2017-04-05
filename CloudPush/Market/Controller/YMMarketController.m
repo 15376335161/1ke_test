@@ -4,7 +4,6 @@
 //
 //  Created by APPLE on 17/2/21.
 //  Copyright © 2017年 YouMeng. All rights reserved.
-//
 
 #import "YMMarketController.h"
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
@@ -19,7 +18,6 @@
 #import "YMTaskViewController.h"
 #import "YMTaskDetailController.h"
 #import "YMTaskModel.h"
-
 
 
 @interface YMMarketController ()<BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UITableViewDataSource,UITableViewDelegate>

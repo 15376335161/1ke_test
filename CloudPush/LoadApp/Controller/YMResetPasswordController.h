@@ -10,4 +10,6 @@
 
 @interface YMResetPasswordController : BaseViewController
 
+//密码类型
+@property(nonatomic,assign)PasswordType passwordType;
 @end

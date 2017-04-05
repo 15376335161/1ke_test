@@ -13,6 +13,10 @@
 #import "YMTaskBaseController.h"
 #import "UIImage+Extension.h"
 
+#import "YMMainController.h"
+#import "YMPartnerController.h"
+
+
 @interface YMTabBarController ()
 
 @end
@@ -21,9 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tabBar.tintColor = NavBarTintColor;
+    self.tabBar.tintColor = TabBarTintColor;
     
-   // 添加所有的子控制器
+    // 添加所有的子控制器
     [self addChildVCs];
 }
 /**
@@ -31,9 +35,9 @@
  */
 - (void)addChildVCs{
     //市场
-    [self setUpChildViewController:[[YMMarketController alloc]init] title:@"市场" imageNamed:@"市场"];
+    [self setUpChildViewController:[[YMMainController alloc]init] title:@"市场" imageNamed:@"市场"];
     //任务
-    [self setUpChildViewController:[[YMTaskBaseController alloc]init] title:@"任务" imageNamed:@"任务"];
+    [self setUpChildViewController:[[YMPartnerController alloc]init] title:@"合伙人" imageNamed:@"合伙人"];
     //我的
     [self setUpChildViewController:[[YMMeViewController alloc]init] title:@"我的" imageNamed:@"我的"];
 }
@@ -44,11 +48,11 @@
     YMNavigationController * naVc = [[YMNavigationController alloc]initWithRootViewController:vc];
     vc.title = title;//相当于上面两句
     if ([title isEqualToString:@"市场"]) {
-        vc.title = @"有盟云众推";
+        vc.title = @"有盟";
         vc.tabBarItem.title = title;
     }
-    if ([title isEqualToString:@"任务"]) {
-        vc.title = @"我的任务";
+    if ([title isEqualToString:@"合伙人"]) {
+        vc.title = @"我的合伙人";
         vc.tabBarItem.title = title;
     }
     vc.tabBarItem.image = [UIImage imageNamed:imageName];
