@@ -6,8 +6,13 @@
 //  Copyright © 2017年 YouMeng. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseWebViewController.h"
+#import "YMWebViewController.h"
 
-@interface YMPartnerController : BaseViewController
+@interface YMPartnerController : UIViewController
+
+@property(nonatomic,copy)NSString* urlStr;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 
 @end

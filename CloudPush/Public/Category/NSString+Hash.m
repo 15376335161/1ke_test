@@ -7,6 +7,7 @@
 #import "NSString+hash.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
+#import <CommonCrypto/CommonCrypto.h>
 
 #if __has_feature(objc_arc)
 #define SAFE_AUTORELEASE(a) (a)
@@ -16,71 +17,13 @@
 
 @implementation NSString (Hash)
 
-- (NSString *)md5String
-{
-    const char *string = self.UTF8String;
-	int length = (int)strlen(string);
-	unsigned char bytes[CC_MD5_DIGEST_LENGTH];
-	CC_MD5(string, length, bytes);
-	return [self stringFromBytes:bytes length:CC_MD5_DIGEST_LENGTH];
-}
-
-- (NSString *)sha1String
-{
-	const char *string = self.UTF8String;
-	int length = (int)strlen(string);
-	unsigned char bytes[CC_SHA1_DIGEST_LENGTH];
-	CC_SHA1(string, length, bytes);
-	return [self stringFromBytes:bytes length:CC_SHA1_DIGEST_LENGTH];
-}
-
-- (NSString *)sha256String
-{
-	const char *string = self.UTF8String;
-	int length = (int)strlen(string);
-	unsigned char bytes[CC_SHA256_DIGEST_LENGTH];
-	CC_SHA256(string, length, bytes);
-	return [self stringFromBytes:bytes length:CC_SHA256_DIGEST_LENGTH];
-}
-
-- (NSString *)sha512String
-{
-	const char *string = self.UTF8String;
-	int length = (int)strlen(string);
-	unsigned char bytes[CC_SHA512_DIGEST_LENGTH];
-	CC_SHA512(string, length, bytes);
-	return [self stringFromBytes:bytes length:CC_SHA512_DIGEST_LENGTH];
-}
-
-- (NSString *)hmacSHA1StringWithKey:(NSString *)key
-{
-	NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
-	NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
-	NSMutableData *mutableData = [NSMutableData dataWithLength:CC_SHA1_DIGEST_LENGTH];
-	CCHmac(kCCHmacAlgSHA1, keyData.bytes, keyData.length, messageData.bytes, messageData.length, mutableData.mutableBytes);
-	return [self stringFromBytes:(unsigned char *)mutableData.bytes length:mutableData.length];
-}
-
-- (NSString *)hmacSHA256StringWithKey:(NSString *)key
-{
-	NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
-	NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
-	NSMutableData *mutableData = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
-	CCHmac(kCCHmacAlgSHA256, keyData.bytes, keyData.length, messageData.bytes, messageData.length, mutableData.mutableBytes);
-	return [self stringFromBytes:(unsigned char *)mutableData.bytes length:mutableData.length];
-}
-
-- (NSString *)hmacSHA512StringWithKey:(NSString *)key
-{
-	NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
-	NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
-	NSMutableData *mutableData = [NSMutableData dataWithLength:CC_SHA512_DIGEST_LENGTH];
-	CCHmac(kCCHmacAlgSHA512, keyData.bytes, keyData.length, messageData.bytes, messageData.length, mutableData.mutableBytes);
-	return [self stringFromBytes:(unsigned char *)mutableData.bytes length:mutableData.length];
-}
-
 #pragma mark - Helpers
-
+/**
+ *  返回二进制 Bytes 流的字符串表示形式
+ *  @param bytes  二进制 Bytes 数组
+ *  @param length 数组长度
+ *  @return 字符串表示形式
+ */
 - (NSString *)stringFromBytes:(unsigned char *)bytes length:(int)length
 {
 	NSMutableString *mutableString = @"".mutableCopy;
@@ -114,6 +57,182 @@
      NSLog("%02X", 0x4); //04
      */
 }
+
+
+#pragma mark - 散列函数
+- (NSString *)md5String {
+    const char *str = self.UTF8String;
+    uint8_t buffer[CC_MD5_DIGEST_LENGTH];
+    
+    CC_MD5(str, (CC_LONG)strlen(str), buffer);
+    
+    return [self stringFromBytes:buffer length:CC_MD5_DIGEST_LENGTH];
+}
+
+- (NSString *)sha1String {
+    const char *str = self.UTF8String;
+    uint8_t buffer[CC_SHA1_DIGEST_LENGTH];
+    CC_SHA1(str, (CC_LONG)strlen(str), buffer);
+    return [self stringFromBytes:buffer length:CC_SHA1_DIGEST_LENGTH];
+}
+
+- (NSString *)sha256String {
+    const char *str = self.UTF8String;
+    uint8_t buffer[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(str, (CC_LONG)strlen(str), buffer);
+    return [self stringFromBytes:buffer length:CC_SHA256_DIGEST_LENGTH];
+}
+
+- (NSString *)sha512String {
+    const char *str = self.UTF8String;
+    uint8_t buffer[CC_SHA512_DIGEST_LENGTH];
+    CC_SHA512(str, (CC_LONG)strlen(str), buffer);
+    return [self stringFromBytes:buffer length:CC_SHA512_DIGEST_LENGTH];
+}
+
+#pragma mark - HMAC 散列函数
+- (NSString *)hmacMD5StringWithKey:(NSString *)key {
+    const char *keyData = key.UTF8String;
+    const char *strData = self.UTF8String;
+    uint8_t buffer[CC_MD5_DIGEST_LENGTH];
+    CCHmac(kCCHmacAlgMD5, keyData, strlen(keyData), strData, strlen(strData), buffer);
+    return [self stringFromBytes:buffer length:CC_MD5_DIGEST_LENGTH];
+}
+
+- (NSString *)hmacSHA1StringWithKey:(NSString *)key {
+    const char *keyData = key.UTF8String;
+    const char *strData = self.UTF8String;
+    uint8_t buffer[CC_SHA1_DIGEST_LENGTH];
+    CCHmac(kCCHmacAlgSHA1, keyData, strlen(keyData), strData, strlen(strData), buffer);
+    return [self stringFromBytes:buffer length:CC_SHA1_DIGEST_LENGTH];
+}
+
+- (NSString *)hmacSHA256StringWithKey:(NSString *)key {
+    const char *keyData = key.UTF8String;
+    const char *strData = self.UTF8String;
+    uint8_t buffer[CC_SHA256_DIGEST_LENGTH];
+    CCHmac(kCCHmacAlgSHA256, keyData, strlen(keyData), strData, strlen(strData), buffer);
+    return [self stringFromBytes:buffer length:CC_SHA256_DIGEST_LENGTH];
+}
+
+- (NSString *)hmacSHA512StringWithKey:(NSString *)key {
+    const char *keyData = key.UTF8String;
+    const char *strData = self.UTF8String;
+    uint8_t buffer[CC_SHA512_DIGEST_LENGTH];
+    CCHmac(kCCHmacAlgSHA512, keyData, strlen(keyData), strData, strlen(strData), buffer);
+    return [self stringFromBytes:buffer length:CC_SHA512_DIGEST_LENGTH];
+}
+
+#pragma mark - 文件散列函数
+
+#define FileHashDefaultChunkSizeForReadingData 4096
+
+- (NSString *)fileMD5Hash {
+    NSFileHandle *fp = [NSFileHandle fileHandleForReadingAtPath:self];
+    if (fp == nil) {
+        return nil;
+    }
+    CC_MD5_CTX hashCtx;
+    CC_MD5_Init(&hashCtx);
+    while (YES) {
+        @autoreleasepool {
+            NSData *data = [fp readDataOfLength:FileHashDefaultChunkSizeForReadingData];
+            CC_MD5_Update(&hashCtx, data.bytes, (CC_LONG)data.length);
+            if (data.length == 0) {
+                break;
+            }
+        }
+    }
+    [fp closeFile];
+    uint8_t buffer[CC_MD5_DIGEST_LENGTH];
+    CC_MD5_Final(buffer, &hashCtx);
+    return [self stringFromBytes:buffer length:CC_MD5_DIGEST_LENGTH];
+}
+
+- (NSString *)fileSHA1Hash {
+    NSFileHandle *fp = [NSFileHandle fileHandleForReadingAtPath:self];
+    if (fp == nil) {
+        return nil;
+    }
+    
+    CC_SHA1_CTX hashCtx;
+    CC_SHA1_Init(&hashCtx);
+    
+    while (YES) {
+        @autoreleasepool {
+            NSData *data = [fp readDataOfLength:FileHashDefaultChunkSizeForReadingData];
+            
+            CC_SHA1_Update(&hashCtx, data.bytes, (CC_LONG)data.length);
+            
+            if (data.length == 0) {
+                break;
+            }
+        }
+    }
+    [fp closeFile];
+    
+    uint8_t buffer[CC_SHA1_DIGEST_LENGTH];
+    CC_SHA1_Final(buffer, &hashCtx);
+    
+    return [self stringFromBytes:buffer length:CC_SHA1_DIGEST_LENGTH];
+}
+
+- (NSString *)fileSHA256Hash {
+    NSFileHandle *fp = [NSFileHandle fileHandleForReadingAtPath:self];
+    if (fp == nil) {
+        return nil;
+    }
+    
+    CC_SHA256_CTX hashCtx;
+    CC_SHA256_Init(&hashCtx);
+    
+    while (YES) {
+        @autoreleasepool {
+            NSData *data = [fp readDataOfLength:FileHashDefaultChunkSizeForReadingData];
+            
+            CC_SHA256_Update(&hashCtx, data.bytes, (CC_LONG)data.length);
+            
+            if (data.length == 0) {
+                break;
+            }
+        }
+    }
+    [fp closeFile];
+    
+    uint8_t buffer[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256_Final(buffer, &hashCtx);
+    
+    return [self stringFromBytes:buffer length:CC_SHA256_DIGEST_LENGTH];
+}
+
+- (NSString *)fileSHA512Hash {
+    NSFileHandle *fp = [NSFileHandle fileHandleForReadingAtPath:self];
+    if (fp == nil) {
+        return nil;
+    }
+    
+    CC_SHA512_CTX hashCtx;
+    CC_SHA512_Init(&hashCtx);
+    
+    while (YES) {
+        @autoreleasepool {
+            NSData *data = [fp readDataOfLength:FileHashDefaultChunkSizeForReadingData];
+            
+            CC_SHA512_Update(&hashCtx, data.bytes, (CC_LONG)data.length);
+            
+            if (data.length == 0) {
+                break;
+            }
+        }
+    }
+    [fp closeFile];
+    
+    uint8_t buffer[CC_SHA512_DIGEST_LENGTH];
+    CC_SHA512_Final(buffer, &hashCtx);
+    
+    return [self stringFromBytes:buffer length:CC_SHA512_DIGEST_LENGTH];
+}
+
 
 
 

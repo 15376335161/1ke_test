@@ -11,8 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YMPartnerController">
             <connections>
-                <outlet property="tableView" destination="LX6-DN-OiW" id="obi-fx-oJo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webView" destination="4xk-7g-oV0" id="rsW-Wq-Z94"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -20,17 +20,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LX6-DN-OiW">
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xk-7g-oV0">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
-                </tableView>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="91K-iS-gWn"/>
+                    </connections>
+                </webView>
             </subviews>
             <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="LX6-DN-OiW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7qR-Cu-bvn"/>
-                <constraint firstAttribute="trailing" secondItem="LX6-DN-OiW" secondAttribute="trailing" id="azG-VD-Z6e"/>
-                <constraint firstAttribute="bottom" secondItem="LX6-DN-OiW" secondAttribute="bottom" id="lR4-JA-aO4"/>
-                <constraint firstItem="LX6-DN-OiW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xoZ-W1-Zmw"/>
+                <constraint firstAttribute="trailing" secondItem="4xk-7g-oV0" secondAttribute="trailing" id="C2v-xh-zmI"/>
+                <constraint firstAttribute="bottom" secondItem="4xk-7g-oV0" secondAttribute="bottom" id="Rbv-cl-tW4"/>
+                <constraint firstItem="4xk-7g-oV0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Yx5-h8-iBa"/>
+                <constraint firstItem="4xk-7g-oV0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fJb-aU-Tad"/>
             </constraints>
             <point key="canvasLocation" x="-245" y="-50"/>
         </view>

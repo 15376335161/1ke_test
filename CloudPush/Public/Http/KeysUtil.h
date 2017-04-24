@@ -41,11 +41,19 @@ typedef NS_ENUM(NSInteger,SetType) {
     SetTypeBankCardModifyTwice //修改银联卡 第二步
     
 };
+typedef NS_ENUM(NSInteger,DetailListType) {
+    DetailListTypeBalance       = 1, //余额明细
+    DetailListTypeWaitIssue,         //待发明细
+    DetailListTypeWithdraw,          //提现明细
+    
+};
+
 
 typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
     WithDrawCrashStyleZfb       = 1,// 提现方式支付宝
     WithDrawCrashStyleBankCard      // 提现方式 银行卡
 };
+
 
 
 #define kJPushAppKey    @"a4e14f9c3a2ff72f5a400b3e"
@@ -62,12 +70,14 @@ typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
 
 #define WeChat_AppId      @"wxdcc23700247f2571"  // wx1705d06974c1200e//wxd930ea5d5a258f4f
 #define WeChatAppSecrect  @"1851a8f91573e7e32700b88b1f1b2832"
+
 //#define WeChat_Secret   @"tiaoshi@86goodfood.com"
 
-#define QQ_AppId        @"1105935609"         //  @"1105155505"
-#define QQ_Secrect      @"bUfLXNbJWYH5PgLf"   // @"KYJZQznciNcbiAs4"
+#define QQ_AppId        @"1106103020"         //   1105935609       @"1105155505"
+#define QQ_Secrect      @"uRGnHjSuLpuHtb0t"   //   bUfLXNbJWYH5PgLf @"KYJZQznciNcbiAs4"
 
 
+#define kNotification_PartAct   @"kNotificationPartActs"
 
 #define kNotification_Login     @"kNotificationLogin"
 #define kNotification_LoginOut  @"kNotificationLoginOut"
@@ -88,12 +98,15 @@ typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
 #define ClearColor      [UIColor clearColor]
 //背景色
 #define BackGroundColor       HEX(@"F0F0F0")// RGBA(239, 239, 244, 1)
-#define NavBarTintColor       HEX(@"414b4d")//RGBA(90, 162, 238, 1)  HEX(@"2196F3")
+//按钮的颜色
+#define NavBarTintColor       HEX(@"ef5316")//RGBA(90, 162, 238, 1)  HEX(@"2196F3")
+
+#define DefaultNavBarColor    HEX(@"414b4d")
 
 #define TabBarTintColor       HEX(@"ef5316")
 
 //不可点击颜色
-#define NavBar_UnabelColor    RGBA(90, 162, 238, 0.5)
+#define NavBar_UnabelColor    HEX(@"bebebe")
 
 //传入RGB三个参数，得到颜色
 #define RGB(r,g,b) RGBA(r,g,b,1.f)
@@ -109,6 +122,8 @@ typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
 //屏幕宽度
 #define SCREEN_WIDTH  ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEGIHT  ([UIScreen mainScreen].bounds.size.height)
+
+#define KeyWindow      [UIApplication sharedApplication].keyWindow
 //获取屏幕大小
 #define kScreenSize [UIScreen mainScreen].bounds.size
 
@@ -133,8 +148,10 @@ typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
 #define kZfb_accountName     @"zfb_accountName"
 #define kCard_realName       @"isCard_realName"
 #define kCard_accountName    @"isCard_accountName"
+#define kPayStyle            @"payStyle"
+#define kisRefresh           @"isRefresh"
 
-
+//支付密码
 #define kPasswd      @"passwd"
 
 static NSString *kAuthScope = @"snsapi_message,snsapi_userinfo,snsapi_friend,snsapi_contact";//授权域

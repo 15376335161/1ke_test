@@ -23,6 +23,7 @@
 //存储用户信息
 - (void)saveUserInfoByUsrModel:(UserModel* )model{
     if (model.uid) {
+        //[kUserDefaults setObject:@"1422" forKey:kUid];
         [kUserDefaults setObject:model.uid forKey:kUid];
     }
     if (model.username) {
@@ -84,12 +85,17 @@
     UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         YMLoginController* lvc = [[YMLoginController alloc]init];
+        YMNavigationController* nav = [[YMNavigationController alloc]initWithRootViewController:lvc];
         lvc.hidesBottomBarWhenPushed = YES;
-        [viewController.navigationController pushViewController:lvc animated:YES];
+        [viewController presentViewController:nav animated:YES completion:nil];
+        //[viewController.navigationController pushViewController:lvc animated:YES];
     }];
     [alerC addAction:cancelAction];
     [alerC addAction:sureAction];
     [viewController presentViewController:alerC animated:YES completion:nil];
     
 }
+
+
+
 @end

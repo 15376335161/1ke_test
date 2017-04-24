@@ -12,7 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.layoutMargins = UIEdgeInsetsZero;
+    self.separatorInset = UIEdgeInsetsMake(0, SCREEN_WIDTH, 0, 0);
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

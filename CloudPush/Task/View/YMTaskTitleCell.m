@@ -33,7 +33,7 @@
 -(void)setModel:(YMTaskStatusModel *)model{
     _model = model;
     //YMTaskModel* model = model.myTaskList;
-    _titlLabel.text = [model.myTaskList valueForKey:@"task_title"];
+  //  _titlLabel.text = [model.myTaskList valueForKey:@"task_title"];
     
     
 }

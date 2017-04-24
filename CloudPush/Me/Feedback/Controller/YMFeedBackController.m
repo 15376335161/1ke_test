@@ -9,15 +9,16 @@
 #import "YMFeedBackController.h"
 #import "BRPlaceholderTextView.h"
 #import "YMTextField.h"
+#import "HWImagePickerSheet.h"
+#import "UIImage+Extension.h"
 
 
-@interface YMFeedBackController ()<UIScrollViewDelegate,UITextFieldDelegate>
+@interface YMFeedBackController ()<UIScrollViewDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+
 //问题描述
 @property (weak, nonatomic) IBOutlet BRPlaceholderTextView *descTextView;
 //标题
 @property (weak, nonatomic) IBOutlet UILabel *imgTltlLabel;
-
-
 //滚动视图
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -26,10 +27,12 @@
 @property (nonatomic,strong) NSMutableArray * photoArr;
 
 //手机号 输入框
-@property(nonatomic,strong)UIView* phoneView;
+@property(nonatomic,strong)UIView*  phoneView;
 @property(nonatomic,strong)UILabel* phoneLabel;
 @property(nonatomic,strong)UITextField* phoneTextFd;
 
+
+@property(nonatomic,strong)MBProgressHUD *HUD;
 //确认按钮
 @property (strong, nonatomic) IBOutlet UIButton *sureBtn;
 @end
@@ -43,20 +46,16 @@
     self.showInView = self.contentView;
     /** 初始化collectionView */
     [self initPickerView];
-    
     //设置photo frame
     [self setViewAndFrame];
-    
     //添加照片
     // [self addPostImgView];
     //手机号码
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
 /**
  *  界面布局 frame
  */
@@ -93,17 +92,18 @@
     phoneTextFd.keyboardType = UIKeyboardTypeNumberPad;
     phoneTextFd.borderStyle = UITextBorderStyleNone;
     phoneTextFd.backgroundColor = WhiteColor;
+    _phoneTextFd = phoneTextFd;
 //    phoneTextFd.
     phoneTextFd.sd_layout.leftEqualToView(self.phoneView).topSpaceToView(phoneLabel,10).rightEqualToView(self.phoneView).heightIs(44);
     
     self.phoneView.sd_layout.heightIs(phoneLabel.height + phoneTextFd.height);
-    
-
+   
     _sureBtn = [[UIButton alloc]init];
     [self.contentView addSubview:_sureBtn];
     
     [_sureBtn setTitle:@"确认" forState:UIControlStateNormal];
     [_sureBtn setTitleColor:WhiteColor forState:UIControlStateNormal];
+    [_sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     _sureBtn.backgroundColor = NavBarTintColor;
     _sureBtn.titleLabel.font = Font(18);
     _sureBtn.sd_layout.leftSpaceToView(_contentView,15).topSpaceToView(_phoneView,30).rightSpaceToView(_contentView,15).heightIs(35);
@@ -125,21 +125,56 @@
     
 }
 - (IBAction)sureBtnClick:(id)sender {
+    //推出键盘
+    [self.view endEditing:YES];
     self.photoArr = [[NSMutableArray alloc] initWithArray:[self getBigImageArray]];
-    if (self.photoArr.count >9){
-        NSLog(@"最多上传9张照片!");
-        [MBProgressHUD showFail:@"最多上传9张照片!" view:self.view];
-        
-    }else if (self.photoArr.count == 0){
-        NSLog(@"请上传照片!");
-        
-    }else{
+    DDLog(@"photo arr == %@",self.photoArr);
+    if (_descTextView.text.length == 0) {
+        [MBProgressHUD showFail:@"请输入您遇到的问题或者建议！" view:self.view];
+        return;
+    }
+    if (self.photoArr.count > 5){
+        NSLog(@"最多上传5张照片!");
+        [MBProgressHUD showFail:@"最多上传5张照片!" view:self.view];
+        return;
+    }else if (self.photoArr.count <= 5){
         /** 上传的接口方法 */
+         NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
+        if (_phoneTextFd.text.length > 0) {
+            if (![NSString isMobileNum:_phoneTextFd.text]) {
+                [MBProgressHUD showFail:@"请输入正确的手机号！" view:self.view];
+                return;
+            }else{
+                 [param setObject:_phoneTextFd.text forKey:@"phone"];
+            }
+        }else{
+            //默认传当前用户的手机号
+            [param setObject:[kUserDefaults valueForKey:kPhone] forKey:@"phone"];
+        }
+        [param setObject:[kUserDefaults valueForKey:kUid] forKey:kUid];//
+        [param setObject:_descTextView.text forKey:@"info"];
+        YMWeakSelf;
+        //加载中
+        [self.HUD showAnimated:YES whileExecutingBlock:^{
+            [[HttpManger sharedInstance]postFileHTTPReqAPI:SuggestListURL params:param imgsArr:_photoArr imgsKey:@"img" view:self.view loading:NO completionHandler:^(id task, id responseObject, NSError *error) {
+                [self.HUD removeFromSuperview];
+                NSString *respStatus = [NSString stringWithFormat:@"%@",[responseObject objectForKey:@"status"]];
+                NSString* msg = responseObject[@"msg"];
+                if ([respStatus isEqualToString:SUCCESS]) {
+                    [MBProgressHUD showSuccess:@"提交成功！感谢您对本平台的支持！" view:self.view];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [weakSelf.navigationController popViewControllerAnimated:YES];
+                    });
+                }else{
+                    [MBProgressHUD showSuccess:msg view:self.view];
+                }
+            }];
+        }];
     }
 }
+
 #pragma mark - UIScrollViewDelegate
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    
     return YES;
 }
 #pragma mark - UITextViewDelegate
@@ -148,25 +183,20 @@
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
     }
-
     return YES;
 }
-
-
-//#pragma mark - UI
-//-(void)addPostImgView{
-//    UIImageView* postImgV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"plus"]];
-//    [self.view addSubview:postImgV];
-//
-//    postImgV.sd_layout.leftSpaceToView(self.view,15).topSpaceToView(_imgTltlLabel,10).widthIs(79).heightIs(79);
-//    postImgV.userInteractionEnabled = YES;
-//
-//    [YMTool addTapGestureOnView:postImgV target:self selector:@selector(postImgClick:) viewController:self];
-//
-//
-//}
-//-(void)postImgClick:(UITapGestureRecognizer* )tap{
-//    DDLog(@"点击啦上传图片");
-//}
+- (MBProgressHUD *)HUD{
+    if (!_HUD) {
+        MBProgressHUD *hud= [[MBProgressHUD alloc] initWithView:KeyWindow];
+#warning 打断点会停
+        [KeyWindow addSubview:hud];
+        hud.labelText = @"努力上传中";
+        hud.labelFont = [UIFont systemFontOfSize:12];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        //hud.progress = 0;
+        _HUD = hud;
+    }
+    return _HUD;
+}
 
 @end

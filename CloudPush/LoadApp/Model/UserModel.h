@@ -45,4 +45,10 @@
 //银行卡账户 真实姓名
 @property(nonatomic,copy)NSString* isCard_accountName;
 @property(nonatomic,copy)NSString* isCard_realName;
+
+//用户信息
+@property(nonatomic,strong)NSArray* userInfo;
+
+//未读消息的 条数
+@property(nonatomic,strong)NSNumber* countMessage;
 @end

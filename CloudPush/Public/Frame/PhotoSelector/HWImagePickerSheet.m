@@ -35,7 +35,10 @@
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             imaPic.sourceType = UIImagePickerControllerSourceTypeCamera;
             imaPic.delegate = self;
-            [viewController presentViewController:imaPic animated:NO completion:nil];
+            [viewController presentViewController:imaPic animated:NO completion:^{
+                //设置导航栏按钮文字的颜色
+                [[UINavigationBar appearance]setTintColor:WhiteColor];
+            }];
         }
         
     }];
@@ -46,7 +49,10 @@
     [alertController addAction:actionCamera];
     [alertController addAction:actionAlbum];
     viewController = controller;
-    [viewController presentViewController:alertController animated:YES completion:nil];
+    [viewController presentViewController:alertController animated:YES completion:^{
+        //设置导航栏按钮文字的颜色
+        [[UINavigationBar appearance]setTintColor:WhiteColor];
+    }];
     
 }
 #pragma mark - 加载照片数据

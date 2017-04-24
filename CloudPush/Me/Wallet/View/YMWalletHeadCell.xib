@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,13 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="126"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="125.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7Q-LP-1hM">
                         <rect key="frame" x="0.0" y="68" width="375" height="57"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnN-3R-kCJ">
+                            <view tag="101" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnN-3R-kCJ">
                                 <rect key="frame" x="125" y="0.0" width="125" height="57"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已提现收入(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6J-7C-YwB">
@@ -43,7 +43,7 @@
                                     <constraint firstItem="Ttj-1r-CAW" firstAttribute="centerX" secondItem="B6J-7C-YwB" secondAttribute="centerX" id="POi-ZP-bBq"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQI-Qh-SQj">
+                            <view tag="102" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQI-Qh-SQj">
                                 <rect key="frame" x="250" y="0.0" width="125" height="57"/>
                                 <subviews>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ba9-fK-qLa">
@@ -75,7 +75,7 @@
                                     <constraint firstItem="Ba9-fK-qLa" firstAttribute="top" secondItem="bQI-Qh-SQj" secondAttribute="top" constant="15" id="nvD-kh-hLc"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ug-e5-xTx">
+                            <view tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ug-e5-xTx">
                                 <rect key="frame" x="0.0" y="0.0" width="125" height="57"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待发收入(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U26-ze-MOz">
@@ -145,25 +145,35 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="余额账户(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFH-rB-hi3">
-                        <rect key="frame" x="152.5" y="42.5" width="70" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="满50.00元即可提现，加油！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFH-rB-hi3">
+                        <rect key="frame" x="110" y="42.5" width="155.5" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view tag="103" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RPU-sE-0ji">
+                        <rect key="frame" x="87.5" y="0.0" width="200" height="67"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="6kM-wq-Geh"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.23921568630000001" green="0.63921568630000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="YvI-V7-lAx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="6SX-nH-vDi"/>
                     <constraint firstItem="qq7-jW-HsD" firstAttribute="top" secondItem="vFH-rB-hi3" secondAttribute="bottom" constant="10" id="EXb-bS-fiy"/>
                     <constraint firstAttribute="trailing" secondItem="qq7-jW-HsD" secondAttribute="trailing" constant="15" id="ImY-n1-eXv"/>
+                    <constraint firstItem="RPU-sE-0ji" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="KKs-AF-PYl"/>
                     <constraint firstAttribute="trailing" secondItem="J7Q-LP-1hM" secondAttribute="trailing" id="MsJ-K2-HB3"/>
                     <constraint firstAttribute="bottom" secondItem="J7Q-LP-1hM" secondAttribute="bottom" id="OiQ-bD-YPd"/>
                     <constraint firstItem="vFH-rB-hi3" firstAttribute="centerX" secondItem="YvI-V7-lAx" secondAttribute="centerX" id="ReL-KM-12Y"/>
                     <constraint firstItem="YvI-V7-lAx" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="X9Y-2O-VU9"/>
                     <constraint firstItem="J7Q-LP-1hM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Xpg-mr-RFQ"/>
                     <constraint firstItem="J7Q-LP-1hM" firstAttribute="top" secondItem="qq7-jW-HsD" secondAttribute="bottom" id="Z3F-TA-n6V"/>
+                    <constraint firstItem="qq7-jW-HsD" firstAttribute="top" secondItem="RPU-sE-0ji" secondAttribute="bottom" id="apQ-xh-4Gp"/>
                     <constraint firstItem="qq7-jW-HsD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="cx2-YR-aOY"/>
+                    <constraint firstItem="RPU-sE-0ji" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hil-To-Fnq"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,8 +182,12 @@
                 <outlet property="readMoneyLabel" destination="YJg-J1-qpu" id="fht-Ui-1TJ"/>
                 <outlet property="useMoneyLabel" destination="YvI-V7-lAx" id="1pU-M4-wDT"/>
                 <outlet property="withdrawLabel" destination="Ttj-1r-CAW" id="eyx-Cu-beV"/>
+                <outletCollection property="tapViewsArr" destination="dnN-3R-kCJ" id="7Mc-iE-WUB"/>
+                <outletCollection property="tapViewsArr" destination="bQI-Qh-SQj" id="g5T-Al-I0y"/>
+                <outletCollection property="tapViewsArr" destination="8Ug-e5-xTx" id="tAG-q1-1eu"/>
+                <outletCollection property="tapViewsArr" destination="RPU-sE-0ji" id="ay2-Zf-tNN"/>
             </connections>
-            <point key="canvasLocation" x="-896.5" y="-222"/>
+            <point key="canvasLocation" x="-1446.5" y="-370"/>
         </tableViewCell>
     </objects>
 </document>

@@ -32,6 +32,85 @@
     freeifaddrs(interfaces);
     return address;
 }
+//银行卡验证
++ (BOOL)isBankCard:(NSString *)cardNo
+{
+    int oddsum = 0;     //奇数求和
+    int evensum = 0;    //偶数求和
+    int allsum = 0;
+    int cardNoLength = (int)[cardNo length];
+    int lastNum = [[cardNo substringFromIndex:cardNoLength-1] intValue];
+    
+    cardNo = [cardNo substringToIndex:cardNoLength - 1];
+    for (int i = cardNoLength -1 ; i>=1;i--) {
+        NSString *tmpString = [cardNo substringWithRange:NSMakeRange(i-1, 1)];
+        int tmpVal = [tmpString intValue];
+        if (cardNoLength % 2 ==1 ) {
+            if((i % 2) == 0){
+                tmpVal *= 2;
+                if(tmpVal>=10)
+                    tmpVal -= 9;
+                evensum += tmpVal;
+            }else{
+                oddsum += tmpVal;
+            }
+        }else{
+            if((i % 2) == 1){
+                tmpVal *= 2;
+                if(tmpVal>=10)
+                    tmpVal -= 9;
+                evensum += tmpVal;
+            }else{
+                oddsum += tmpVal;
+            }
+        }
+    }
+    
+    allsum = oddsum + evensum;
+    allsum += lastNum;
+    if((allsum % 10) == 0)
+        return YES;
+    else
+        return NO;
+    
+
+//    if(cardNumber.length==0)
+//    {
+//        return NO;
+//    }
+//    NSString *digitsOnly = @"";
+//    char c;
+//    for (int i = 0; i < cardNumber.length; i++)
+//    {
+//        c = [cardNumber characterAtIndex:i];
+//        if (isdigit(c))
+//        {
+//            digitsOnly =[digitsOnly stringByAppendingFormat:@"%c",c];
+//        }
+//    }
+//    int sum = 0;
+//    int digit = 0;
+//    int addend = 0;
+//    BOOL timesTwo = false;
+//    for (NSInteger i = digitsOnly.length - 1; i >= 0; i--)
+//    {
+//        digit = [digitsOnly characterAtIndex:i] - '0';
+//        if (timesTwo)
+//        {
+//            addend = digit * 2;
+//            if (addend > 9) {
+//                addend -= 9;
+//            }
+//        }
+//        else {
+//            addend = digit;
+//        }
+//        sum += addend;
+//        timesTwo = !timesTwo;
+//    }
+//    int modulus = sum % 10;
+//    return modulus == 0;
+}
 
 + (NSString *)showDistance:(NSString *)str
 {
@@ -208,45 +287,43 @@
 }
 
 
-+ (BOOL)isMobileNum:(NSString *)num{
-    /**
-     * 手机号码
-     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
-     * 联通：130,131,132,152,155,156,185,186
-     * 电信：133,1349,153,180,189
-     */
-    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
-    /**
-     10 * 中国移动：China Mobile
-     11 * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
-     12 */
-    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[2378])\\d)\\d{7}$";
-    /**
-     15 * 中国联通：China Unicom
-     16 * 130,131,132,152,155,156,185,186
-     17 */
-    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
-    /**
-     20 * 中国电信：China Telecom
-     21 * 133,1349,153,180,189,177
-     22 */
-    NSString * CT = @"^1((33|53|8[0-9]|7[0-9])[0-9]|349)\\d{7}$";
-    
-    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
-    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
-    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
-    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
-    
-    if (([regextestmobile evaluateWithObject:num] == YES)
-        || ([regextestcm evaluateWithObject:num] == YES)
-        || ([regextestct evaluateWithObject:num] == YES)
-        || ([regextestcu evaluateWithObject:num] == YES))
-    {
-        return YES;
-    }
-    else
++ (BOOL)isMobileNum:(NSString *)mobile{
+    mobile = [mobile stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (mobile.length != 11)
     {
         return NO;
+    }else{
+        /**
+         * 手机号码:
+         * 13[0-9], 14[5,7], 15[0, 1, 2, 3, 5, 6, 7, 8, 9], 17[6, 7, 8], 18[0-9], 170[0-9]
+         * 移动号段: 134,135,136,137,138,139,150,151,152,157,158,159,182,183,184,187,188,147,178,1705
+         * 联通号段: 130,131,132,155,156,185,186,145,176,1709
+         * 电信号段: 133,153,180,181,189,177,1700
+         */
+        /**
+         * 移动号段正则表达式
+         */
+        NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
+        /**
+         * 联通号段正则表达式
+         */
+        NSString *CU_NUM = @"^((13[0-2])|(145)|(15[5-6])|(176)|(18[5,6]))\\d{8}|(1709)\\d{7}$";
+        /**
+         * 电信号段正则表达式
+         */
+        NSString *CT_NUM = @"(^1(33|53|77|8[019])\\d{8}$)|(^1700\\d{7}$)";
+        NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM_NUM];
+        BOOL isMatch1 = [pred1 evaluateWithObject:mobile];
+        NSPredicate *pred2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU_NUM];
+        BOOL isMatch2 = [pred2 evaluateWithObject:mobile];
+        NSPredicate *pred3 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT_NUM];
+        BOOL isMatch3 = [pred3 evaluateWithObject:mobile];
+        
+        if (isMatch1 || isMatch2 || isMatch3) {
+            return YES;
+        }else{
+            return NO;
+        }
     }
 }
 #pragma mark - 身份证号码验证
@@ -346,8 +423,20 @@
 
 +(NSString* )string:(NSString *)str replaceStrInRange:(NSRange)range withString:(NSString*)placeStr{
     NSMutableString* newStr = str.mutableCopy;
-    if (newStr.length > 4) {
-        [newStr replaceCharactersInRange:range withString:placeStr];
+    NSArray* strArr = [newStr componentsSeparatedByString:@"@"];
+    NSMutableString* firstStr;
+    if (strArr.count > 1) {
+        firstStr = strArr[0];
+        if (firstStr.length > 3) {
+            NSRange newRange = NSMakeRange(range.location, firstStr.length - 3);
+            [newStr replaceCharactersInRange:newRange withString:placeStr];
+           // newStr = [[NSString stringWithFormat:@"%@%@",firstStr,strArr[1]] mutableCopy];
+            return newStr;
+        }else{
+            return newStr;
+        }
+    }else{
+         [newStr replaceCharactersInRange:range withString:placeStr];
     }
     return newStr;
 }

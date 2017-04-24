@@ -65,7 +65,7 @@
     }
     if (self.usrModel.isCard.integerValue) {
         TitleModel* model = [[TitleModel alloc]init];
-        model.icon =   @"Unionpay";
+        model.icon  =  @"Unionpay";
         model.title =  @"银行卡";
         model.withdrawStyle = self.withdrawStyle;
         model.isCard = @1;
@@ -82,11 +82,8 @@
 }
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     YMWithdrawStyleCell* cell = [YMWithdrawStyleCell cellDequeueReusableCellWithTableView:tableView];
-    
     cell.model = self.dataArr[indexPath.section];
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
 }
 
@@ -105,7 +102,6 @@
             self.typeBlock(WithDrawCrashStyleZfb,model);
         }
         [self.navigationController popViewControllerAnimated:YES];
-
     }else if (model.isCard.integerValue){
         if (self.typeBlock) {
             self.typeBlock(WithDrawCrashStyleBankCard,model);
@@ -114,11 +110,15 @@
     }else  if(model.isZfb.integerValue == 0 && [model.title isEqualToString:@"绑定支付宝账号提现"]){
         YMPaySecrectController* pvc = [[YMPaySecrectController alloc]init];
         pvc.title = @"绑定支付宝";
+        //绑定之后返回
         pvc.setType = SetTypeZhiFuBaoUnSet;
+        pvc.isWithdraw = YES;
         [self.navigationController pushViewController:pvc animated:YES];
     }else if(model.isCard.integerValue == 0 && [model.title isEqualToString:@"绑定银行卡提现"]){
         YMPaySecrectController* pvc = [[YMPaySecrectController alloc]init];
         pvc.title = @"绑定银行卡";
+        //绑定之后返回
+        pvc.isWithdraw = YES;
         pvc.setType = SetTypeBankCardUnSet;
         [self.navigationController pushViewController:pvc animated:YES];
     }

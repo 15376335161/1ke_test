@@ -18,14 +18,13 @@
 @end
 
 
-
 @implementation YMMsgCell
 - (void)awakeFromNib {
     [super awakeFromNib];
 }
 -(void)setModel:(YMMsgModel *)model{
     _model = model;
-    _titlLabel.text = @"";
+    _titlLabel.text = @"系统消息";
     _msgLabel.text  = model.content;
     _timeLabel.text = model.add_time;
     

@@ -12,4 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titlLabel;
 
+
++(instancetype)cellDequeueReusableCellWithTableView:(UITableView* )tableView;
+
 @end

@@ -23,7 +23,7 @@
     
     self.tableView.tableFooterView = [UIView new];
 
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageNamed:@"del" target:self action:@selector(deleteMsgClick:)];
+   // self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageNamed:@"del" target:self action:@selector(deleteMsgClick:)];
     
     //请求消息详情
     [self requestMessageDetail];
@@ -39,9 +39,12 @@
     //消息id
     [param setObject:_model.id forKey:@"id_message"];
     [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
-    [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
+    [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];//
     [[HttpManger sharedInstance]callHTTPReqAPI:MessageDeleteURL params:param view:self.view  loading:YES tableView:self.tableView  completionHandler:^(id task, id responseObject, NSError *error) {
-        
+        //刷新
+        if (self.refreshBlock) {
+             self.refreshBlock();
+        }
         [self.navigationController popViewControllerAnimated:YES];
     }];
 }
@@ -51,15 +54,15 @@
     [param setObject:_model.type forKey:@"type_message"];
     [param setObject:_model.id forKey:@"id_message"];
     [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
-    [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
+    [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];//
 
     NSString* urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@&type_message=%@&id_message=%@",MessageDetailURL,
-                        @"1422",
+                        [kUserDefaults valueForKey:kUid],
                         [kUserDefaults valueForKey:kToken],
                         _model.type,
                         _model.id];
     YMWeakSelf;
-    [[HttpManger sharedInstance] getHTTPReqAPI:urlStr params:param view:self.view loading:YES tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
+    [[HttpManger sharedInstance] getHTTPReqAPI:urlStr params:param view:self.view isEdit:YES  loading:YES tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
         
         weakSelf.model = [YMMsgModel mj_objectWithKeyValues:responseObject[@"data"]];
         [weakSelf.tableView reloadData];

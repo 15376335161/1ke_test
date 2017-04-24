@@ -10,9 +10,11 @@
 
 @interface YMRegistViewController : BaseViewController
 
-//tag block
-//@property(nonatomic,copy)void(^tagBlock)(NSInteger tag);
-
 //注册的tag
+@property(nonatomic,assign)BOOL isPresent;
+
+//刷新网页block
+//@property(nonatomic,copy)void(^refreshWebBlock)();
+
 @property(nonatomic,assign)NSInteger tag;
 @end

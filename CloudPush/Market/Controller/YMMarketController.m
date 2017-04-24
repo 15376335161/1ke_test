@@ -103,7 +103,7 @@
     [param setValue:[NSString stringWithFormat:@"%ld",(long)page] forKey:@"page"];
     [param setObject:type forKey:@"type"];//23- 27
     YMWeakSelf;
-    [[HttpManger sharedInstance]getHTTPReqAPI:[NSString stringWithFormat:@"%@?type=%@&page=%ld",TaskListURL,type,(long)page] params:param view:self.view loading:isLoading tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
+    [[HttpManger sharedInstance]getHTTPReqAPI:[NSString stringWithFormat:@"%@?type=%@&page=%ld",TaskListURL,type,(long)page] params:param view:self.view isEdit:NO  loading:isLoading tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
         if (_page > 0 ) {
             if (responseObject[@"data"] == 0) {
                 [MBProgressHUD showFail:@"已经是最后一页啦！" view:self.view];
@@ -305,7 +305,7 @@
 }
 -(void)requestTaskDetailByModel:(YMTaskModel*)model{
     YMWeakSelf;
-    [[HttpManger sharedInstance]getHTTPReqAPI:[NSString stringWithFormat:@"%@?id_task=%@",TaskDetailURL,model.id.stringValue] params:@{@"id_task":model.id.stringValue} view:self.view loading:YES tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
+    [[HttpManger sharedInstance]getHTTPReqAPI:[NSString stringWithFormat:@"%@?id_task=%@",TaskDetailURL,model.id.stringValue] params:@{@"id_task":model.id.stringValue} view:self.view isEdit:NO  loading:YES tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
         YMTaskDetailController* tvc = [[YMTaskDetailController alloc]init];
         tvc.title = @"任务详情";
         tvc.hidesBottomBarWhenPushed = YES;

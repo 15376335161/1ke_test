@@ -37,6 +37,11 @@
 //返现左边约束
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profitLabelLeft;
 
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *tagsArr;
+
+//产品名
+@property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
+
 @end
 
 @implementation YMProductCell
@@ -44,15 +49,23 @@
     [super awakeFromNib];
     if (SCREEN_WIDTH == 320) {
         self.interestLabelLeft.constant = self.interestLabelRight.constant = self.profitLabelLeft.constant = 20;
+        _interestLbel.font = Font(20);
+        
     }else if (SCREEN_WIDTH == 375){
         self.interestLabelLeft.constant = self.interestLabelRight.constant = self.profitLabelLeft.constant = 30;
     }else{
         self.interestLabelLeft.constant = self.interestLabelRight.constant = self.profitLabelLeft.constant = 40;
     }
+   
     //起投金额
-    [YMTool viewLayerWithView:_minInvestLabel cornerRadius:4 boredColor:TabBarTintColor borderWidth:1];
-    [YMTool viewLayerWithView:_investBtn cornerRadius:4 boredColor:TabBarTintColor borderWidth:1];
+    [YMTool viewLayerWithView:_minInvestLabel cornerRadius:2 boredColor:TabBarTintColor borderWidth:1];
+    [YMTool viewLayerWithView:_investBtn cornerRadius:2 boredColor:TabBarTintColor borderWidth:1];
     
+}
+-(void)setFrame:(CGRect)frame{
+    // frame.origin.y    += 10;
+     frame.size.height -= 10;
+    [super setFrame:frame];
 }
 
 + (instancetype)shareCellWithTableView:(UITableView* )tableView actionBlock:(void(^)(UIButton* btn))actionBlock{
@@ -71,22 +84,59 @@
 }
 -(void)setModel:(YMProductModel *)model{
     _model = model;
-    [_iconImgView sd_setImageWithURL:[NSURL URLWithString:model.logo_path] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
+    [_iconImgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseApi,model.logo_path]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    _productNameLabel.text = model.platform_name;
     if (model.tag.integerValue == 1) { //1热门 2 置顶
-        _tagImgView.image = [UIImage imageNamed:@"hot"];
-    }else if (model.tag.integerValue == 2) {
-        _tagImgView.image = [UIImage imageNamed:@"zhiding"];
+        _tagImgView.image = [UIImage imageNamed:@"hot"];//else if (model.tag.integerValue == 2) {
+                                                      //_tagImgView.image = [UIImage imageNamed:@"zhiding"];
+                                                      //}
     }else{
         _tagImgView.hidden = YES;
     }
+    
     _titlDescLabel.text = model.slogan;//平台描述
-    _timeLabel.text     = [NSString stringWithFormat:@"还剩%@",[YMDateTool futureTimeWithfutureTime:model.end_time format:@"yyyy-MM-dd HH:mm:ss"]];
-    _interestLbel.text  = model.expect_annual_rate;//预计年化收益
+    _timeLabel.text =  model.end_time;
+    _interestLbel.text  = [NSString stringWithFormat:@"%@%%",model.expect_annual_rate];//预计年化收益
+    
+    [YMTool labelColorWithLabel:_interestLbel font:Font(15) range:NSMakeRange(model.expect_annual_rate.length, 1) color:HEX(@"ef5316")];
     _profitLabel.text   = [NSString stringWithFormat:@"最高%@元",model.max_rebate];//返利
+    if (SCREEN_WIDTH == 320) {
+        //设置颜色
+        [YMTool labelColorWithLabel:_profitLabel font:Font(20) range:NSMakeRange(2, model.max_rebate.length) color:TabBarTintColor];
+    }else{
+        //设置颜色
+        [YMTool labelColorWithLabel:_profitLabel font:Font(25) range:NSMakeRange(2, model.max_rebate.length) color:TabBarTintColor];
+    }
     
-    _minInvestLabel.text = [NSString stringWithFormat:@" %@元起投",model.start_money];//起投
+    _minInvestLabel.text = [NSString stringWithFormat:@" %@元起投 ",model.start_money];//起投
     
-    
+    NSMutableArray* tagStrArr = [[NSMutableArray alloc]init];
+    //企业性质
+    if (![NSString isEmptyString:model.enterprise_type]) {
+        [tagStrArr addObject:[NSString stringWithFormat:@" %@ ",model.enterprise_type]];
+    }
+    //企业等级
+    if (![NSString isEmptyString:model.enterprise_grade]) {
+        [tagStrArr addObject:[NSString stringWithFormat:@" %@ ",model.enterprise_grade]];
+    }
+    //托管银行
+    if (![NSString isEmptyString:model.enterprise_bank]) {
+        [tagStrArr addObject:[NSString stringWithFormat:@" %@ ",model.enterprise_bank]];
+    }
+    for (int i = 0 ; i < tagStrArr.count;  i ++) {
+        UILabel* label = _tagsArr[i];
+        label.text = tagStrArr[i];
+        if (i == 0) {
+             [YMTool viewLayerWithView:label cornerRadius:2 boredColor:HEX(@"3DA3F5") borderWidth:1];
+        }
+        if (i == 1) {
+             [YMTool viewLayerWithView:label cornerRadius:2 boredColor:HEX(@"EF5316") borderWidth:1];
+        }
+        if (i == 2) {
+             [YMTool viewLayerWithView:label cornerRadius:2 boredColor:HEX(@"F6956C") borderWidth:1];
+        }
+    }
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

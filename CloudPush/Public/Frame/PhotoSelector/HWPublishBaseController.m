@@ -38,7 +38,6 @@ static NSString * const reuseIdentifier = @"HWCollectionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
 }
 
 /** 初始化collectionView */
@@ -269,9 +268,7 @@ static NSString * const reuseIdentifier = @"HWCollectionViewCell";
 - (NSArray*)getALAssetArray{
     return _arrSelected;
 }
-
 - (NSArray*)getBigImageArray{
-    
     return [self getBigImageArrayWithALAssetArray:_arrSelected];
 }
 
@@ -282,7 +279,6 @@ static NSString * const reuseIdentifier = @"HWCollectionViewCell";
 - (CGRect)getPickerViewFrame{
     return self.pickerCollectionView.frame;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

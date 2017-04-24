@@ -7,18 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserModel.h"
 
 @interface YMMeIconCell : UITableViewCell
 
-
+// 用户头像
 @property (weak, nonatomic) IBOutlet UIImageView *iconImgView;
-@property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *tagImgView;
-@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
-
 //改变图像
 @property(nonatomic,copy)void(^changeIconBlock)();
 
+//用户模型
+@property(nonatomic,copy)UserModel* usrModel;
 //设置头像
--(instancetype)shareCellWithChangeIconBlock:(void(^)())changeIconBlock;
+//-(instancetype)shareCellWithChangeIconBlock:(void(^)())changeIconBlock;
 @end

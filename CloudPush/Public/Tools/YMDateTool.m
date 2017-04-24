@@ -182,7 +182,7 @@
     [formatter setDateFormat:format];
     NSString *dateTime = [formatter stringFromDate:[NSDate date]];
     NSDate *date       = [formatter dateFromString:dateTime];
-    DDLog(@"---------- currentDate == %@",date);
+   // DDLog(@"---------- currentDate == %@",date);
     return date;
 }
 

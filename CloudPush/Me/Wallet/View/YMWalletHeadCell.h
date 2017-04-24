@@ -15,6 +15,7 @@
 
 @property(nonatomic,strong)UserModel* model;
 
+@property(nonatomic,copy)void(^tapViewBlock)(UITapGestureRecognizer* tap);
 //实例
 +(instancetype)shareCell;
 @end

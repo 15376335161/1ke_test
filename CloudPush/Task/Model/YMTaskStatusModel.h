@@ -10,39 +10,25 @@
 
 @interface YMTaskStatusModel : BaseModel
 
-//订单列表
-@property(nonatomic,strong)NSDictionary* myTaskList;
-
-//订单数
-@property(nonatomic,strong)NSDictionary* myTaskCounts;
-
 //订单状态
-@property(nonatomic,copy)NSString* myTaskStatus;
+@property(nonatomic,copy)NSString* status;
+//明细描述
+@property(nonatomic,copy)NSString* waiting_desc;
+@property(nonatomic,copy)NSString* add_time;
+//友盟返利金额
+@property(nonatomic,copy)NSString* reward_money;
+//项目名称
+@property(nonatomic,copy)NSString* product_name;
+//备注(30天标)
+@property(nonatomic,copy)NSString* ps;
 
-//待处理
-@property(nonatomic,strong)NSArray* pending;
-@property(nonatomic,strong)NSArray* taskProject;
-//审核中。
-@property(nonatomic,strong)NSArray* audit_count;
-@property(nonatomic,strong)NSArray* audit;
-//审核成功
-@property(nonatomic,strong)NSArray* orderSuccess;
-@property(nonatomic,strong)NSArray* success;
-
-
-//任务状态 1 待处理
-@property(nonatomic,copy)NSString* del_status;
-@property(nonatomic,copy)NSString* end_time;
-@property(nonatomic,copy)NSString* id;
-//价格
-@property(nonatomic,copy)NSString* price;
-
-@property(nonatomic,copy)NSString* task_title;
-
-//失效原因 
-@property(nonatomic,copy)NSString* audit_status;
+//平台名称
+@property(nonatomic,copy)NSString* platform_name;
 //图片链接
-@property(nonatomic,copy)NSString* imgPath;
+@property(nonatomic,copy)NSString* logo_path;
+//投资金额
+@property(nonatomic,copy)NSString* start_money;
+
 
 //+ (NSDictionary *)mj_replacedKeyFromPropertyName;//替换模型与字典中不同的key
 

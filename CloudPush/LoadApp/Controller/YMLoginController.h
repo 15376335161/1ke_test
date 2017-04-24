@@ -14,6 +14,14 @@
 @interface YMLoginController : BaseViewController
 
 
-//注册 tag
+//注册 tag == 1   修改密码 tag == 2  游客 返回 到 主页
 @property(nonatomic,assign)NSInteger tag;
+
+@property(nonatomic,assign)BOOL isToTabBar;
+
+//隐藏返回键
+@property(nonatomic,assign)BOOL isHiddenBackBtn;
+
+//刷新网页block
+@property(nonatomic,copy)void(^refreshWebBlock)();
 @end

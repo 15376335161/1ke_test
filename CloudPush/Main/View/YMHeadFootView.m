@@ -21,4 +21,12 @@
     return  self;
 }
 
++(instancetype)cellDequeueReusableCellWithTableView:(UITableView* )tableView{
+    YMHeadFootView* hfView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(self)];
+    if (hfView == nil) {
+        hfView =  [[[NSBundle mainBundle]loadNibNamed:@"YMHeadFootView" owner:self options:nil]lastObject];
+    }
+    return hfView;
+}
+
 @end

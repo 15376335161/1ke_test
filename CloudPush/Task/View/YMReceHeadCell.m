@@ -46,8 +46,8 @@
 }
 -(void)setModel:(YMTaskStatusModel *)model{
     _model = model;
-    _outTimeLabel.text = [NSString stringWithFormat:@"截止日期：%@",model.myTaskList[@"end_time"]];
-    _leftCountLabel.text = [NSString stringWithFormat:@"剩余单数：%d",([model.myTaskList[@"task_nums"] intValue] - [model.myTaskCounts[@"COUNT(id)"] intValue] )];
+//    _outTimeLabel.text = [NSString stringWithFormat:@"截止日期：%@",model.myTaskList[@"end_time"]];
+//    _leftCountLabel.text = [NSString stringWithFormat:@"剩余单数：%d",([model.myTaskList[@"task_nums"] intValue] - [model.myTaskCounts[@"COUNT(id)"] intValue] )];
     
     
 }

@@ -11,12 +11,14 @@
 @interface YMMainHeadCell ()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *actionBtnArr;
 
-
 @end
 @implementation YMMainHeadCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    //消除分隔
+    self.layoutMargins = UIEdgeInsetsZero;
+    self.separatorInset = UIEdgeInsetsMake(0, SCREEN_WIDTH, 0, 0);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

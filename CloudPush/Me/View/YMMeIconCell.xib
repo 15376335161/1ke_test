@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="372" height="114"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="372" height="113"/>
+                <rect key="frame" x="0.0" y="0.0" width="372" height="113.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_head" translatesAutoresizingMaskIntoConstraints="NO" id="npI-Go-qft">
@@ -26,22 +26,16 @@
                             <constraint firstAttribute="width" constant="55" id="MBM-6S-aod"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fS0-GB-2AK">
-                        <rect key="frame" x="166" y="62" width="40" height="20"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOK-5K-U0H">
-                        <rect key="frame" x="165.5" y="87" width="42" height="16"/>
+                        <rect key="frame" x="145" y="75" width="83" height="16"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVp-r5-e4t">
-                                <rect key="frame" x="13" y="0.0" width="29" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="135****3388" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVp-r5-e4t">
+                                <rect key="frame" x="13" y="0.0" width="70" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_iphone" translatesAutoresizingMaskIntoConstraints="NO" id="DZG-KP-A0k">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_banner_phone" translatesAutoresizingMaskIntoConstraints="NO" id="DZG-KP-A0k">
                                 <rect key="frame" x="0.0" y="0.0" width="8" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="8" id="OkH-B8-7VU"/>
@@ -63,9 +57,7 @@
                 </subviews>
                 <color key="backgroundColor" red="0.23921568630000001" green="0.63921568630000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="fS0-GB-2AK" firstAttribute="top" secondItem="npI-Go-qft" secondAttribute="bottom" constant="2" id="7gK-Es-lBQ"/>
-                    <constraint firstItem="fS0-GB-2AK" firstAttribute="centerX" secondItem="npI-Go-qft" secondAttribute="centerX" id="Jnz-Si-Dd2"/>
-                    <constraint firstItem="IOK-5K-U0H" firstAttribute="top" secondItem="fS0-GB-2AK" secondAttribute="bottom" constant="5" id="diJ-fD-Q2R"/>
+                    <constraint firstItem="IOK-5K-U0H" firstAttribute="top" secondItem="npI-Go-qft" secondAttribute="bottom" constant="15" id="GGK-1U-gr8"/>
                     <constraint firstItem="npI-Go-qft" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="pUU-gB-1Nq"/>
                     <constraint firstItem="IOK-5K-U0H" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="z8O-qr-ReZ"/>
                     <constraint firstItem="npI-Go-qft" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="zQv-ch-0Ja"/>
@@ -73,7 +65,6 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="iconImgView" destination="npI-Go-qft" id="upW-rA-xBB"/>
-                <outlet property="nickNameLabel" destination="fS0-GB-2AK" id="Tlh-nz-uiL"/>
                 <outlet property="phoneLabel" destination="JVp-r5-e4t" id="jaA-U6-Dj8"/>
                 <outlet property="tagImgView" destination="DZG-KP-A0k" id="CTT-rK-hji"/>
             </connections>
@@ -81,7 +72,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="my_banner_phone" width="8" height="14"/>
         <image name="my_head" width="55" height="55"/>
-        <image name="my_iphone" width="8" height="14"/>
     </resources>
 </document>

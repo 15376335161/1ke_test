@@ -23,7 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    DDLog(@"model == %@  taskCOunt == %@  mytaskList == %@  status == %@",self.model,self.model.myTaskCounts,self.model.myTaskList,self.model.myTaskStatus);
     
     YMReceHeadCell* headCell = [YMReceHeadCell shareCell];
    // headCell.model = self.model;

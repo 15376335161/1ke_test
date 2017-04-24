@@ -26,7 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tabBar.tintColor = TabBarTintColor;
-    
     // 添加所有的子控制器
     [self addChildVCs];
 }
@@ -35,7 +34,7 @@
  */
 - (void)addChildVCs{
     //市场
-    [self setUpChildViewController:[[YMMainController alloc]init] title:@"市场" imageNamed:@"市场"];
+    [self setUpChildViewController:[[YMMainController alloc]init] title:@"首页" imageNamed:@"市场"];
     //任务
     [self setUpChildViewController:[[YMPartnerController alloc]init] title:@"合伙人" imageNamed:@"合伙人"];
     //我的
@@ -47,8 +46,8 @@
     //精华
     YMNavigationController * naVc = [[YMNavigationController alloc]initWithRootViewController:vc];
     vc.title = title;//相当于上面两句
-    if ([title isEqualToString:@"市场"]) {
-        vc.title = @"有盟";
+    if ([title isEqualToString:@"首页"]) {
+        vc.title = @"赏多多";
         vc.tabBarItem.title = title;
     }
     if ([title isEqualToString:@"合伙人"]) {

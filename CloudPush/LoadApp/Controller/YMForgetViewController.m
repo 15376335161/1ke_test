@@ -32,7 +32,7 @@
     _totalTime = 60;
     
     //监听字体处理按钮颜色
-    _nextBtn.enabled = [_phoneTextFd.text length] > 0 && [_passwordTextFd.text length] > 0  ;
+    _nextBtn.enabled = [_phoneTextFd.text length] > 0 && [_passwordTextFd.text length] >= 6  ;
     _nextBtn.backgroundColor = _nextBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
     //设置layer
     [YMTool viewLayerWithView:_getCodeBtn cornerRadius:4 boredColor:BackGroundColor borderWidth:1];
@@ -45,6 +45,12 @@
             _phoneTextFd.userInteractionEnabled = NO;
         }
     }
+    //忘记密码
+    if (self.passwordType == PasswordTypeForget) {
+            _phoneTextFd.text = _phoneStr;
+           _phoneTextFd.userInteractionEnabled = NO;
+    }
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -59,6 +65,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UITextFieldTextDidChangeNotification
                                                   object:nil];
+}
+-(void)dealloc{
     //取消定时器
     [_timer invalidate];
     _timer = nil;
@@ -69,7 +77,7 @@
 }
 -(void)textDidChangeHandle:(NSNotification* )noti{
     //监听字体处理按钮颜色
-    _nextBtn.enabled = [_phoneTextFd.text length] > 0 && [_passwordTextFd.text length] > 0 ;
+    _nextBtn.enabled = [_phoneTextFd.text length] > 0 && [_passwordTextFd.text length] >= 6 ;
     _nextBtn.backgroundColor = _nextBtn.enabled ? NavBarTintColor : NavBar_UnabelColor;
 }
 - (IBAction)getCodeBtnClick:(id)sender {
@@ -81,18 +89,30 @@
         [MBProgressHUD showFail:@"手机号码有误，请重新输入！" view:self.view];
         return;
     }
+    NSString* urlStr ;
     NSMutableDictionary* param = [[NSMutableDictionary alloc] init];
-    [param setObject:_phoneTextFd.text forKey:@"phone"];
-    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
-    [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];           //[kUserDefaults valueForKey:kUid]
-    [param setObject:@"updatePasswd" forKey:@"method"];
-    [[HttpManger sharedInstance]callHTTPReqAPI:SendMsgCodeURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
+    //修改密码
+    if (self.passwordType == PasswordTypeModify) {
+        [param setObject:_phoneTextFd.text forKey:@"phone"];
+        [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+        [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"]; //[kUserDefaults valueForKey:kUid]
+        [param setObject:@"updatePasswd" forKey:@"method"];
+        urlStr = SendMsgCodeURL;
+    }else{
+        //忘记密码
+        [param setObject:_phoneTextFd.text forKey:@"phone"];
+        [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"findPhoneCaptcha"];
+        urlStr = ForgetSendCodeURL;
+    }
+    
+    [[HttpManger sharedInstance]callHTTPReqAPI:urlStr params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
         NSNumber* status = responseObject[@"status"];
         NSString* msg    = responseObject[@"msg"];
+         [_passwordTextFd becomeFirstResponder];
         //显示提示信息
         [MBProgressHUD showFail:msg view:self.view];
         if (status.integerValue == 1) {
-             _timer   = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getCodeMessage) userInfo:nil repeats:YES];
+            _timer   = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getCodeMessage) userInfo:nil repeats:YES];
         }
     }];
 }
@@ -103,7 +123,7 @@
         _getCodeBtn.userInteractionEnabled = NO;
         [_getCodeBtn setBackgroundColor:LightGrayColor];
         [_getCodeBtn setTitleColor:WhiteColor forState:UIControlStateNormal];
-        _getCodeBtn.titleLabel.text = [NSString stringWithFormat:@"   已发送%lds",(long)_totalTime];
+        _getCodeBtn.titleLabel.text = [NSString stringWithFormat:@"  已发送%lds",(long)_totalTime];
     }
     else{
         _getCodeBtn.userInteractionEnabled = YES;
@@ -131,12 +151,22 @@
         [MBProgressHUD showFail:@"手机验证码格式不正确，请重新输入！" view:self.view];
         return;
     }
-    NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
-    [param setObject:_phoneTextFd.text forKey:@"phone"];
-    [param setObject:_passwordTextFd.text forKey:@"captcha"];//[kUserDefaults valueForKey:kToken]
-    [param setObject:@"update-passwd" forKey:@"type"];       //修改密码
+     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
+     NSString* urlStr ;
+    //修改密码
+    if (self.passwordType == PasswordTypeModify) {
+        [param setObject:_phoneTextFd.text forKey:@"phone"];
+        [param setObject:_passwordTextFd.text forKey:@"captcha"];//[kUserDefaults valueForKey:kToken]
+        [param setObject:@"update-passwd" forKey:@"type"];       //修改密码
+        urlStr =  ValidateMsgURL;
+    }else{
+        //忘记密码
+        urlStr = ForgetCheckPhoneURL;
+        [param setObject:_passwordTextFd.text forKey:@"phoneCode"];
+        [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"findPhoneCaptcha"];
+    }
     YMWeakSelf;
-    [[HttpManger sharedInstance]callHTTPReqAPI:ValidateMsgURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
+    [[HttpManger sharedInstance]callHTTPReqAPI:urlStr params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
         NSNumber* status = responseObject[@"status"];
         NSString* msg    = responseObject[@"msg"];
         if (status.integerValue == 1) {
@@ -145,6 +175,8 @@
             if (self.passwordType == PasswordTypeModify) {
                 rvc.title = @"修改密码";
             }else{
+                [kUserDefaults setObject:responseObject[@"data"][@"token"] forKey:kToken];
+                [kUserDefaults synchronize];
                 rvc.title = @"找回密码-重置密码";
             }
             [weakSelf.navigationController pushViewController:rvc animated:YES];

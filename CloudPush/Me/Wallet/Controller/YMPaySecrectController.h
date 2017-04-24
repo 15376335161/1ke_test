@@ -14,4 +14,7 @@
 @property(nonatomic,assign)SetType setType;
 
 @property(nonatomic,copy)void(^refreshDataBlock)();
+
+// 提现返回
+@property(nonatomic,assign)BOOL isWithdraw;
 @end

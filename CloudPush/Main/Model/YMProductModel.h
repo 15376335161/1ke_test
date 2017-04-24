@@ -18,8 +18,8 @@
 @property(nonatomic,copy)NSString* ad_tag;
 //预计年化收益率
 @property(nonatomic,copy)NSString* expect_annual_rate;
-//项目名称
-@property(nonatomic,copy)NSString* product_name;
+//项目名称  平台名称
+@property(nonatomic,copy)NSString* platform_name;
 //起投金额
 @property(nonatomic,copy)NSString* start_money;
 //企业性质
@@ -39,6 +39,9 @@
 @property(nonatomic,copy)NSString* enterprise_grade;
 //企业名称
 @property(nonatomic,copy)NSString* enterprise_name;
+//托管银行
+@property(nonatomic,copy)NSString* enterprise_bank;
+
 //最高返利
 @property(nonatomic,copy)NSString* max_rebate;
 //添加时间

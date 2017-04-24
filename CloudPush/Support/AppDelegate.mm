@@ -65,8 +65,7 @@
         UInt64 typeFlag = MMAPP_SUPPORT_TEXT | MMAPP_SUPPORT_PICTURE | MMAPP_SUPPORT_LOCATION | MMAPP_SUPPORT_VIDEO |MMAPP_SUPPORT_AUDIO | MMAPP_SUPPORT_WEBPAGE | MMAPP_SUPPORT_DOC | MMAPP_SUPPORT_DOCX | MMAPP_SUPPORT_PPT | MMAPP_SUPPORT_PPTX | MMAPP_SUPPORT_XLS | MMAPP_SUPPORT_XLSX | MMAPP_SUPPORT_PDF;
         
         [WXApi registerAppSupportContentFlag:typeFlag];
-        
-        
+    
         UMConfigInstance.appKey =  kUMAppKey;
         UMConfigInstance.ChannelId = @"App Store";
         [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
@@ -79,18 +78,18 @@
         [MobClick setLogEnabled:YES];
     });
     
-    //集成获取测试设备信息
-    Class cls = NSClassFromString(@"UMANUtil");
-    SEL deviceIDSelector = @selector(openUDIDString);
-    NSString *deviceID = nil;
-    if(cls && [cls respondsToSelector:deviceIDSelector]){
-        deviceID = [cls performSelector:deviceIDSelector];
-    }
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:@{@"oid" : deviceID}
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:nil];
-    
-    DDLog(@"oid  =============== %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+//    //集成获取测试设备信息
+//    Class cls = NSClassFromString(@"UMANUtil");
+//    SEL deviceIDSelector = @selector(openUDIDString);
+//    NSString *deviceID = nil;
+//    if(cls && [cls respondsToSelector:deviceIDSelector]){
+//        deviceID = [cls performSelector:deviceIDSelector];
+//    }
+//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:@{@"oid" : deviceID}
+//                                                       options:NSJSONWritingPrettyPrinted
+//                                                         error:nil];
+//    
+//    DDLog(@"oid  =============== %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -128,7 +127,6 @@
     //您可以统一设置键盘遮挡时的默认偏移值
     [YSKeyboardMoving appearance].offset = 50;
     
-   
 //    DDLog(@"time == close ");
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //         DDLog(@"time == closed  haha ");
@@ -150,6 +148,10 @@
         
     }else if([sourceApplication isEqualToString:@"com.tencent.mqq"] ){
         [TencentOAuth HandleOpenURL:url];
+    }
+    else if([[url scheme] isEqualToString:@"cloudPush://"]){
+        [application setApplicationIconBadgeNumber:10];
+         return YES;
     }
     return YES;
     
@@ -228,6 +230,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     //Optional
     DDLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
+
 #pragma mark- JPUSHRegisterDelegate
 //添加处理APNs通知回调方法
 // iOS 10 Support

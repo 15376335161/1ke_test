@@ -87,9 +87,9 @@
 
 //压缩图片到指定文件大小
 + (NSData *)compressOriginalImage:(UIImage *)image toMaxDataSizeKBytes:(CGFloat)size{
-    NSData *data = UIImageJPEGRepresentation(image, 1.0);
+    NSData *data = UIImageJPEGRepresentation(image, 0.1);
     CGFloat dataKBytes = data.length/1000.0;
-    CGFloat maxQuality = 0.9f;
+    CGFloat maxQuality = 0.2f;
     CGFloat lastData = dataKBytes;
     while (dataKBytes > size && maxQuality > 0.01f) {
         maxQuality = maxQuality - 0.01f;
@@ -124,13 +124,14 @@
     }else{
         zoomSize = image.size;
     }
+    DDLog(@"zoomSize == %f heigh = %f",zoomSize.width,zoomSize.height);
     return zoomSize;
 }
 + (NSData* )imgDataByImage:(UIImage* )image{
     //压缩图片
     if (UIImagePNGRepresentation(image) == nil) {
         // compression is 0(most)..1(least)
-        return  UIImageJPEGRepresentation(image, 0.5);
+        return  UIImageJPEGRepresentation(image, 0.1);
     } else {
         return  UIImagePNGRepresentation(image);
     }

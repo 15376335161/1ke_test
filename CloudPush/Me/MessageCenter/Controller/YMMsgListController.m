@@ -11,7 +11,7 @@
 #import "UIBarButtonItem+HKExtension.h"
 #import "YMBottomView.h"
 #import "UIControl+Custom.h"
-
+#import "UIView+Placeholder.h"
 
 
 @interface YMMsgListController ()<UITableViewDataSource,UITableViewDelegate>
@@ -27,6 +27,8 @@
 //页数
 @property(nonatomic,assign)NSInteger page;
 
+//占位页面
+@property(nonatomic,strong)UIView* placeView;
 @end
 
 @implementation YMMsgListController
@@ -63,8 +65,9 @@
                     weakSelf.selectArr = [weakSelf.dataArr mutableCopy];
                     [weakSelf.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
                 }else{
+                    
                     DDLog(@"selet == %@",weakSelf.selectArr);
-                    [weakSelf.selectArr removeObjectAtIndex:indexPath.row];
+                    [weakSelf.selectArr removeAllObjects];
                     [weakSelf.tableView deselectRowAtIndexPath:indexPath  animated:NO];
                 }
             }
@@ -95,14 +98,16 @@
         }
     }
     [param setObject:@"1" forKey:@"type_message"];
-//    //消息id
+    //消息id
     [param setObject:idsStr forKey:@"id_message"];
     [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
-    [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
+    [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];//
     [[HttpManger sharedInstance]callHTTPReqAPI:MessageDeleteURL params:param view:self.view  loading:YES tableView:self.tableView  completionHandler:^(id task, id responseObject, NSError *error) {
         //删除
         [weakSelf.dataArr removeObjectsInArray:weakSelf.selectArr];
         weakSelf.tableView.editing = NO;
+        
+        weakSelf.placeView.hidden = weakSelf.dataArr.count;
         [weakSelf.tableView reloadData];
     }];
 }
@@ -150,11 +155,11 @@
         }];
     }
 }
-#pragma mark - requestNetWork  网络数据
+#pragma mark - requestNetWork  网络数据 - 消息中心
 -(void)requestMsgListDataWithPage:(NSInteger)page{
     YMWeakSelf;
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
-     [param setObject:@"1422" forKey:@"uid"];
+     [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];
      [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
      [param setObject:@"1" forKey:@"type_message"];
      [param setObject:@(page).stringValue forKey:@"Page"];
@@ -164,12 +169,12 @@
         urlStr = [NSString stringWithFormat:@"%@?Page=%d&uid=%@&ssotoken=%@&type_message=%@",
                   urlStr,
                   (long)page,
-                  @"1422",
+                  [kUserDefaults valueForKey:kUid],
                   [kUserDefaults valueForKey:kToken],
                   @"1"
                    ];
     }
-    [[HttpManger sharedInstance]getHTTPReqAPI:urlStr params:param view:self.view loading:YES tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
+    [[HttpManger sharedInstance]getHTTPReqAPI:urlStr params:param view:self.view isEdit:YES  loading:YES  tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
         if (_page > 0 ) {
             if (responseObject[@"data"] == 0) {
                 [MBProgressHUD showFail:@"已经是最后一页啦！" view:self.view];
@@ -180,8 +185,10 @@
             [allTmpArr addObjectsFromArray:tmpArr];
             _dataArr = allTmpArr;
         }else{
-            weakSelf.dataArr    = [YMMsgModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+            weakSelf.dataArr  = [YMMsgModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         }
+        weakSelf.placeView.hidden = weakSelf.dataArr.count;
+        
         [weakSelf.tableView reloadData];
     }];
 }
@@ -266,4 +273,13 @@
     }
     return _selectArr;
 }
+-(UIView *)placeView{
+    if (!_placeView) {
+     _placeView = [UIView placeViewWhithFrame:self.tableView.frame placeImgStr:@"iconPlaceholder" placeString:@"您暂时还没有消息！"];
+        [self.view addSubview:_placeView];
+        _placeView.hidden = YES;
+    }
+    return _placeView;
+}
+
 @end

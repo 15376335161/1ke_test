@@ -13,4 +13,6 @@
 //修改密码 忘记密码 公用一个控制器 接口不一致
 @property(nonatomic,assign)PasswordType passwordType;
 
+//手机号
+@property(nonatomic,strong)NSString* phoneStr;
 @end

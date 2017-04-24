@@ -17,13 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationBar.tintColor = NavBarTintColor;
+    self.navigationBar.tintColor = DefaultNavBarColor;
     //设置导航上 按钮 文字的颜色
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     //设置导航栏背景色
-    [[UINavigationBar appearance] setBarTintColor:NavBarTintColor];
+    [[UINavigationBar appearance] setBarTintColor:DefaultNavBarColor];
     self.navigationBar.translucent = NO;
-
+    
+    //背景色
+    self.navigationController.view.backgroundColor = BackGroundColor;
 }
 
 //重写跳转方法
@@ -38,7 +40,7 @@
 //        [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
 //        backButton.contentEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-        self.view.backgroundColor = WhiteColor;
+        self.view.backgroundColor = BackGroundColor;
         //        viewController.hidesBottomBarWhenPushed = YES; // 隐藏底部的工具条
     }
     [super pushViewController:viewController animated:animated];

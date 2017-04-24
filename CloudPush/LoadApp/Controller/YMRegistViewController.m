@@ -15,7 +15,8 @@
 #import "UserModel.h"
 #import "UIView+YSTextInputKeyboard.h"
 #import "RSAEncryptor.h"
-
+#import "YMTabBarController.h"
+#import "YMRedBagController.h"
 
 @interface YMRegistViewController ()<UIGestureRecognizerDelegate>
 
@@ -44,27 +45,28 @@
 @property(nonatomic,strong)NSTimer* timer;
 @property(nonatomic,copy)NSString* isAgree;
 
+//最大长度
+@property(nonatomic,assign)NSInteger maxCount;
 @end
 
 @implementation YMRegistViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"注册有盟账号";
+    self.title = @"注册";
     //初始化view
     [self modifyView];
     
+    _maxCount = 11; //最多11位
     //监听字体处理按钮颜色
     _registBtn.enabled = [_phoneTextFd.text length] > 0 && [_codeTextFd.text length] > 0 && [_passwordTextFd.text length] > 0 ;
     _registBtn.backgroundColor = _registBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
     
     _totalTime = 60;
     
-//    //通过offset的设置可以设置某个输入框特殊偏移量。
-//    self.inviteCodeTextFd.kbMoving.offset = 50;
-//    
-//    //你也可以通过设置一个具体的移动的视图而不是默认的父视图
-//    self.inviteCodeTextFd.kbMoving.kbMovingView = self.view;    
-//    self.inviteCodeTextFd.kbMoving.offset = 0;
+    if (self.isPresent == YES) {
+        //设置返回按钮
+        [self setLeftBackButton];
+    }
 
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -78,17 +80,30 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-   // [self.view endEditing:YES];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UITextFieldTextDidChangeNotification
                                                   object:nil];
-    //取消定时器 
+}
+-(void)dealloc{
+    //取消定时器
     [_timer invalidate];
     _timer = nil;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+//设置返回按钮
+-(void)setLeftBackButton{
+    UIButton *backButton = [Factory createNavBarButtonWithImageStr:@"back" target:self selector:@selector(back)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.view.backgroundColor = BackGroundColor;
+}
+//返回
+-(void)back{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+#pragma mark - UI
 -(void)modifyView{
     //设置layer
     //设置圆角
@@ -102,7 +117,6 @@
     //添加协议
      _protocolLabel.userInteractionEnabled = YES;
     [YMTool addTapGestureOnView:_protocolLabel target:self selector:@selector(protocolLabelClick:) viewController:self];
-    
 }
 #pragma mark - 按钮响应方法
 //获取验证码
@@ -153,7 +167,6 @@
 - (IBAction)loginBtnClick:(id)sender {
     DDLog(@"点击啦登录按钮");
     if (self.tag == 1) {
-        //self.tagBlock(1);
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         YMLoginController* lvc = [[YMLoginController alloc]init];
@@ -170,12 +183,13 @@
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
     [param setObject:_phoneTextFd.text forKey:@"phone"];
     [param setObject:_codeTextFd.text forKey:@"captcha"];
+    //注册来源
+    [param setObject:@"iOS" forKey:@"source"];
     [param setObject:[RSAEncryptor encryptString:_passwordTextFd.text publicKey:kPublicKey] forKey:@"passwd"];
    // [param setObject:@"1" forKey:@"isAgreement"];
     if (_inviteCodeTextFd.text) {
          [param setObject:_inviteCodeTextFd.text forKey:@"sharecode"];
     }
-    
     [[HttpManger sharedInstance]callHTTPReqAPI:RegisterURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
            NSNumber* status = responseObject[@"status"];
            NSString* msg    = responseObject[@"msg"];
@@ -183,13 +197,23 @@
                //保存数据
                 UserModel* usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
                 [[YMUserManager shareInstance]saveUserInfoByUsrModel:usrModel];
-                for (UIViewController* vc in self.navigationController.viewControllers) {
-                   DDLog(@"nav class == %@",[vc class]);
-                }
-               //回退2级
-               if (self.navigationController.viewControllers.count > 2) {
-                   [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
-               }
+               
+               YMRedBagController* rvc = [[YMRedBagController alloc]init];
+               rvc.title = @"我的红包";
+               rvc.isToTabBar = YES;
+               [kUserDefaults setBool:YES forKey:kisRefresh];
+               [kUserDefaults synchronize];
+               rvc.urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",RedPaperListURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]];
+               [self.navigationController pushViewController:rvc animated:YES];
+//                for (UIViewController* vc in self.navigationController.viewControllers) {
+//                   DDLog(@"nav class == %@",[vc class]);
+//                }
+//               //回退2级
+//               if (self.navigationController.viewControllers.count > 2) {
+//                   [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
+//               }
+             //  [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_UserDataChanged object:nil];
+             //  [self dismissViewControllerAnimated:YES completion:nil];
            }else{
                [MBProgressHUD showFail:msg view:self.view];
            }
@@ -204,7 +228,7 @@
     wvc.agreeBlock = ^(NSString* isAgree){
         self.isAgree = isAgree;
     };
-    wvc.urlStr  =  @"http://passport.youmeng.com/reg/agrement";
+    wvc.urlStr  =  RegistProtocalURL;
     [self.navigationController pushViewController:wvc animated:YES];
 }
 #pragma mark - UITextFieldDelegate
@@ -212,6 +236,32 @@
     //监听字体处理按钮颜色
     _registBtn.enabled = [_phoneTextFd.text length] > 0 && [_codeTextFd.text length] > 0 && [_passwordTextFd.text length] > 0 ;
     _registBtn.backgroundColor = _registBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
+    
+    NSString *toBeString = _phoneTextFd.text;
+    NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
+    if ([lang isEqualToString:@"zh-Hans"]) {
+        // 简体中文输入，包括简体拼音，健体五笔，简体手写
+        UITextRange *selectedRange = [_phoneTextFd markedTextRange];       //获取高亮部分的range
+        //获取高亮部分的从range.start位置开始，向右偏移0所得的字符所在的位置。如果高亮部分不存在，那么就返回nil，反之就不是nil
+        UITextPosition *position = [_phoneTextFd positionFromPosition:selectedRange.start offset:0];
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position) {
+            if (toBeString.length > self.maxCount) {
+                _phoneTextFd.text = [toBeString substringToIndex:self.maxCount];
+            }
+        }
+        // 有高亮选择的字符串，则暂不对文字进行统计和限制
+        else{
+            // _phoneTextFd.text
+        }
+    }
+    // 中文输入法以外的直接对其统计限制即可
+    else{
+        if (toBeString.length > self.maxCount) {
+            _phoneTextFd.text = [toBeString substringToIndex:self.maxCount];
+        }
+    }
+
 }
 
 #pragma mark - 键盘处理

@@ -10,4 +10,6 @@
 
 @interface YMSetController : BaseViewController
 
+//返回到首页block
+@property(nonatomic,copy)void(^backToMainBlock)();
 @end

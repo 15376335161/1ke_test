@@ -38,14 +38,6 @@
    // CGRect newRect = [_titlLabel convertRect:_titlLabel.bounds toView:self.contentView];
     
    // DDLog(@"newRect  width  == %f  x === %f y == %f",newRect.size.width,newRect.origin.x,newRect.origin.y);
-    UIView* newView = [[UIView alloc]init];
-                     //  WithFrame: CGRectMake(CGRectGetMaxX(newRect),CGRectGetMinY(newRect),4, 4)];
-    newView.layer.cornerRadius = 2;
-    newView.backgroundColor = RedColor;
-    newView.clipsToBounds = YES;
-    [_titlLabel addSubview:newView];
-    
-    newView.sd_layout.rightSpaceToView(_titlLabel,-3 ).topSpaceToView(_titlLabel,-3).widthIs(4).heightIs(4);
     
 }
 -(void)layoutSubviews{

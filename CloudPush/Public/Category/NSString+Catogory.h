@@ -14,6 +14,8 @@
 
 //获取设备 IP 地址
 + (NSString *)getIPAddress;
+//银行卡验证
++ (BOOL)isBankCard:(NSString *)cardNo;
 //传递一个单位 M 距离
 + (NSString *)showDistance:(NSString *)str;
 //返回中文的 时间
@@ -48,7 +50,7 @@
 //是否是手机号码
 + (BOOL)isMobileNum:(NSString *)num;
 //是否是有效身份证号
-+ (BOOL) validateIdentityCard: (NSString *)identityCard;
++ (BOOL)validateIdentityCard: (NSString *)identityCard;
 
 //家庭地址正则表达式
 + (BOOL)validateAddress:(NSString *)address;

@@ -100,7 +100,7 @@
     }
     YMWeakSelf;
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
-     [param setObject:@"1422" forKey:@"uid"];//[kUserDefaults valueForKey:kUid]
+     [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];//
      [param setObject:_newsPassWdTextFd.text forKey:@"passwd"];
      [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
     [[HttpManger sharedInstance]callHTTPReqAPI:updatePasswordURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {

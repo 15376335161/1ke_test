@@ -12,7 +12,7 @@
 
 
 //设置可添加图片最多个数!!!
-#define kMaxImageCount 9
+#define kMaxImageCount 5
 
 @interface MShowGroupAllSet ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,MImaCellDelegate>
 {

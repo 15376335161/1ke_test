@@ -16,6 +16,8 @@
 #import "YMWithdrawController.h"
 #import "YMTitleActionCell.h"
 #import "NSString+Catogory.h"
+#import "YMWithdrawDetailController.h"
+
 
 @interface YMWalletController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -24,6 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property(nonatomic,strong)YMWalletHeadCell* headCell;
 @end
 
 @implementation YMWalletController
@@ -31,13 +34,8 @@
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.tableFooterView = [UIView new];
-    self.tableView.scrollEnabled = NO;
-    
-    YMWalletHeadCell* cell = [YMWalletHeadCell shareCell];
-    cell.model = self.usrModel;
-    self.tableView.tableHeaderView = cell;
- 
+    //修改 设置头部
+    [self mofifyView];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -59,12 +57,10 @@
     [super viewWillDisappear:animated];
     //恢复之前的导航色
     navBarHairlineImageView.hidden = NO;
+    
 }
 
 -(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self                                                   name:UITextFieldTextDidChangeNotification
-                                               object:nil];
-    
     //消息中心 数据改变
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kNotification_UserDataChanged object:nil];
 }
@@ -81,22 +77,55 @@
     }
     return nil;
 }
+#pragma mark - ModifyView
+-(void)mofifyView{
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.scrollEnabled = NO;
+    YMWalletHeadCell* cell = [YMWalletHeadCell shareCell];
+    cell.model = self.usrModel;
+    cell.tapViewBlock = ^(UITapGestureRecognizer *tap) {
+            YMWithdrawDetailController* mvc = [[YMWithdrawDetailController alloc]init];
+            if (tap.view.tag == 101) {
+                mvc.title = @"提现明细";
+                mvc.detailListType = DetailListTypeWithdraw;
+            }else if (tap.view.tag == 100) {//待发明细
+                mvc.title = @"待发明细";
+                mvc.detailListType = DetailListTypeWaitIssue;
+            }
+            else if (tap.view.tag == 103) {//余额
+                mvc.title = @"余额明细";
+                mvc.detailListType = DetailListTypeBalance;
+            }else{
+                //累积收入 --- 待处理 不跳转
+                return ;
+            }
+            [self.navigationController pushViewController:mvc animated:YES];
+    };
+    self.tableView.tableHeaderView = cell;
+    //tableViewHead
+    self.headCell = cell;
+    
+}
 #pragma mark - 监听数据变化
 -(void)userDataChanged:(NSNotification* )notification{
-    
     NSString* userInfo = [notification valueForKey:@"object"];
     DDLog(@"notDic === %@  notification == %@",userInfo,notification);
     [self requestUserData];
 }
+-(void)userLoginOut:(NSNotification* )notification{
+    DDLog(@"用户推出登录");
+    _usrModel = nil;
+}
 -(void)requestUserData{
     YMWeakSelf;
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
-    [param setObject:@"1422" forKey:@"uid"];      //[kUserDefaults valueForKey:kUid]
+    [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];      //
     [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
     [[HttpManger sharedInstance]callHTTPReqAPI:UserPayInfoURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
         weakSelf.usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
         
         [[YMUserManager shareInstance] saveUserInfoByUsrModel:weakSelf.usrModel];
+         weakSelf.headCell.model = weakSelf.usrModel;
         [weakSelf.tableView reloadData];
     }];
 }
@@ -112,8 +141,8 @@
     }
 }
 -(UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     YMTitleActionCell* cell = [YMTitleActionCell cellDequeueReusableCellWithTableView:tableView];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     YMWeakSelf;
     switch (indexPath.section) {
         case 0:
@@ -144,8 +173,14 @@
                     DDLog(@"修改 设置支付密码");
                    [weakSelf pushToViewController:[YMPaySecrectController alloc] userModel:weakSelf.usrModel indexPath:indexPath];
                 };
-                if (self.usrModel.isZfb.integerValue) {
-                    [cell cellWithTitle:[NSString stringWithFormat:@"支付宝(%@)",[NSString string:self.usrModel.isZfb_accountName replaceStrInRange:NSMakeRange(3, self.usrModel.isZfb_accountName.length - 4) withString:@"****"]] icon:@"alipay"];
+                if (self.usrModel.isZfb.integerValue == 1) {
+                    //手机号
+                    if ([NSString isMobileNum:self.usrModel.isZfb_accountName]) {
+                        [cell cellWithTitle:[NSString stringWithFormat:@"支付宝(%@)",[NSString string:self.usrModel.isZfb_accountName replaceStrInRange:NSMakeRange(3, 4) withString:@"****"]] icon:@"alipay"];
+                    //邮箱账户
+                    }else{
+                        [cell cellWithTitle:[NSString stringWithFormat:@"支付宝(%@)",[NSString string:self.usrModel.isZfb_accountName replaceStrInRange:NSMakeRange(3, 4) withString:@"****"]] icon:@"alipay"];
+                    }
                     [cell.actBtn setTitle:@"更改" forState:UIControlStateNormal];
                 }else{
                     [cell cellWithTitle:@"支付宝" icon:@"alipayUnset"];
@@ -156,7 +191,7 @@
                     DDLog(@"修改 设置银联");
                     [weakSelf pushToViewController:[YMPaySecrectController alloc] userModel:weakSelf.usrModel indexPath:indexPath];
                 };
-                if (self.usrModel.isCard.integerValue) {
+                if (self.usrModel.isCard.integerValue == 1) {
                     if (self.usrModel.isCard_accountName.length > 4) {
                         [cell cellWithTitle:[NSString stringWithFormat:@"银联(尾号%@)",[self.usrModel.isCard_accountName substringFromIndex:self.usrModel.isCard_accountName.length - 4]] icon:@"Unionpay"];
                     }else{
@@ -181,11 +216,11 @@
     if (indexPath.section == 0 && indexPath.row == 1) {
         YMPaySecrectController * vc  = (YMPaySecrectController *)viewController;
         if (usrModel.isSetPasswd.integerValue ) {
-            vc.title = @"更改支付密码";
+            vc.title   = @"更改支付密码";
             vc.setType = SetTypePayWordModify;
         }else{
             vc.title = @"支付密码绑定";
-            vc.setType = SetTypePayWordUnSet;
+            vc.setType = SetTypePayWordModify;
         }
         vc.refreshDataBlock = ^(){
             [weakSelf requestUserData];
@@ -235,6 +270,13 @@
         case 0:
         {
             if (indexPath.row == 0) {
+                [self showAlertView];
+//                if (self.usrModel.isZfb.integerValue == 0 && self.usrModel.isCard.integerValue == 0) {
+//                    YMWithdrawStyleController* yvc = [[YMWithdrawStyleController alloc]init];
+//                    yvc.usrModel = self.usrModel;
+//                    yvc.title = @"选择支付方式";
+//                    [self.navigationController pushViewController:yvc animated:YES];
+//                }
                 YMWithdrawController* mvc = [[YMWithdrawController alloc]init];
                 mvc.title = @"提现";
                 mvc.usrModel = self.usrModel;
@@ -250,6 +292,12 @@
                     model.title =  @"银行卡";
                     model.isCard = @1;
                     mvc.withdrawStyle = WithDrawCrashStyleBankCard;
+                }
+                if (self.usrModel.isCard.integerValue == 0 && self.usrModel.isZfb.integerValue == 0 ){
+                    model.icon  =  @"withdrawal_add";
+                    model.title =  @"添加提现方式";
+                    model.isCard = @0;
+                    model.isZfb  = @0;
                 }
                 mvc.model = model;
                 [self.navigationController pushViewController:mvc animated:YES];
@@ -271,5 +319,36 @@
             break;
     }
 }
+
+-(void)showAlertView{
+    
+    if (self.usrModel.useMoeny.floatValue < 50) {
+        UIAlertController* alerC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"满50.00元即可提现，加油！" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alerC addAction:sureAction];
+        [self presentViewController:alerC animated:YES completion:nil];
+        return;
+    }
+
+    if (self.usrModel.isSetPasswd.integerValue == 0) {
+        UIAlertController* alerC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"亲爱的用户，为了您的资金安全，您需要设置支付密码才能提现！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            YMPaySecrectController* pvc = [[YMPaySecrectController alloc]init];
+            pvc.setType = SetTypePayWordModify;
+            pvc.title   = @"支付密码绑定";
+            [self.navigationController pushViewController:pvc animated:YES];
+        }];
+        [alerC addAction:cancelAction];
+        [alerC addAction:sureAction];
+        [self presentViewController:alerC animated:YES completion:nil];
+        return;
+    }
+}
+
 
 @end

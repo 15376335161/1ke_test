@@ -125,7 +125,7 @@
     }
     //用户id
    // NSString* usrId = [kUserDefaults valueForKey:kUid];
-    [param setObject:@"1422" forKey:@"user_id"];
+    [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"user_id"];
     [param setObject:model.id forKey:@"task_id"];
     [[HttpManger sharedInstance]callHTTPReqAPI:TaskReciveURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
         
@@ -134,7 +134,6 @@
         YMTaskStatusModel* statusModel = [YMTaskStatusModel mj_objectWithKeyValues:responseObject[@"data"]];
         // [YMTaskStatusModel mj_objectWithKeyValues:<#(id)#>]
         DDLog(@"model === %@ stu",statusModel);
-        DDLog(@"model == %@  taskCOunt == %@  mytaskList == %@  status == %@",statusModel,statusModel.myTaskCounts,statusModel.myTaskList,statusModel.myTaskStatus);
         
         YMReceSuccessController* rvc = [[YMReceSuccessController alloc]init];
         rvc.title = @"接单成功";
