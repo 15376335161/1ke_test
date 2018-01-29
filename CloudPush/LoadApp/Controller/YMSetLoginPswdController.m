@@ -9,6 +9,7 @@
 #import "YMSetLoginPswdController.h"
 #import "RSAEncryptor.h"
 #import "YMRedBagController.h"
+#import "YMTabBarController.h"
 
 @interface YMSetLoginPswdController ()
 
@@ -26,11 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //监听字体处理按钮颜色
-    _doneBtn.enabled = [_firstPasswordTextFd.text length] > 0 && [_secondPasswordTextFd.text length] > 0  ;
-    _doneBtn.backgroundColor = _doneBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
-    //设置颜色
-    [YMTool viewLayerWithView:_doneBtn cornerRadius:4 boredColor:ClearColor borderWidth:1];
+    //设置返回按钮
+    [self setLeftBackButton];
+    //修改设置圆角
+    [self subViewLayerModified];
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -57,7 +57,28 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+#pragma mark - UI
+-(void)subViewLayerModified{
+    //监听字体处理按钮颜色
+    _doneBtn.enabled = [_firstPasswordTextFd.text length] > 0 && [_secondPasswordTextFd.text length] > 0  ;
+    _doneBtn.backgroundColor = _doneBtn.enabled ? NavBarTintColor :NavBar_UnabelColor;
+    //设置颜色
+    [YMTool viewLayerWithView:_doneBtn cornerRadius:4 boredColor:ClearColor borderWidth:1];
+}
+//设置返回按钮
+-(void)setLeftBackButton{
+    UIButton *backButton = [Factory createNavBarButtonWithImageStr:@"back" target:self selector:@selector(back)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.view.backgroundColor = BackGroundColor;
+}
+-(void)back{
 
+    if (self.isToTabBar == YES) {
+        //设置密码返回跳转 到主页面
+        YMTabBarController* tab = [[YMTabBarController alloc]init];
+        [self presentViewController:tab animated:YES completion:nil];
+    }
+}
 - (IBAction)sureBtnClick:(id)sender {
     DDLog(@"完成按钮点击啦");
     if (_firstPasswordTextFd.text.length < 6 || _firstPasswordTextFd.text.length > 14) {
@@ -98,4 +119,5 @@
         }
     }];
 }
+
 @end

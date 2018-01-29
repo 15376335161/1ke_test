@@ -110,6 +110,7 @@
     }
 }
 
+#pragma mark - 设置密保手机 成功之后 重新登录
 - (IBAction)sureBtnClick:(id)sender {
     DDLog(@"设置点击啦");
     if (![NSString isMobileNum:_phoneTextFd.text]) {
@@ -130,15 +131,12 @@
         NSNumber* status = responseObject[@"status"];
         NSString* msg    = responseObject[@"msg"];
         if (status.integerValue == 1) {
-//            //回退到设置界面
-//            for (UIViewController* view in self.navigationController.childViewControllers) {
-//                if ([view isKindOfClass:[YMSetController class]]) {
-//                    [self.navigationController popToViewController:view animated:YES];
-//                }
-//            }
+            [[YMUserManager shareInstance]removeUserInfo];
+            [kUserDefaults setBool:NO forKey:kisRefresh];
+            [kUserDefaults synchronize];
+            
             YMLoginController* lvc = [[YMLoginController alloc]init];
-            lvc.tag = 2;
-            lvc.isHiddenBackBtn = YES;
+            lvc.isToTabBar = YES;
             YMNavigationController* nav = [[YMNavigationController alloc]initWithRootViewController:lvc];
             [self presentViewController:nav animated:YES completion:nil];
         }else{

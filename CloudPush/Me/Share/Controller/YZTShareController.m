@@ -83,7 +83,7 @@
 #pragma mark - 分享链接
 -(void)shareLinkToFriends{
     if (![TencentOAuth iphoneQQInstalled] && ![WXApi isWXAppInstalled]) {
-        [MBProgressHUD showFail:@"您的手机还未安装微信、QQ客户端！" view:self.view];
+        [MBProgressHUD showFail:@"您的手机还未安装QQ客户端、微信！暂不能分享！" view:self.view];
         return;
     }
     [[YMShareManager sharedManager]removeAllArr];

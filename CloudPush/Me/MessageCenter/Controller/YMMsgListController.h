@@ -10,4 +10,8 @@
 
 @interface YMMsgListController : BaseViewController
 
+//消息推送进来的
+@property(nonatomic,assign)BOOL isMsgPushed;
+
+@property(nonatomic,copy)void(^refreshBlock)(NSString* msgNum);
 @end

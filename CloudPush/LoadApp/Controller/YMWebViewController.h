@@ -18,4 +18,5 @@
 @property(nonatomic,strong)YMWebProgressLayer *progressLayer; ///< 网页加载进度条
 //网页链接
 @property(nonatomic,copy)NSString* urlStr;
+
 @end

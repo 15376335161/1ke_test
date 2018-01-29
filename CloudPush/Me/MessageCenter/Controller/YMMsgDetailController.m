@@ -20,17 +20,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.tableView.tableFooterView = [UIView new];
-
-   // self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageNamed:@"del" target:self action:@selector(deleteMsgClick:)];
-    
+    //修改view
+    [self modifyView];
     //请求消息详情
     [self requestMessageDetail];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+-(void)modifyView{
+    self.tableView.tableFooterView = [UIView new];
+    
+    UIButton *backButton = [Factory createNavBarButtonWithImageStr:@"back" target:self selector:@selector(back)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+}
+-(void)back{
+    DDLog(@"返回按钮执行了");
+    if (self.refreshBlock) {
+        self.refreshBlock();
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)deleteMsgClick:(UIButton* )btn{
     DDLog(@"删除了按钮");
@@ -48,10 +59,11 @@
         [self.navigationController popViewControllerAnimated:YES];
     }];
 }
+
 #pragma mark - requestNetWork
 -(void)requestMessageDetail {
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
-    [param setObject:_model.type forKey:@"type_message"];
+    [param setObject:_model.type forKey:@"type_message"];//
     [param setObject:_model.id forKey:@"id_message"];
     [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
     [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];//
@@ -68,6 +80,18 @@
         [weakSelf.tableView reloadData];
     }];
 }
+
+//-(void)readMessageRequest{
+//    NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
+//    [param setObject:_model.type forKey:@"type_message"];
+//    [param setObject:_model.id forKey:@"id_message"];
+//    [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+//    [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];//
+//
+//    [[HttpManger sharedInstance] callHTTPReqAPI:MessageReadURL params:param view:self.view loading:YES tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
+//
+//    }];
+//}
 #pragma mark - UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

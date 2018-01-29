@@ -76,7 +76,7 @@
         param = [[NSMutableDictionary alloc]init];
         urlStr = [NSString stringWithFormat:@"%@?type=%@&page=%ld",TaskListURL,type,(long)page];
     }
-  //  NSMutableDictionary* param =
+    //  NSMutableDictionary* param =
     // 剩余单数 surplu_nums=surplu_desc
     // 剩余单数 end_time=end_sort  end_desc
     // 剩余单数 surplu_price=price_sort  price_desc

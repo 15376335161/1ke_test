@@ -18,7 +18,6 @@
 @end
 
 @implementation YMShareManager
-
 #pragma mark - coderDelegate
 - (id)initWithCoder:(NSCoder *)aDecoder {
     NSMutableArray *shareModelsArr = [aDecoder decodeObjectForKey:@"shareModelsArr"];
@@ -29,7 +28,6 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.shareModelsArr forKey:@"shareModelsArr"];
 }
-
 
 +(YMShareManager *)sharedManager{
     static YMShareManager *instance = nil;

@@ -15,6 +15,9 @@
 #import "RSAEncryptor.h"
 #import "YMTabBarController.h"
 #import "YMSetLoginPswdController.h"
+#import <JPUSHService.h>
+//登录传递uid 设备别名
+
 
 @interface YMLoginController ()<UITextFieldDelegate>
 //手机号
@@ -29,13 +32,10 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *styleBtnArr;
 //显示颜色区分
 @property (weak, nonatomic) IBOutlet UILabel *lineView;
-
 //获取验证码
 @property (weak, nonatomic) IBOutlet UIButton *getCodeBtn;
-
 //最大长度
 @property(nonatomic,assign)NSInteger maxCount;
-
 //标题label
 @property (weak, nonatomic) IBOutlet UILabel *secondTitleLabel;
 
@@ -116,10 +116,10 @@
         if (self.tag == 2) {
             //修改密码 -- 重新回到主页面
             YMTabBarController* tab = [[YMTabBarController alloc]init];
-            [self presentViewController:tab animated:YES completion:nil];
+            [self presentViewController:tab animated:NO completion:nil];
         }else{
             YMTabBarController* tab = [[YMTabBarController alloc]init];
-            [self presentViewController:tab animated:YES completion:nil];
+            [self presentViewController:tab animated:NO completion:nil];
         }
     }else{
          [self dismissViewControllerAnimated:YES completion:nil];
@@ -132,7 +132,6 @@
                                              selector:@selector(textDidChangeHandle:)
                                                  name:UITextFieldTextDidChangeNotification
                                                object:nil];
-    
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -151,6 +150,7 @@
         [MBProgressHUD showFail:@"手机号码有误，请重新输入！" view:self.view];
         return;
     }
+    
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
     [param setObject:_phoneTextFd.text forKey:@"phone"];
     [param setObject:@"quickLogin" forKey:@"method"];
@@ -257,6 +257,14 @@
             //保存用户信息
             UserModel* usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
             [[YMUserManager shareInstance] saveUserInfoByUsrModel:usrModel];
+            //uid
+            NSNumber* usrId = responseObject[@"data"][@"uid"];
+            DDLog(@"用户的 uid == %@",usrId);
+            //调用此 API 来同时设置别名与标签，支持回调函数。
+            [JPUSHService setTags:nil alias:usrId.stringValue fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                DDLog(@" 上传别名 成功 == %d iTags == %@ ialias == %@",iResCode,iTags,iAlias);
+            }];
+           // [JPUSHService setAlias:usrId callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:nil];
             //这个是为了修改密码  返回到首页
             if (self.isToTabBar == YES && self.tag == 2) {
                 //可以返回
@@ -286,6 +294,14 @@
             //保存用户信息
             UserModel* usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
             [[YMUserManager shareInstance] saveUserInfoByUsrModel:usrModel];
+            //uid
+            NSNumber* usrId = responseObject[@"data"][@"uid"];
+            DDLog(@"用户的 uid == %@",usrId);
+            //调用此 API 来同时设置别名与标签，支持回调函数。
+            [JPUSHService setTags:nil alias:usrId.stringValue fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                DDLog(@" 上传别名 成功 == %d iTags == %@ ialias == %@",iResCode,iTags,iAlias);
+            }];
+
             YMSetLoginPswdController* svc = [[YMSetLoginPswdController alloc]init];
             svc.title = @"设置登录密码";
             [kUserDefaults setBool:YES forKey:kisRefresh];
@@ -293,6 +309,7 @@
             svc.loginStatusBlock = ^(){
                 _isToTabBar = YES;
             };
+            svc.isToTabBar = YES;
             [self.navigationController pushViewController:svc animated:YES];
         }
         else{
@@ -300,6 +317,7 @@
         }
     }];
 }
+#pragma mark - 极光推送 方法
 - (IBAction)forgetBtnClick:(id)sender {
     DDLog(@"忘记密码点击啦");
     YMForgetFirstController* fvc = [[YMForgetFirstController alloc]init];

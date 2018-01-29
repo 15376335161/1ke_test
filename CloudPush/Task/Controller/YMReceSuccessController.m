@@ -7,7 +7,7 @@
 //
 
 #import "YMReceSuccessController.h"
-#import "YMCommissionCell.h"
+//#import "YMCommissionCell.h"
 #import "YMTaskTitleCell.h"
 #import "YMReceFootCell.h"
 #import "YMReceHeadCell.h"
@@ -54,20 +54,20 @@
     switch (indexPath.section) {
         case 0:
         {
-            if (indexPath.row == 0) {
+//            if (indexPath.row == 0) {
                 YMTaskTitleCell * cell = [YMTaskTitleCell shareCell];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 // cell.model = self.model;
                 [cell.iconImgView sd_setImageWithURL:[NSURL URLWithString:self.dicData[@"myTaskList"][@"img_path"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
                  cell.titlLabel.text = self.dicData[@"myTaskList"][@"task_title"];
                 return cell;
-            }else{
-                YMCommissionCell * cell = [YMCommissionCell shareCell];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.commissionLabel.text = [NSString stringWithFormat:@"佣金：¥%@元／单",self.dicData[@"myTaskList"][@"price"]];
-                [YMTool labelColorWithLabel:cell.commissionLabel font:Font(14) range:NSMakeRange(3, cell.commissionLabel.text.length - 3)  color:NavBarTintColor];
-                return cell;
-            }
+//            }else{
+//                YMCommissionCell * cell = [YMCommissionCell shareCell];
+//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                cell.commissionLabel.text = [NSString stringWithFormat:@"佣金：¥%@元／单",self.dicData[@"myTaskList"][@"price"]];
+//                [YMTool labelColorWithLabel:cell.commissionLabel font:Font(14) range:NSMakeRange(3, cell.commissionLabel.text.length - 3)  color:NavBarTintColor];
+//                return cell;
+//            }
         }
             break;
         case 1:

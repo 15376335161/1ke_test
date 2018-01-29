@@ -17,6 +17,8 @@
 #import "YMPartnerController.h"
 
 
+#import "YMWKWebViewController.h"
+
 @interface YMTabBarController ()
 
 @end

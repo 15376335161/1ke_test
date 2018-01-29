@@ -16,14 +16,12 @@
 
 -(void)needLogin:(NSString* )loginString;
 -(void)needRegister:(NSString* )registString;
-
 -(void)redirectSiteIndex;
 
 @end
 
+
 @interface YMRedBagController ()<UIWebViewDelegate,JSObjcDelegate>
-
-
 
 @property (nonatomic, strong) JSContext *jsContext;
 
@@ -34,7 +32,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-      
     //红包 和 签到页
     //redirectSiteIndex
     self.isLoginStatusChanged = [kUserDefaults valueForKey:kisRefresh];
@@ -49,9 +46,8 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    //消息中心
     if (self.isLoginStatusChanged != [kUserDefaults boolForKey:kisRefresh]) {
-        
         NSString* urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",UserSignListURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
         self.isLoginStatusChanged = [kUserDefaults boolForKey:kisRefresh];
@@ -82,7 +78,6 @@
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     DDLog(@"开始加载数据");
-    
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     //加载完毕后，进度条完成
@@ -92,12 +87,13 @@
         DDLog(@"异常信息：%@", exceptionValue);
     };
     self.jsContext[@"EnjoyaLot"] = self;
-    // 以 JSExport 协议关联 native 的方法
     
+    // 以 JSExport 协议关联 native 的方法
     // YMWeakSelf;
     // 以 block 形式关联 JavaScript function  分享
+    
        self.jsContext[@"redirectSiteIndex"] = ^(){
-        DDLog(@"参加活动");
+          DDLog(@"参加活动");
        };
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
@@ -135,6 +131,7 @@
         lvc.title = @"注册";
         [self presentViewController:nav animated:YES completion:nil];
     });
+    
     //    YMRegistViewController* lvc = [[YMRegistViewController alloc]init];
     //    YMNavigationController* nav = [[YMNavigationController alloc]initWithRootViewController:lvc];
     //    DDLog(@"登录");

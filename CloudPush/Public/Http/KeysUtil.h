@@ -41,11 +41,11 @@ typedef NS_ENUM(NSInteger,SetType) {
     SetTypeBankCardModifyTwice //修改银联卡 第二步
     
 };
+
 typedef NS_ENUM(NSInteger,DetailListType) {
     DetailListTypeBalance       = 1, //余额明细
     DetailListTypeWaitIssue,         //待发明细
     DetailListTypeWithdraw,          //提现明细
-    
 };
 
 
@@ -54,11 +54,10 @@ typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
     WithDrawCrashStyleBankCard      // 提现方式 银行卡
 };
 
-
-
-#define kJPushAppKey    @"a4e14f9c3a2ff72f5a400b3e"
-#define kChannel        @"appStore"
-#define kIsProduct      YES
+#define kJPushAppKey    @"d8144c6daaff570fb25cbd4c" //新的  Master Secret : @"92afe64dc432f31fb816a954" // @"a4e14f9c3a2ff72f5a400b3e" //
+#define kChannel              @"App Store"
+static BOOL kIsProduct = YES;
+//#define  BOOL kIsProduct      YES
 
 #define kUMAppKey       @"58b3ea40c62dca548d0023b4"
 #define kBaiduKey       @"0GQKawZkRIxTNjLLUQGNzYfX"
@@ -71,10 +70,9 @@ typedef NS_ENUM(NSInteger,WithDrawCrashStyle) {
 #define WeChat_AppId      @"wxdcc23700247f2571"  // wx1705d06974c1200e//wxd930ea5d5a258f4f
 #define WeChatAppSecrect  @"1851a8f91573e7e32700b88b1f1b2832"
 
-//#define WeChat_Secret   @"tiaoshi@86goodfood.com"
 
-#define QQ_AppId        @"1106103020"         //   1105935609       @"1105155505"
-#define QQ_Secrect      @"uRGnHjSuLpuHtb0t"   //   bUfLXNbJWYH5PgLf @"KYJZQznciNcbiAs4"
+#define QQ_AppId       @"1105799657"      //@"1106103020"   @"1105155505"      //   1105935609
+#define QQ_Secrect     @"Uls5vAKp01O8JNhR"// @"uRGnHjSuLpuHtb0t"   //   bUfLXNbJWYH5PgLf @"KYJZQznciNcbiAs4"
 
 
 #define kNotification_PartAct   @"kNotificationPartActs"

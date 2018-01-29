@@ -22,12 +22,18 @@
 
 @protocol JSObjcDelegate <JSExport,ImageDownloadDelegate>
 
+//登录
 -(void)needLogin:(NSString* )loginString;
+//注册
 -(void)needRegister:(NSString* )registString;
+//跳转分享
 -(void)needShare:(NSString* )shareString;
+//点击使用红包 会弹出立即使用按钮   点击按钮 会跳转到APP端首页
 -(void)redirectSiteIndex;
 //客服电话
 -(void)callservice:(NSString* )tel;
+//返回首页
+-(void)returnHome;
 
 @end
 
@@ -291,12 +297,13 @@
         DDLog(@"将要进行界面跳转由h5界面跳转到原生界面");
         //必须放入主线程中更新UI否则会出错
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertController* alerC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您的手机还未安装微信、QQ客户端！" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-            }];
-            [alerC addAction:sureAction];
-            [self presentViewController:alerC animated:YES completion:nil];
+            [MBProgressHUD showFail:@"您的手机还未安装QQ客户端、微信！暂不能分享！" view:self.view];
+//            UIAlertController* alerC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您的手机还未安装微信、QQ客户端！" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                
+//            }];
+//            [alerC addAction:sureAction];
+//            [self presentViewController:alerC animated:YES completion:nil];
         });
         
         return;
@@ -445,5 +452,9 @@
 //声明一个协议,代理对象执行协议方法时讲参数传递过去
 - (void)imageDownloadDidfinishDownloadImage:(UIImage *)image{
     DDLog(@"image == %@",image);
+}
+//返回首页
+-(void)returnHome{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

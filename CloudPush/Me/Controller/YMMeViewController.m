@@ -10,7 +10,6 @@
 #import "YMTitleCell.h"
 #import "UIImage+Extension.h"
 #import "YMMeWalletCell.h" //钱包
-#import "YMTeamListController.h"
 #import "YMWalletController.h"
 #import "YZTShareController.h"
 #import "YMMsgListController.h"
@@ -56,6 +55,7 @@
     [super viewDidLoad];
     //调整 设置 修改 view
     [self modifyView];
+    
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -73,7 +73,7 @@
          lvc.isToTabBar = YES;
          //lvc.hidesBottomBarWhenPushed = YES;
          YMNavigationController* nav = [[YMNavigationController alloc]initWithRootViewController:lvc];
-         [self presentViewController:nav animated:YES completion:nil];
+         [self presentViewController:nav animated:NO completion:nil];
     }
 }
 - (void)viewWillDisappear:(BOOL)animated
@@ -216,13 +216,11 @@
                     [self.navigationController pushViewController:tvc animated:YES];
                 }
                 else if(indexPath.row == 1){
-                   // YMPartnerController* tvc = [[YMPartnerController alloc]init];
+                  
                     YMRedBagController* tvc = [[YMRedBagController alloc]init];
                     tvc.title = @"我的红包";
                     tvc.urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",RedPaperListURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]];
                     tvc.backBlock = ^(){
-                       //  self.tabBarController.tabBar.hidden = NO;
-                        // self.tabBarController.selectedIndex = 0;
                         DDLog(@"返回了");
                     };
                     tvc.hidesBottomBarWhenPushed = YES;

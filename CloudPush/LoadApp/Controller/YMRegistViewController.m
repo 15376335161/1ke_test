@@ -10,13 +10,14 @@
 #import "YMLoginController.h"
 #import "HyperlinksButton.h"
 #import "YMTool.h"
-#import "YMWebViewController.h"
+#import "YMRegistWebController.h"
 #import "YMUserManager.h"
 #import "UserModel.h"
 #import "UIView+YSTextInputKeyboard.h"
 #import "RSAEncryptor.h"
 #import "YMTabBarController.h"
 #import "YMRedBagController.h"
+#import "JPUSHService.h"
 
 @interface YMRegistViewController ()<UIGestureRecognizerDelegate>
 
@@ -197,6 +198,14 @@
                //保存数据
                 UserModel* usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
                 [[YMUserManager shareInstance]saveUserInfoByUsrModel:usrModel];
+            
+               //uid
+               NSNumber* usrId = responseObject[@"data"][@"uid"];
+               DDLog(@"用户的 uid == %@",usrId);
+               //调用此 API 来同时设置别名与标签，支持回调函数。
+               [JPUSHService setTags:nil alias:usrId.stringValue fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                   DDLog(@" 上传别名 成功 == %d iTags == %@ ialias == %@",iResCode,iTags,iAlias);
+               }];
                
                YMRedBagController* rvc = [[YMRedBagController alloc]init];
                rvc.title = @"我的红包";
@@ -205,29 +214,17 @@
                [kUserDefaults synchronize];
                rvc.urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",RedPaperListURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]];
                [self.navigationController pushViewController:rvc animated:YES];
-//                for (UIViewController* vc in self.navigationController.viewControllers) {
-//                   DDLog(@"nav class == %@",[vc class]);
-//                }
-//               //回退2级
-//               if (self.navigationController.viewControllers.count > 2) {
-//                   [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
-//               }
-             //  [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_UserDataChanged object:nil];
-             //  [self dismissViewControllerAnimated:YES completion:nil];
+               
            }else{
                [MBProgressHUD showFail:msg view:self.view];
            }
     }];
 }
-
 //注册协议
 -(void)protocolLabelClick:(UITapGestureRecognizer* )tap{
     DDLog(@"点击啦协议");
-    YMWebViewController* wvc = [[YMWebViewController alloc]init];
+    YMRegistWebController* wvc = [[YMRegistWebController alloc]init];
     wvc.title   =  @"注册协议";
-    wvc.agreeBlock = ^(NSString* isAgree){
-        self.isAgree = isAgree;
-    };
     wvc.urlStr  =  RegistProtocalURL;
     [self.navigationController pushViewController:wvc animated:YES];
 }
@@ -261,7 +258,6 @@
             _phoneTextFd.text = [toBeString substringToIndex:self.maxCount];
         }
     }
-
 }
 
 #pragma mark - 键盘处理

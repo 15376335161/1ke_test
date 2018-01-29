@@ -12,6 +12,7 @@
 #import "YMBottomView.h"
 #import "UIControl+Custom.h"
 #import "UIView+Placeholder.h"
+#import "YMTabBarController.h"
 
 
 @interface YMMsgListController ()<UITableViewDataSource,UITableViewDelegate>
@@ -42,9 +43,35 @@
     [self creatBottomView];
     //修改view
     [self modifyView];
+    
+    //设置返回键
+    if (self.isMsgPushed == YES) {
+        //设置返回按钮
+        [self setLeftBackButton];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+//设置返回按钮
+-(void)setLeftBackButton{
+    UIButton *backButton = [Factory createNavBarButtonWithImageStr:@"back" target:self selector:@selector(back)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.view.backgroundColor = BackGroundColor;
+}
+-(void)back{
+    DDLog(@"设置返回按钮");
+    if (self.isMsgPushed ) {
+        //未读消息个数
+        if (self.refreshBlock) {
+            self.refreshBlock(@"0");
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+          [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 #pragma mark - View
 //添加底部的 删除 View
@@ -60,12 +87,10 @@
             for (int i = 0 ; i < weakSelf.dataArr.count; i ++) {
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
                 if (btn.selected == YES) {
-                    
                     DDLog(@"selet == %@",weakSelf.selectArr);
                     weakSelf.selectArr = [weakSelf.dataArr mutableCopy];
                     [weakSelf.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionBottom];
                 }else{
-                    
                     DDLog(@"selet == %@",weakSelf.selectArr);
                     [weakSelf.selectArr removeAllObjects];
                     [weakSelf.tableView deselectRowAtIndexPath:indexPath  animated:NO];
@@ -118,12 +143,14 @@
     //刷新header
     self.tableView.mj_header.automaticallyChangeAlpha = YES;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [_dataArr removeAllObjects];
+        _page = 1;
         //消息列表数据
         [self requestMsgListDataWithPage:1];
     }];
     //底部footer
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        if ((_page + 1) * 15 > weakSelf.dataArr.count ) {
+        if ((_page ) * 15 > weakSelf.dataArr.count ) {
             [MBProgressHUD showFail:@"已经是最后一页啦！" view:self.view];
             [weakSelf.tableView.mj_footer endRefreshing];
             return ;
@@ -162,11 +189,11 @@
      [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];
      [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
      [param setObject:@"1" forKey:@"type_message"];
-     [param setObject:@(page).stringValue forKey:@"Page"];
+     [param setObject:@(page).stringValue forKey:@"page"];
     
     NSString* urlStr = MessageListURL;
     if (page > 0) {
-        urlStr = [NSString stringWithFormat:@"%@?Page=%d&uid=%@&ssotoken=%@&type_message=%@",
+        urlStr = [NSString stringWithFormat:@"%@?page=%d&uid=%@&ssotoken=%@&type_message=%@",
                   urlStr,
                   (long)page,
                   [kUserDefaults valueForKey:kUid],
@@ -175,7 +202,7 @@
                    ];
     }
     [[HttpManger sharedInstance]getHTTPReqAPI:urlStr params:param view:self.view isEdit:YES  loading:YES  tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
-        if (_page > 0 ) {
+        if (_page > 1 ) {
             if (responseObject[@"data"] == 0) {
                 [MBProgressHUD showFail:@"已经是最后一页啦！" view:self.view];
             }
@@ -192,6 +219,7 @@
         [weakSelf.tableView reloadData];
     }];
 }
+
 #pragma mark - UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -221,9 +249,15 @@
         YMMsgDetailController* mvc = [[YMMsgDetailController alloc]init];
         mvc.title = @"消息详情";
         mvc.model = _dataArr[indexPath.row];
-        mvc.refreshBlock = ^( ){
-            [weakSelf requestMsgListDataWithPage:1];
-        };
+        // 消息未读
+        if (mvc.model.status.integerValue == 1) {
+            mvc.refreshBlock = ^(){
+                //移除所有的对象
+                [weakSelf.dataArr removeAllObjects];
+                //刷新获取首页数据
+                [weakSelf.tableView.mj_header beginRefreshing];
+            };
+        }
         [self.navigationController pushViewController:mvc animated:YES];
     }
 }

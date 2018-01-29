@@ -11,8 +11,6 @@
 
 @interface YMRedBagController : YMWebViewController
 
-//urlStr  链接的url
-//@property(nonatomic,copy)NSString* urlStr;
 
 @property(nonatomic,assign)BOOL isToTabBar;
 

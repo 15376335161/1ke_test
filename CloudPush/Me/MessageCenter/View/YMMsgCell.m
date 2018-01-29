@@ -27,6 +27,12 @@
     _titlLabel.text = @"系统消息";
     _msgLabel.text  = model.content;
     _timeLabel.text = model.add_time;
+    //未读 1 已读 0
+    if (model.status.integerValue == 0) {
+        _titlLabel.textColor = HEX(@"999999");
+    }else{
+        _titlLabel.textColor = HEX(@"333333");
+    }
     
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

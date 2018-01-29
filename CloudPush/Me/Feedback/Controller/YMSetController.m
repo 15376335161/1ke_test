@@ -12,7 +12,7 @@
 #import "YMForgetFirstController.h"
 #import "YMForgetViewController.h"
 #import "YMSetPhoneController.h"
-#import "YMWebViewController.h"
+#import "YMRegistWebController.h"
 
 
 @interface YMSetController ()<UITableViewDataSource,UITableViewDelegate>
@@ -98,9 +98,9 @@
         }
         //密保手机
         if (indexPath.section == 2) {
-            YMWebViewController* svc = [[YMWebViewController alloc]init];
+            YMRegistWebController* svc = [[YMRegistWebController alloc]init];
             svc.title = @"关于我们";
-            svc.urlStr = @"http://sdd.youmeng.com/about.html";
+            svc.urlStr = AboutUsURL;
             [self.navigationController pushViewController:svc animated:YES];
         }
         //推出登录

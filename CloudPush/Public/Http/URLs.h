@@ -15,8 +15,7 @@
 #define TOKEN_TIMEOUT   @"-999999"
 #define FAILURE_TOKEN   @"API_FAILURE_TOKEN"
 
-
-#define  BaseApi    @"http://apiyzt.youmeng.com/" //@"http://192.168.10.31:8081/" //
+#define  BaseApi          @"http://192.168.10.31:8081/" //@"http://apiyzt.youmeng.com/"  //
 
 //请求首页数据
 #define HomeDataURL        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/home"]
@@ -24,16 +23,22 @@
 #define  SendMsgCodeURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/sms_interface/send"]
 //修改 绑定 手机
 #define UpdatePhoneURL     [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/Site/updatePhone"]
-
-//找回密码获取验证码
-#define ForgetSendCodeURL    @"http://passport.youmeng.com/find/sendphonecaptcha"
-//忘记密码 短信验证
-#define ForgetCheckPhoneURL   @"http://passport.youmeng.com/find/checkphonecaptcha"
-//忘记密码 设置密码
-#define ForgetSetPasswdURL    @"http://passport.youmeng.com/find/resetpasswd"
-
 //注册协议
-#define RegistProtocalURL     @"http://apiyzt.youmeng.com/Reg/agrement"
+#define RegistProtocalURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Reg/agrement"]
+//@"http://apiyzt.youmeng.com/Reg/agrement"
+//关于我们
+#define AboutUsURL           @"http://sdd.youmeng.com/about.html"
+
+
+//忘密码 图形验证码
+#define ForgetImgCodeCheckURL   @"http://passport.youmeng.com/find/checkfindcaptcha"
+//找回密码获取验证码
+#define ForgetSendCodeURL       @"http://passport.youmeng.com/find/sendphonecaptcha"
+//忘记密码 短信验证
+#define ForgetCheckPhoneURL     @"http://passport.youmeng.com/find/checkphonecaptcha"
+//忘记密码 设置密码
+#define ForgetSetPasswdURL      @"http://passport.youmeng.com/find/resetpasswd"
+
 //注册
 #define RegisterURL         [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/Site/register"] //@"http://apiyzt.youmeng.com/Api/Site/register"
 //修改密码 密保手机  短信验证
@@ -42,10 +47,10 @@
 #define updatePasswordURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/Site/updatePasswd"]
 
 //分享logo 的链接
-#define shareLogoURL       [NSString stringWithFormat:@"%@%@",BaseApi,@"static/images/share_logo@2x.png"]
-// @"http://img02.tooopen.com/images/20140504/sy_60294738471.jpg" //
+#define shareLogoURL         [NSString stringWithFormat:@"%@%@",BaseApi,@"static/images/share_logo@2x.png"]
+
 //上传头像
-#define uploadUserPicURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/upload_pic_interface/upload"]
+#define uploadUserPicURL      [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/upload_pic_interface/upload"]
 //提现明细
 #define ExtractRecordListURL  [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/ExtractRecord"]
 //余额明细
@@ -56,7 +61,7 @@
 #define SuggestListURL       [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/SuggestionList"]
 
 //红包列表接口
-#define RedPaperListURL     [NSString stringWithFormat:@"%@%@",BaseApi,@"Redpaper/index"]
+#define RedPaperListURL      [NSString stringWithFormat:@"%@%@",BaseApi,@"Redpaper/index"]
 
 //任务列表
 #define  TaskListURL         [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list"]
@@ -66,7 +71,8 @@
 #define  TaskReciveURL       [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/my_task_list"]
 
 //z账户密码 登陆
-#define LoginURL           [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/Site/login"]  //@"http://apiyzt.youmeng.com/Api/Site/login"
+#define LoginURL           [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/Site/login"]  
+                             //@"http://apiyzt.youmeng.com/Api/Site/login"
 //快捷登录
 #define QuickLoginURL      [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/Site/quickLogin"]
 
@@ -78,26 +84,7 @@
 //合作人明细
 #define InviteFriendsURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"InviteFriends/home"]
 //签到页面
-#define UserSignListURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"usersign/sign_list"]
-
-
-
-
-//验证码
-#define LogincaptchaURL   @"http://passport.youmeng.com/captcha/logincaptcha"
-//注册
-#define RegstURL          @"http://passport.youmeng.com/reg"
-//注册验证码
-#define RegstSendCodeURL     @"http://passport.youmeng.com/reg/sendphoneregcode"
-//找回密码获取验证码
-#define ForgetSendCodeURL    @"http://passport.youmeng.com/find/sendphonecaptcha"
-//修改密码 短信验证
-#define ForgetCheckPhoneURL   @"http://passport.youmeng.com/find/checkphonecaptcha"
-//修改密码 图形验证码
-#define ForgetImgCodeCheckURL   @"http://passport.youmeng.com/find/checkfindcaptcha"
-
-//修改密码 设置密码
-#define ForgetSetPasswdURL    @"http://passport.youmeng.com/find/resetpasswd"
+#define UserSignListURL     [NSString stringWithFormat:@"%@%@",BaseApi,@"usersign/sign_list"]
 
 //我的任务列表 待处理
 #define MyTaskListPending      [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_pending"]
@@ -105,17 +92,17 @@
 //我的任务列表  审核中
 #define MyTaskListAudit        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_audit"]
 //我的任务列表  审核成功
-#define MyTaskListSuccess        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_success"]
+#define MyTaskListSuccess      [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_success"]
 //我的任务列表  已失效
-#define MyTaskListFailed        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_failed"]
+#define MyTaskListFailed       [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_failed"]
 //我的任务 放弃任务
-#define AuditMyTaskURL        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_audit_status"]
+#define AuditMyTaskURL         [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/task_list/task_audit_status"]
 
 //我的钱包 信息
 #define UserPayInfoURL         [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/UserPay/GetUserPayinfo"]
 
 //绑定 修改 支付宝 银行卡
-#define AddBankCardURL       [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/UserPay/FirstAddPayAccount"]
+#define AddBankCardURL        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/UserPay/FirstAddPayAccount"]
 //绑定 修改 支付宝
 //#define AddZFBAccountURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/payaccount/bindpayaccount"]
 
@@ -124,21 +111,20 @@
 //支付密码 验证手机号
 #define  CheckPwdCaptchaURL   [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/sms_interface/check_reset_pwd_captcha"]
 //#define ResetPassWordCheckPhoneURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/sms_interface/send"]
+//#define ModifyAccountURL  [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/payaccount/ModifyAlipay"]
 
 //支付宝 验证手机号
 #define  CheckAliCaptchaURL   [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/sms_interface/check_reset_alipay_captcha"]
 
-//#define ModifyAccountURL  [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/payaccount/ModifyAlipay"]
 //提现接口
 #define GetWithdrawMoneyURL   [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/member/UserPay/getWithdrawMoney"]
-
 //消息列表
 #define MessageListURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/message_list/index"]
 //消息详情
 #define MessageDetailURL   [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/message_list/message_details"]
 //删除消息
 #define MessageDeleteURL   [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/message_list/delUserMessage"]
-
-
+//阅读消息
+#define MessageReadURL     [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/message_list/message_read"]
 
 #endif /* URLs_h */

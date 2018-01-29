@@ -12,4 +12,6 @@
 
 //登录状态
 @property(nonatomic,copy)void(^loginStatusBlock)();
+
+@property(nonatomic,assign)BOOL isToTabBar;
 @end

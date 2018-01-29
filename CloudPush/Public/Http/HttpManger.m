@@ -177,7 +177,6 @@ static dispatch_queue_t serialQueue;
     NSString* token = [[HttpManger sharedInstance]getTokenWithParam:params];
     [newParamDic setObject:token forKey:@"token"];
     DDLog(@"最终的token == %@",newParamDic);
-#warning todo
     MBProgressHUD *hud = [[MBProgressHUD alloc]init];
     if (loading) {
         hud = [MBProgressHUD showMessag:@"加载中" toView:view];
@@ -228,7 +227,6 @@ static dispatch_queue_t serialQueue;
     
     [newParamDic setObject:token forKey:@"token"];
     DDLog(@"最终的token == %@",newParamDic);
-#warning todo
     MBProgressHUD *hud = [[MBProgressHUD alloc]init];
     if (loading) {
         hud = [MBProgressHUD showMessag:@"加载中" toView:view];
@@ -308,7 +306,6 @@ static dispatch_queue_t serialQueue;
     
     [newParamDic setObject:token forKey:@"token"];
     DDLog(@"最终的token == %@",newParamDic);
-#warning todo
     MBProgressHUD *hud = [[MBProgressHUD alloc]init];
     if (loading) {
         hud = [MBProgressHUD showMessag:@"加载中" toView:view];
@@ -391,7 +388,6 @@ static dispatch_queue_t serialQueue;
     [newParamDic setObject:token forKey:@"token"];
     DDLog(@"最终的token == %@",newParamDic);
     NSString* newApi = [NSString stringWithFormat:@"%@&token=%@",api,token];
-#warning todo
     MBProgressHUD *hud = [[MBProgressHUD alloc]init];
     if (loading) {
         hud = [MBProgressHUD showMessag:@"加载中" toView:view];

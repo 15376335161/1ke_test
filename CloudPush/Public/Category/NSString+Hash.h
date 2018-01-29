@@ -168,4 +168,13 @@
  *  @return 128个字符的SHA512散列字符串
  */
 - (NSString *)fileSHA512Hash;
+
+//给一个字符串,进行base64 编码,返回结果
+-(NSString *)base64Endcode:(NSString *)string;
+
+/**
+ *  解码
+ */
+-(NSString *)base64Decode:(NSString *)string;
+
 @end

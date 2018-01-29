@@ -101,7 +101,6 @@
         DDLog(@"设置支付宝");
         self.getCodeBtn.hidden = NO;
         //设置支付宝
-#warning todo
         _warnLabel.hidden = YES;
         _topMarinConst.constant = 25;
         _firstNameLabel.text = @"支付宝账号";
@@ -132,7 +131,6 @@
     else if (self.setType == SetTypeBankCardUnSet){
         DDLog(@"设置银行卡");
         //设置银行卡
-#warning todo
         _warnLabel.hidden = YES;
          _topMarinConst.constant = 25;
         _firstNameLabel.text = @"银行卡号";
@@ -146,7 +144,6 @@
     else if (self.setType == SetTypeZhiFuBaoModifyTwice){
         DDLog(@"修改支付宝");
         //提示信息
-#warning todo
         if (SCREEN_WIDTH == 320) {
              _topMarinConst.constant = 25;
         }
@@ -165,7 +162,6 @@
     else if (self.setType == SetTypeBankCardModifyTwice){
         DDLog(@"修改");
         //提示信息
-#warning todo
         if (SCREEN_WIDTH == 320) {
             _topMarinConst.constant = 25;
         }

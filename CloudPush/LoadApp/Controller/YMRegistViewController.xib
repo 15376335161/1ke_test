@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -91,7 +91,7 @@
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入6-14位登录密码" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pOp-nz-lI2">
-                            <rect key="frame" x="78" y="82" width="177" height="35"/>
+                            <rect key="frame" x="78" y="82" width="149" height="35"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
@@ -102,7 +102,6 @@
                         <constraint firstItem="fmO-7U-igL" firstAttribute="height" secondItem="CKP-2K-Fvx" secondAttribute="height" id="2jb-0x-OJw"/>
                         <constraint firstItem="pOp-nz-lI2" firstAttribute="centerY" secondItem="bUd-l5-3Us" secondAttribute="centerY" id="2nk-Gn-6w1"/>
                         <constraint firstItem="sIq-fF-fW9" firstAttribute="top" secondItem="w5L-q8-gcP" secondAttribute="top" constant="39" id="3Pg-1j-xRC"/>
-                        <constraint firstItem="pOp-nz-lI2" firstAttribute="width" secondItem="CKP-2K-Fvx" secondAttribute="width" id="4Da-SX-wmg"/>
                         <constraint firstItem="pOp-nz-lI2" firstAttribute="leading" secondItem="CKP-2K-Fvx" secondAttribute="leading" id="4Wr-tP-4Xm"/>
                         <constraint firstItem="sIq-fF-fW9" firstAttribute="leading" secondItem="w5L-q8-gcP" secondAttribute="leading" constant="15" id="5P8-VQ-yJp"/>
                         <constraint firstItem="deb-Fj-cMF" firstAttribute="top" secondItem="w5L-q8-gcP" secondAttribute="top" constant="5" id="8ce-gM-iSL"/>
@@ -149,7 +148,7 @@
                         <action selector="regestBtnClick:" destination="-1" eventType="touchUpInside" id="c5p-Rg-0aI"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击立即注册，即表示已阅读并同意有盟用户协议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihM-5b-PrH">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击立即注册，即表示已阅读并同意诱梦用户协议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihM-5b-PrH">
                     <rect key="frame" x="53" y="205" width="270" height="15"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

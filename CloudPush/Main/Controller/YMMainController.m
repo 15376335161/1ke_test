@@ -6,14 +6,12 @@
 //  Copyright © 2017年 YouMeng. All rights reserved.
 
 #import "YMMainController.h"
-#import "YMItemCell.h" // 金融理财。贷款
+#import "YMItemCell.h"   // 金融理财。贷款
 #import "YMProductCell.h"
 #import "SDCycleScrollView.h"
 #import "YMHeadItemCell.h"
-
 #import "YMMainHeadCell.h"
 #import "YMSectionCell.h"
-
 #import "YMProductModel.h"
 #import "YMBannerModel.h"
 #import "YMHeadFootView.h"
@@ -22,8 +20,9 @@
 #import "YMRedBagController.h"
 #import "BaseWebViewController.h"
 #import "YMMsgListController.h"
-
 #import "YMPartnerController.h"
+
+
 
 @interface YMMainController ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate>
 
@@ -36,13 +35,14 @@
 //图片浏览器
 @property(nonatomic,strong)NSMutableArray* imgsArr;
 
-
 @property(nonatomic,copy)NSString* rewardTotal;//奖励累积
 @property(nonatomic,copy)NSString* joinNums;   //参与人数
 
 //消息中心
 @property(nonatomic,strong)UIButton* messageBtn;
 @property(nonatomic,strong)UILabel*  mesgNumLabel;
+
+@property(nonatomic,strong)NSNumber* unreadMsgCount;
 @end
 
 @implementation YMMainController
@@ -59,11 +59,19 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 #pragma mark - 请求网络数据
 -(void)requestData{
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
     NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] * 1000;
     [param setObject:@(interval).stringValue forKey:@"time"];
+    //首页
+    if ([kUserDefaults valueForKey:kUid]) {
+        [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"];
+    }
+    if ([kUserDefaults valueForKey:kToken]) {
+         [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];
+    }
     YMWeakSelf;
     [[HttpManger sharedInstance]callHTTPReqAPI:HomeDataURL params:param view:self.view loading:YES tableView:self.tableView completionHandler:^(id task, id responseObject, NSError *error) {
         //轮播图
@@ -77,6 +85,11 @@
         weakSelf.hostProdtListArr = [YMProductModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"hostProductList"]];
         weakSelf.joinNums = responseObject[@"data"][@"joinNums"];
         weakSelf.rewardTotal = responseObject[@"data"][@"rewardTotal"];
+        //未读消息的个数
+        weakSelf.unreadMsgCount = responseObject[@"data"][@"unread_num"];
+        //消息的个数
+        weakSelf.mesgNumLabel.hidden = weakSelf.unreadMsgCount.integerValue > 0 ? NO : YES;
+        weakSelf.mesgNumLabel.text   = weakSelf.unreadMsgCount.stringValue;
         //刷新数据
         [weakSelf.tableView reloadData];
     }];
@@ -104,7 +117,7 @@
     sdSycleView.pageDotColor        = LightGrayColor;
 
     sdSycleView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-    sdSycleView.placeholderImage = [UIImage imageNamed:@"bigPlaceholder"];
+    sdSycleView.placeholderImage   = [UIImage imageNamed:@"bigPlaceholder"];
     self.tableView.tableHeaderView = sdSycleView;
 }
 #pragma mark - 修改view
@@ -115,23 +128,38 @@
         [weakSelf requestData];
     }];
 }
+
 #pragma mark - 消息中心
 -(void)creatRightItem{
     self.messageBtn = [Factory createNavBarButtonWithImageStr:@"news" target:self selector:@selector(messageBtnClick:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_messageBtn];
     
-//    _mesgNumLabel = [Factory createCircleLabelWithFrame:CGRectMake(CGRectGetWidth(_messageBtn.frame) - 5 , -5, 14, 14) text:@"9" textColor:WhiteColor fontSize:10 bgColor:RedColor borderColor:RedColor borderWidth:1];
-//    [_messageBtn addSubview:_mesgNumLabel];
+    _mesgNumLabel = [Factory createCircleLabelWithFrame:CGRectMake(CGRectGetWidth(_messageBtn.frame) - 5 , -5, 14, 14) text:_unreadMsgCount.stringValue textColor:WhiteColor fontSize:10 bgColor:RedColor borderColor:RedColor borderWidth:1];
+    [_messageBtn addSubview:_mesgNumLabel];
+    //未读消息 个数
+    if (_unreadMsgCount.integerValue == 0) {
+        _mesgNumLabel.hidden = YES;
+    }
 }
 -(void)messageBtnClick:(UIButton* )btn{
     if ([[YMUserManager shareInstance]isValidLogin]) {
         YMMsgListController* mvc = [[YMMsgListController alloc]init];
         mvc.title = @"消息中心";
+        mvc.isMsgPushed = YES;
+        mvc.refreshBlock = ^(NSString* msgNum){
+            DDLog(@"消息的条数 == %@",msgNum);
+            _mesgNumLabel.text = msgNum;
+            if (msgNum.integerValue == 0) {
+                _mesgNumLabel.hidden = YES;
+            }
+        };
         mvc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:mvc animated:YES];
     }else{
-        
-        [[YMUserManager shareInstance]pushToLoginWithViewController:self];
+        YMLoginController* lvc = [[YMLoginController alloc]init];
+        YMNavigationController* nav = [[YMNavigationController alloc]initWithRootViewController:lvc];
+        lvc.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:nav animated:YES completion:nil];
     }
 }
 #pragma mark - UITableViewDataSource
@@ -170,7 +198,6 @@
     YMWeakSelf;
     YMProductCell* prodctCell = [YMProductCell shareCellWithTableView:tableView actionBlock:^(UIButton *btn) {
         DDLog(@"btn tag == %ld",(long)btn.tag);
-       // if ([[YMUserManager shareInstance]isValidLogin]) {
             BaseWebViewController* wvc = [[BaseWebViewController alloc]init];
             YMProductCell* prodctCell = [tableView cellForRowAtIndexPath:indexPath];
             YMProductModel* model = prodctCell.model;
@@ -180,9 +207,6 @@
             DDLog(@"urlStr == %@",wvc.urlStr);
             wvc.hidesBottomBarWhenPushed = YES;
             [weakSelf.navigationController pushViewController:wvc animated:YES];
-//        }else{
-//            [[YMUserManager shareInstance]pushToLoginWithViewController:self];
-//        }
     }];
     prodctCell.selectionStyle = UITableViewCellSelectionStyleNone;
     switch (indexPath.section) {
@@ -193,7 +217,7 @@
             tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             cell.tapBlock = ^(UIButton* btn){
                 DDLog(@"btn tag == %ld",(long)((UIButton*)btn).tag);
-                switch (btn.tag) {
+                switch (btn.tag){
                     case 0:
                     {
                         DDLog(@"签到领一元");
@@ -227,7 +251,6 @@
                     default:
                         break;
                 }
-                
             };
             cell.partNumLabel.text = [NSString stringWithFormat:@"累积参与%@人",self.joinNums.intValue ? self.joinNums : @"0"];
             cell.partMoneyLabel.text = [NSString stringWithFormat:@"累积奖励%@元",self.rewardTotal.floatValue ? self.rewardTotal : @"0"];
@@ -248,7 +271,6 @@
                     prodctCell.height += 10;
                 }
             }
-            
             return prodctCell;
         }
             break;
@@ -294,9 +316,7 @@
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
     if ( section == 1 ){
-    
         return 27;
     }
     if (section == 2) {
@@ -306,6 +326,7 @@
         return 0;
     }
 }
+
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
@@ -345,7 +366,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DDLog(@"点击啦 row == %ld colum == %ld",(long)indexPath.row,(long)indexPath.section);
     if (indexPath.section > 0) {
-       // if ([[YMUserManager shareInstance]isValidLogin]) {
             BaseWebViewController * wvc = [[BaseWebViewController alloc]init];
             YMProductCell* prodctCell = [tableView cellForRowAtIndexPath:indexPath];
             YMProductModel* model = prodctCell.model;
@@ -353,12 +373,8 @@
             wvc.urlStr = [NSString stringWithFormat:@"%@?uid=%@&platform_id=%@&ssotoken=%@",ProductDetailURL,[kUserDefaults valueForKey:kUid] ? [kUserDefaults valueForKey:kUid] : @"",model.id,[kUserDefaults valueForKey:kToken] ? [kUserDefaults valueForKey:kToken] : @"" ];
             wvc.platform_id = model.id;
             DDLog(@"urlStr == %@",wvc.urlStr);
-       
             wvc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:wvc animated:YES];
-//        }else{
-//            [[YMUserManager shareInstance]pushToLoginWithViewController:self];
-//        }
     }
 }
 /** 点击图片回调 */
@@ -372,25 +388,10 @@
 
 #pragma mark - scrollViewDelegate
 //去掉 UItableview headerview 黏性(sticky)
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.tableView){
-//         UITableView *tableview = (UITableView *)scrollView;
-//         CGFloat sectionHeaderHeight = 27;
-//         CGFloat sectionFooterHeight = (SCREEN_WIDTH - 10 * 2 - 5)/2 * 14/35 + 15 * 2 + 10;
-//         CGFloat offsetY = tableview.contentOffset.y;
-//         if (offsetY >= 0 && offsetY <= sectionHeaderHeight){
-//        
-//              tableview.contentInset = UIEdgeInsetsMake(-offsetY, 0, -sectionFooterHeight, 0);
-//             
-//         }else if (offsetY >= sectionHeaderHeight && offsetY <= tableview.contentSize.height - tableview.frame.size.height - sectionFooterHeight){
-//             
-//              tableview.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, -sectionFooterHeight, 0);
-//             
-//        }else if(offsetY >= tableview.contentSize.height - tableview.frame.size.height - sectionFooterHeight && offsetY <= tableview.contentSize.height - tableview.frame.size.height){
-//            
-//             tableview.contentInset = UIEdgeInsetsMake(-offsetY, 0, -(tableview.contentSize.height - tableview.frame.size.height - sectionFooterHeight), 0);
-//        }
-    }
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    if (scrollView == self.tableView){
+//
+//    }
+//}
 
 @end

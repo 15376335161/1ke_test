@@ -9,7 +9,6 @@
 #import "YMPartnerController.h"
 #import "YMWebProgressLayer.h"
 #import <JavaScriptCore/JavaScriptCore.h>
-
 #import <Photos/Photos.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
@@ -19,9 +18,7 @@
 #import "WXApiObject.h"
 #import "WXMediaMessage+messageConstruct.h"
 #import "YMRegistViewController.h"
-
 #import "NSString+Catogory.h"
-
 #import "ImageDownloader.h"
 
 
@@ -44,7 +41,7 @@
 //是否刷新登录状态
 @property(nonatomic,assign)BOOL isLoginStatusChanged;
 
-//@property(nonatomic,strong)UIImageView* whiteImgView;
+
 @end
 
 @implementation YMPartnerController
@@ -67,10 +64,13 @@
 
     self.webView.userInteractionEnabled = YES;
     
+    //背景色
+    self.webView.backgroundColor = ClearColor;
+    self.webView.opaque = NO;//这句话很重要，webView是否是不透明的，no为透明 在webView下添加个imageView展示图片就可以了
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
   //  if (self.isLoginStatusChanged != [kUserDefaults boolForKey:kisRefresh]) {
         self.urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",InviteFriendsURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]];
         
@@ -102,18 +102,22 @@
 //刷新界面
 -(void)reloadWebView{
    // [self.webView reload];
-
     self.urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",InviteFriendsURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]];
-    
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]]];
-    
     [self endRefresh];
 }
 
+//-(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+//    [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
+//    //   ActivityVC * vc = [ActivityVC DefaultActivityView];
+//    // [vc startActivityIndicatorView:self.view withTag:1000];
+//  //  这里是我自己封装的方法。你自己加活动指示器就行
+//}
 #pragma mark - UIWebViewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     DDLog(@"request == %@",request);
-    
+    //显示网页加载状态
+    [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
     return YES;
 }
 
@@ -123,14 +127,21 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [self.progressLayer finishedLoad];
     [self endRefresh];
+    //停止刷新转圈
+    [self performSelector:@selector(stopAcVC) withObject:nil afterDelay:0];
     //self.whiteImgView.hidden = NO;
 }
-
+-(void)stopAcVC{
+    [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
+    //   ActivityVC * vc = [ActivityVC DefaultActivityView];
+    // [vc stopActivityIndicatorView:self.view withTag:1000];
+    
+}
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [self.progressLayer finishedLoad];
     [self endRefresh];
     
-   // self.whiteImgView.hidden = YES;
+    [self performSelector:@selector(stopAcVC) withObject:nil afterDelay:1.5];
 #warning 处理空白页
     // WebView放到最上层
     [self.view bringSubviewToFront:self.webView];
@@ -162,7 +173,6 @@
     {
         DDLog(@"needLogin");
     };
-    
     self.jsContext[@"redirectSiteIndex"] = ^(){
         
     };
@@ -192,7 +202,6 @@
     });
 }
 -(void)needRegister:(NSString* )registString{
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         YMRegistViewController* lvc = [[YMRegistViewController alloc]init];
         YMNavigationController* nav = [[YMNavigationController alloc]initWithRootViewController:lvc];
@@ -205,19 +214,18 @@
 //分享给好友
 -(void)needShare:(NSString* )shareString{
     DDLog(@"分享给好友 block = %@",shareString);
-    
     if (![TencentOAuth iphoneQQInstalled] && ![WXApi isWXAppInstalled]) {
-        
         DDLog(@"将要进行界面跳转由h5界面跳转到原生界面");
         //必须放入主线程中更新UI否则会出错
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertController* alerC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您的手机还未安装微信、QQ客户端！" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-            }];
-            [alerC addAction:sureAction];
-            
-            [self presentViewController:alerC animated:YES completion:nil];
+             [MBProgressHUD showFail:@"您的手机还未安装QQ客户端、微信！暂不能分享！" view:self.view];
+//            UIAlertController* alerC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您的手机还未安装微信、QQ客户端！" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                
+//            }];
+//            [alerC addAction:sureAction];
+//            
+//            [self presentViewController:alerC animated:YES completion:nil];
             
         });
         return;
@@ -248,7 +256,6 @@
                 break;
         }
     }
-    
      DDLog(@" argArr == %@ urlStr == %@ title == %@ content == %@",argArr,urlStr,title,content);
     [self shareLinkToFriendsWithUrlStr:urlStr title:title content:content iconStr:shareLogoURL];
 }
@@ -367,6 +374,7 @@
 -(void)redirectSiteIndex{
     DDLog(@"合伙人跳转");
 }
+
 //-(void)userLoginStatusChanged:(NSNotification* )notification{
 //    DDLog(@"用户状态改变了");
 //    self.urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",InviteFriendsURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]];

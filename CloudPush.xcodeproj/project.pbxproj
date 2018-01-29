@@ -69,8 +69,6 @@
 		5406D3911E64163F00DE565B /* YMTaskInvalidCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5406D38F1E64163F00DE565B /* YMTaskInvalidCell.xib */; };
 		5406D3951E641BBB00DE565B /* YMTaskCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5406D3931E641BBB00DE565B /* YMTaskCheckCell.m */; };
 		5406D3961E641BBB00DE565B /* YMTaskCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5406D3941E641BBB00DE565B /* YMTaskCheckCell.xib */; };
-		5406D39B1E642AFF00DE565B /* jcore-ios-1.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5406D3981E642AFF00DE565B /* jcore-ios-1.1.1.a */; };
-		5406D39C1E642AFF00DE565B /* jpush-ios-3.0.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5406D3991E642AFF00DE565B /* jpush-ios-3.0.2.a */; };
 		5406D39E1E64303E00DE565B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5406D39D1E64303E00DE565B /* CoreFoundation.framework */; };
 		5406D3A01E64306900DE565B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5406D39F1E64306900DE565B /* Foundation.framework */; };
 		5406D3A21E64307600DE565B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5406D3A11E64307600DE565B /* UIKit.framework */; };
@@ -93,8 +91,6 @@
 		541128581E7276720050C301 /* YMMsgListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541128561E7276720050C301 /* YMMsgListController.xib */; };
 		5411285C1E7276960050C301 /* YZTShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5411285A1E7276960050C301 /* YZTShareController.m */; };
 		5411285D1E7276960050C301 /* YZTShareController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5411285B1E7276960050C301 /* YZTShareController.xib */; };
-		541128611E7276AF0050C301 /* YMTeamListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5411285F1E7276AF0050C301 /* YMTeamListController.m */; };
-		541128621E7276AF0050C301 /* YMTeamListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541128601E7276AF0050C301 /* YMTeamListController.xib */; };
 		541128661E7277320050C301 /* YMWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = 541128641E7277320050C301 /* YMWalletController.m */; };
 		541128671E7277320050C301 /* YMWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541128651E7277320050C301 /* YMWalletController.xib */; };
 		5411286B1E72798C0050C301 /* YMSetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 541128691E72798C0050C301 /* YMSetController.m */; };
@@ -107,7 +103,6 @@
 		5411287B1E7291B50050C301 /* YMSpecTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541128791E7291B50050C301 /* YMSpecTitleCell.xib */; };
 		5411287F1E7637DA0050C301 /* YMWalletHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5411287D1E7637DA0050C301 /* YMWalletHeadCell.m */; };
 		541128801E7637DA0050C301 /* YMWalletHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5411287E1E7637DA0050C301 /* YMWalletHeadCell.xib */; };
-		541128841E76696D0050C301 /* libXLYBankCardMessage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 541128821E76696D0050C301 /* libXLYBankCardMessage.a */; };
 		541128871E77DA950050C301 /* YMQRGenator.m in Sources */ = {isa = PBXBuildFile; fileRef = 541128861E77DA950050C301 /* YMQRGenator.m */; };
 		5411288A1E77F3910050C301 /* YMShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 541128891E77F3910050C301 /* YMShareManager.m */; };
 		5411288D1E77FB960050C301 /* ShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5411288C1E77FB960050C301 /* ShareButton.m */; };
@@ -130,8 +125,6 @@
 		5414B6A01E66D327002403B9 /* YMReceFootCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5414B69E1E66D327002403B9 /* YMReceFootCell.xib */; };
 		5414B6A41E66D5AA002403B9 /* YMTaskTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5414B6A21E66D5AA002403B9 /* YMTaskTitleCell.m */; };
 		5414B6A51E66D5AA002403B9 /* YMTaskTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5414B6A31E66D5AA002403B9 /* YMTaskTitleCell.xib */; };
-		5414B6A91E66D75E002403B9 /* YMCommissionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5414B6A71E66D75E002403B9 /* YMCommissionCell.m */; };
-		5414B6AA1E66D75E002403B9 /* YMCommissionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5414B6A81E66D75E002403B9 /* YMCommissionCell.xib */; };
 		5414B6AE1E67CD12002403B9 /* YMMYTaskDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5414B6AC1E67CD12002403B9 /* YMMYTaskDetailController.m */; };
 		5414B6AF1E67CD12002403B9 /* YMMYTaskDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5414B6AD1E67CD12002403B9 /* YMMYTaskDetailController.xib */; };
 		5414B6B31E67E087002403B9 /* YMContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5414B6B11E67E087002403B9 /* YMContentCell.m */; };
@@ -282,8 +275,6 @@
 		54C452961E5D6AFB00E5B5A1 /* HttpManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C452951E5D6AFB00E5B5A1 /* HttpManger.m */; };
 		54C4529F1E5D737A00E5B5A1 /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54C4529A1E5D737A00E5B5A1 /* BaiduMapAPI_Base.framework */; };
 		54C452A01E5D737A00E5B5A1 /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54C4529B1E5D737A00E5B5A1 /* BaiduMapAPI_Map.framework */; };
-		54C452A11E5D737A00E5B5A1 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54C4529D1E5D737A00E5B5A1 /* libcrypto.a */; };
-		54C452A21E5D737A00E5B5A1 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54C4529E1E5D737A00E5B5A1 /* libssl.a */; };
 		54C452A41E5D750400E5B5A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54C452A31E5D750400E5B5A1 /* CoreLocation.framework */; };
 		54C452A61E5D751500E5B5A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54C452A51E5D751500E5B5A1 /* QuartzCore.framework */; };
 		54C452A81E5D752100E5B5A1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54C452A71E5D752100E5B5A1 /* OpenGLES.framework */; };
@@ -328,11 +319,26 @@
 		54DFB7551E6E90BC0089E06B /* YMWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54DFB7531E6E90BC0089E06B /* YMWebViewController.xib */; };
 		54DFB7581E6EB4CD0089E06B /* YMUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DFB7571E6EB4CD0089E06B /* YMUserManager.m */; };
 		54F8EAEC1E5D8E640067DB54 /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F8EAEB1E5D8E640067DB54 /* BaiduMapAPI_Search.framework */; };
-		54F8EAF51E5E6FE30067DB54 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F8EAF01E5E6FE30067DB54 /* libWeChatSDK.a */; };
 		54F8EAF61E5E6FE30067DB54 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 54F8EAF11E5E6FE30067DB54 /* README.txt */; };
 		54F8EAF81E5E70F70067DB54 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F8EAF71E5E70F70067DB54 /* libz.tbd */; };
 		54F8EAFA1E5E71290067DB54 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F8EAF91E5E71290067DB54 /* libc++.tbd */; };
 		54F8EAFC1E5E714F0067DB54 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F8EAFB1E5E714F0067DB54 /* CFNetwork.framework */; };
+		54FF81D41EADDE910093503D /* jpush-ios-3.0.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FF81D31EADDE910093503D /* jpush-ios-3.0.2.a */; };
+		54FF81D61EADDE990093503D /* jcore-ios-1.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FF81D51EADDE990093503D /* jcore-ios-1.1.1.a */; };
+		54FF81D81EADE2250093503D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FF81D71EADE2250093503D /* libcrypto.a */; };
+		54FF81DA1EADE22C0093503D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FF81D91EADE22C0093503D /* libssl.a */; };
+		54FF81DC1EADE2A10093503D /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FF81DB1EADE2A10093503D /* libWeChatSDK.a */; };
+		54FF81DE1EADE35C0093503D /* libXLYBankCardMessage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FF81DD1EADE35C0093503D /* libXLYBankCardMessage.a */; };
+		54FF81E21EADF9260093503D /* YMRegistWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF81E01EADF9260093503D /* YMRegistWebController.m */; };
+		54FF81E31EADF9260093503D /* YMRegistWebController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54FF81E11EADF9260093503D /* YMRegistWebController.xib */; };
+		54FF81F51EB18A3D0093503D /* YMWKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF81F31EB18A3D0093503D /* YMWKWebViewController.m */; };
+		54FF81F61EB18A3D0093503D /* YMWKWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54FF81F41EB18A3D0093503D /* YMWKWebViewController.xib */; };
+		54FF81FB1EB1BAB90093503D /* IMY_NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF81F81EB1BAB90093503D /* IMY_NJKWebViewProgress.m */; };
+		54FF81FC1EB1BAB90093503D /* IMYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF81FA1EB1BAB90093503D /* IMYWebView.m */; };
+		54FF82021EB1EDAB0093503D /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF81FE1EB1EDAB0093503D /* SSKeychain.m */; };
+		54FF82031EB1EDAB0093503D /* SSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54FF81FF1EB1EDAB0093503D /* SSKeychain.strings */; };
+		54FF82041EB1EDAB0093503D /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF82011EB1EDAB0093503D /* SSKeychainQuery.m */; };
+		54FF82071EB3114B0093503D /* RegExCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF82061EB3114B0093503D /* RegExCategories.m */; };
 		9EE4816C0FA795293162D27E /* libPods-CloudPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 366079064B5BDED9CBF31FC8 /* libPods-CloudPush.a */; };
 /* End PBXBuildFile section */
 
@@ -474,8 +480,6 @@
 		5406D3921E641BBB00DE565B /* YMTaskCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMTaskCheckCell.h; sourceTree = "<group>"; };
 		5406D3931E641BBB00DE565B /* YMTaskCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMTaskCheckCell.m; sourceTree = "<group>"; };
 		5406D3941E641BBB00DE565B /* YMTaskCheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMTaskCheckCell.xib; sourceTree = "<group>"; };
-		5406D3981E642AFF00DE565B /* jcore-ios-1.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.1.a"; sourceTree = "<group>"; };
-		5406D3991E642AFF00DE565B /* jpush-ios-3.0.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.2.a"; sourceTree = "<group>"; };
 		5406D39A1E642AFF00DE565B /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		5406D39D1E64303E00DE565B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		5406D39F1E64306900DE565B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -511,9 +515,6 @@
 		541128591E7276960050C301 /* YZTShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZTShareController.h; sourceTree = "<group>"; };
 		5411285A1E7276960050C301 /* YZTShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZTShareController.m; sourceTree = "<group>"; };
 		5411285B1E7276960050C301 /* YZTShareController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZTShareController.xib; sourceTree = "<group>"; };
-		5411285E1E7276AF0050C301 /* YMTeamListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMTeamListController.h; sourceTree = "<group>"; };
-		5411285F1E7276AF0050C301 /* YMTeamListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMTeamListController.m; sourceTree = "<group>"; };
-		541128601E7276AF0050C301 /* YMTeamListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMTeamListController.xib; sourceTree = "<group>"; };
 		541128631E7277320050C301 /* YMWalletController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMWalletController.h; sourceTree = "<group>"; };
 		541128641E7277320050C301 /* YMWalletController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMWalletController.m; sourceTree = "<group>"; };
 		541128651E7277320050C301 /* YMWalletController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMWalletController.xib; sourceTree = "<group>"; };
@@ -532,7 +533,6 @@
 		5411287C1E7637DA0050C301 /* YMWalletHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMWalletHeadCell.h; sourceTree = "<group>"; };
 		5411287D1E7637DA0050C301 /* YMWalletHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMWalletHeadCell.m; sourceTree = "<group>"; };
 		5411287E1E7637DA0050C301 /* YMWalletHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMWalletHeadCell.xib; sourceTree = "<group>"; };
-		541128821E76696D0050C301 /* libXLYBankCardMessage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXLYBankCardMessage.a; sourceTree = "<group>"; };
 		541128831E76696D0050C301 /* XLYBankCardMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLYBankCardMessage.h; sourceTree = "<group>"; };
 		541128851E77DA950050C301 /* YMQRGenator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMQRGenator.h; sourceTree = "<group>"; };
 		541128861E77DA950050C301 /* YMQRGenator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMQRGenator.m; sourceTree = "<group>"; };
@@ -573,9 +573,6 @@
 		5414B6A11E66D5AA002403B9 /* YMTaskTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMTaskTitleCell.h; sourceTree = "<group>"; };
 		5414B6A21E66D5AA002403B9 /* YMTaskTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMTaskTitleCell.m; sourceTree = "<group>"; };
 		5414B6A31E66D5AA002403B9 /* YMTaskTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMTaskTitleCell.xib; sourceTree = "<group>"; };
-		5414B6A61E66D75E002403B9 /* YMCommissionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMCommissionCell.h; sourceTree = "<group>"; };
-		5414B6A71E66D75E002403B9 /* YMCommissionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMCommissionCell.m; sourceTree = "<group>"; };
-		5414B6A81E66D75E002403B9 /* YMCommissionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMCommissionCell.xib; sourceTree = "<group>"; };
 		5414B6AB1E67CD12002403B9 /* YMMYTaskDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMMYTaskDetailController.h; sourceTree = "<group>"; };
 		5414B6AC1E67CD12002403B9 /* YMMYTaskDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMMYTaskDetailController.m; sourceTree = "<group>"; };
 		5414B6AD1E67CD12002403B9 /* YMMYTaskDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMMYTaskDetailController.xib; sourceTree = "<group>"; };
@@ -818,8 +815,6 @@
 		54C452981E5D6CC800E5B5A1 /* URLs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLs.h; sourceTree = "<group>"; };
 		54C4529A1E5D737A00E5B5A1 /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Base.framework; sourceTree = "<group>"; };
 		54C4529B1E5D737A00E5B5A1 /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
-		54C4529D1E5D737A00E5B5A1 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
-		54C4529E1E5D737A00E5B5A1 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		54C452A31E5D750400E5B5A1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		54C452A51E5D751500E5B5A1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		54C452A71E5D752100E5B5A1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -888,7 +883,6 @@
 		54DFB7561E6EB4CD0089E06B /* YMUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMUserManager.h; sourceTree = "<group>"; };
 		54DFB7571E6EB4CD0089E06B /* YMUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMUserManager.m; sourceTree = "<group>"; };
 		54F8EAEB1E5D8E640067DB54 /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
-		54F8EAF01E5E6FE30067DB54 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		54F8EAF11E5E6FE30067DB54 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		54F8EAF21E5E6FE30067DB54 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		54F8EAF31E5E6FE30067DB54 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -896,6 +890,29 @@
 		54F8EAF71E5E70F70067DB54 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		54F8EAF91E5E71290067DB54 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		54F8EAFB1E5E714F0067DB54 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		54FF81D31EADDE910093503D /* jpush-ios-3.0.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.2.a"; sourceTree = "<group>"; };
+		54FF81D51EADDE990093503D /* jcore-ios-1.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.1.a"; sourceTree = "<group>"; };
+		54FF81D71EADE2250093503D /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		54FF81D91EADE22C0093503D /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		54FF81DB1EADE2A10093503D /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		54FF81DD1EADE35C0093503D /* libXLYBankCardMessage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXLYBankCardMessage.a; sourceTree = "<group>"; };
+		54FF81DF1EADF9260093503D /* YMRegistWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMRegistWebController.h; sourceTree = "<group>"; };
+		54FF81E01EADF9260093503D /* YMRegistWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMRegistWebController.m; sourceTree = "<group>"; };
+		54FF81E11EADF9260093503D /* YMRegistWebController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMRegistWebController.xib; sourceTree = "<group>"; };
+		54FF81F21EB18A3D0093503D /* YMWKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMWKWebViewController.h; sourceTree = "<group>"; };
+		54FF81F31EB18A3D0093503D /* YMWKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMWKWebViewController.m; sourceTree = "<group>"; };
+		54FF81F41EB18A3D0093503D /* YMWKWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMWKWebViewController.xib; sourceTree = "<group>"; };
+		54FF81F71EB1BAB90093503D /* IMY_NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMY_NJKWebViewProgress.h; sourceTree = "<group>"; };
+		54FF81F81EB1BAB90093503D /* IMY_NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMY_NJKWebViewProgress.m; sourceTree = "<group>"; };
+		54FF81F91EB1BAB90093503D /* IMYWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMYWebView.h; sourceTree = "<group>"; };
+		54FF81FA1EB1BAB90093503D /* IMYWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMYWebView.m; sourceTree = "<group>"; };
+		54FF81FD1EB1EDAB0093503D /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		54FF81FE1EB1EDAB0093503D /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		54FF81FF1EB1EDAB0093503D /* SSKeychain.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = SSKeychain.strings; sourceTree = "<group>"; };
+		54FF82001EB1EDAB0093503D /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
+		54FF82011EB1EDAB0093503D /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
+		54FF82051EB3114B0093503D /* RegExCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExCategories.h; sourceTree = "<group>"; };
+		54FF82061EB3114B0093503D /* RegExCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegExCategories.m; sourceTree = "<group>"; };
 		AB74D91D653E34501EF49F94 /* Pods-CloudPush.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudPush.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudPush/Pods-CloudPush.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -904,34 +921,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54FF81DA1EADE22C0093503D /* libssl.a in Frameworks */,
+				54FF81D61EADDE990093503D /* jcore-ios-1.1.1.a in Frameworks */,
 				5406D3A61E6430BE00DE565B /* libresolv.tbd in Frameworks */,
 				5406D3A41E64309700DE565B /* UserNotifications.framework in Frameworks */,
 				5406D3A21E64307600DE565B /* UIKit.framework in Frameworks */,
 				5406D3A01E64306900DE565B /* Foundation.framework in Frameworks */,
 				5406D39E1E64303E00DE565B /* CoreFoundation.framework in Frameworks */,
-				5406D39C1E642AFF00DE565B /* jpush-ios-3.0.2.a in Frameworks */,
 				5406D3641E63BC5800DE565B /* libiconv.2.4.0.tbd in Frameworks */,
-				541128841E76696D0050C301 /* libXLYBankCardMessage.a in Frameworks */,
 				54F8EAFC1E5E714F0067DB54 /* CFNetwork.framework in Frameworks */,
 				54F8EAFA1E5E71290067DB54 /* libc++.tbd in Frameworks */,
 				54F8EAF81E5E70F70067DB54 /* libz.tbd in Frameworks */,
 				54C452B41E5D758000E5B5A1 /* libstdc++.6.0.9.tbd in Frameworks */,
-				54F8EAF51E5E6FE30067DB54 /* libWeChatSDK.a in Frameworks */,
+				54FF81D41EADDE910093503D /* jpush-ios-3.0.2.a in Frameworks */,
 				54C452B21E5D756E00E5B5A1 /* CoreTelephony.framework in Frameworks */,
-				5406D39B1E642AFF00DE565B /* jcore-ios-1.1.1.a in Frameworks */,
 				54C452B01E5D756000E5B5A1 /* libsqlite3.0.tbd in Frameworks */,
+				54FF81DE1EADE35C0093503D /* libXLYBankCardMessage.a in Frameworks */,
 				54C452AE1E5D754800E5B5A1 /* Security.framework in Frameworks */,
 				54C452AC1E5D753C00E5B5A1 /* CoreGraphics.framework in Frameworks */,
+				54FF81DC1EADE2A10093503D /* libWeChatSDK.a in Frameworks */,
 				54C452AA1E5D752F00E5B5A1 /* SystemConfiguration.framework in Frameworks */,
 				54C452A61E5D751500E5B5A1 /* QuartzCore.framework in Frameworks */,
 				54C452A81E5D752100E5B5A1 /* OpenGLES.framework in Frameworks */,
 				54C452A41E5D750400E5B5A1 /* CoreLocation.framework in Frameworks */,
-				54C452A21E5D737A00E5B5A1 /* libssl.a in Frameworks */,
 				54F8EAEC1E5D8E640067DB54 /* BaiduMapAPI_Search.framework in Frameworks */,
 				9EE4816C0FA795293162D27E /* libPods-CloudPush.a in Frameworks */,
 				54C4529F1E5D737A00E5B5A1 /* BaiduMapAPI_Base.framework in Frameworks */,
 				5423E2B41E88F5B7003CD02E /* UMMobClick.framework in Frameworks */,
-				54C452A11E5D737A00E5B5A1 /* libcrypto.a in Frameworks */,
+				54FF81D81EADE2250093503D /* libcrypto.a in Frameworks */,
 				548E232B1E5D875E008DBB26 /* BaiduMapAPI_Location.framework in Frameworks */,
 				542484851E6045FA009CAA6C /* TencentOpenAPI.framework in Frameworks */,
 				54C452A01E5D737A00E5B5A1 /* BaiduMapAPI_Map.framework in Frameworks */,
@@ -1216,6 +1233,12 @@
 				546EED1F1E9B929500E1E99F /* BaseWebViewController.h */,
 				546EED201E9B929600E1E99F /* BaseWebViewController.m */,
 				546EED211E9B929600E1E99F /* BaseWebViewController.xib */,
+				54FF81DF1EADF9260093503D /* YMRegistWebController.h */,
+				54FF81E01EADF9260093503D /* YMRegistWebController.m */,
+				54FF81E11EADF9260093503D /* YMRegistWebController.xib */,
+				54FF81F21EB18A3D0093503D /* YMWKWebViewController.h */,
+				54FF81F31EB18A3D0093503D /* YMWKWebViewController.m */,
+				54FF81F41EB18A3D0093503D /* YMWKWebViewController.xib */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1439,9 +1462,6 @@
 				5414B6A11E66D5AA002403B9 /* YMTaskTitleCell.h */,
 				5414B6A21E66D5AA002403B9 /* YMTaskTitleCell.m */,
 				5414B6A31E66D5AA002403B9 /* YMTaskTitleCell.xib */,
-				5414B6A61E66D75E002403B9 /* YMCommissionCell.h */,
-				5414B6A71E66D75E002403B9 /* YMCommissionCell.m */,
-				5414B6A81E66D75E002403B9 /* YMCommissionCell.xib */,
 				5414B6B01E67E087002403B9 /* YMContentCell.h */,
 				5414B6B11E67E087002403B9 /* YMContentCell.m */,
 				5414B6B21E67E087002403B9 /* YMContentCell.xib */,
@@ -1460,7 +1480,6 @@
 				5411284B1E7276310050C301 /* Feedback */,
 				541128471E7275F00050C301 /* MessageCenter */,
 				541128431E7275C00050C301 /* Share */,
-				5411283F1E72758D0050C301 /* Team */,
 				54DFB7411E6D5D0A0089E06B /* Wallet */,
 				18D68E301E5BCF7F00A42FE0 /* Controller */,
 				18D68E2F1E5BCF7800A42FE0 /* Model */,
@@ -1505,6 +1524,10 @@
 		18D68E311E5BD3CE00A42FE0 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				54FF81F71EB1BAB90093503D /* IMY_NJKWebViewProgress.h */,
+				54FF81F81EB1BAB90093503D /* IMY_NJKWebViewProgress.m */,
+				54FF81F91EB1BAB90093503D /* IMYWebView.h */,
+				54FF81FA1EB1BAB90093503D /* IMYWebView.m */,
 				546EED821EA3689600E1E99F /* UIView+Placeholder.h */,
 				546EED831EA3689600E1E99F /* UIView+Placeholder.m */,
 				541128361E70EB010050C301 /* PooCodeView.h */,
@@ -1591,45 +1614,11 @@
 		5406D3971E642AFF00DE565B /* JPush */ = {
 			isa = PBXGroup;
 			children = (
-				5406D3981E642AFF00DE565B /* jcore-ios-1.1.1.a */,
-				5406D3991E642AFF00DE565B /* jpush-ios-3.0.2.a */,
+				54FF81D51EADDE990093503D /* jcore-ios-1.1.1.a */,
+				54FF81D31EADDE910093503D /* jpush-ios-3.0.2.a */,
 				5406D39A1E642AFF00DE565B /* JPUSHService.h */,
 			);
 			path = JPush;
-			sourceTree = "<group>";
-		};
-		5411283F1E72758D0050C301 /* Team */ = {
-			isa = PBXGroup;
-			children = (
-				541128401E72758D0050C301 /* Controller */,
-				541128411E72758D0050C301 /* Model */,
-				541128421E72758D0050C301 /* View */,
-			);
-			path = Team;
-			sourceTree = "<group>";
-		};
-		541128401E72758D0050C301 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				5411285E1E7276AF0050C301 /* YMTeamListController.h */,
-				5411285F1E7276AF0050C301 /* YMTeamListController.m */,
-				541128601E7276AF0050C301 /* YMTeamListController.xib */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		541128411E72758D0050C301 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		541128421E72758D0050C301 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		541128431E7275C00050C301 /* Share */ = {
@@ -1765,8 +1754,8 @@
 		541128811E76696D0050C301 /* BankCardVerify */ = {
 			isa = PBXGroup;
 			children = (
-				541128821E76696D0050C301 /* libXLYBankCardMessage.a */,
 				541128831E76696D0050C301 /* XLYBankCardMessage.h */,
+				54FF81DD1EADE35C0093503D /* libXLYBankCardMessage.a */,
 			);
 			path = BankCardVerify;
 			sourceTree = "<group>";
@@ -1919,6 +1908,8 @@
 		5423E2A31E88F487003CD02E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				54FF82051EB3114B0093503D /* RegExCategories.h */,
+				54FF82061EB3114B0093503D /* RegExCategories.m */,
 				5423E2A41E88F487003CD02E /* BRPlaceholderTextView.h */,
 				5423E2A51E88F487003CD02E /* BRPlaceholderTextView.m */,
 				5423E2A81E88F487003CD02E /* NullSafe.m */,
@@ -2056,8 +2047,8 @@
 		54C4529C1E5D737A00E5B5A1 /* thirdlibs */ = {
 			isa = PBXGroup;
 			children = (
-				54C4529D1E5D737A00E5B5A1 /* libcrypto.a */,
-				54C4529E1E5D737A00E5B5A1 /* libssl.a */,
+				54FF81D91EADE22C0093503D /* libssl.a */,
+				54FF81D71EADE2250093503D /* libcrypto.a */,
 			);
 			path = thirdlibs;
 			sourceTree = "<group>";
@@ -2188,6 +2179,11 @@
 		54D07EB81E8D323800CAA5ED /* RSA */ = {
 			isa = PBXGroup;
 			children = (
+				54FF81FF1EB1EDAB0093503D /* SSKeychain.strings */,
+				54FF81FD1EB1EDAB0093503D /* SSKeychain.h */,
+				54FF81FE1EB1EDAB0093503D /* SSKeychain.m */,
+				54FF82001EB1EDAB0093503D /* SSKeychainQuery.h */,
+				54FF82011EB1EDAB0093503D /* SSKeychainQuery.m */,
 				54D07EBD1E8D328300CAA5ED /* RSAEncryptor.h */,
 				54D07EBE1E8D328300CAA5ED /* RSAEncryptor.m */,
 			);
@@ -2271,7 +2267,7 @@
 		54F8EAEF1E5E6FE30067DB54 /* OpenSDK1.7.6 */ = {
 			isa = PBXGroup;
 			children = (
-				54F8EAF01E5E6FE30067DB54 /* libWeChatSDK.a */,
+				54FF81DB1EADE2A10093503D /* libWeChatSDK.a */,
 				54F8EAF11E5E6FE30067DB54 /* README.txt */,
 				54F8EAF21E5E6FE30067DB54 /* WechatAuthSDK.h */,
 				54F8EAF31E5E6FE30067DB54 /* WXApi.h */,
@@ -2350,7 +2346,7 @@
 				TargetAttributes = {
 					186F41361E5A9524002F4CDC = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = NAZESGN55V;
+						DevelopmentTeam = BXNJAEDFYS;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2402,7 +2398,6 @@
 			files = (
 				546EED691EA0BCDB00E1E99F /* YMMyTaskCell.xib in Resources */,
 				541554161E7BBE5D00E85A86 /* ico_check_nomal.png in Resources */,
-				5414B6AA1E66D75E002403B9 /* YMCommissionCell.xib in Resources */,
 				541554141E7BBE5D00E85A86 /* close@2x.png in Resources */,
 				541128801E7637DA0050C301 /* YMWalletHeadCell.xib in Resources */,
 				541554151E7BBE5D00E85A86 /* close@3x.png in Resources */,
@@ -2412,7 +2407,6 @@
 				5414B6AF1E67CD12002403B9 /* YMMYTaskDetailController.xib in Resources */,
 				546EED6E1EA0BD0A00E1E99F /* YMTaskInfoCell.xib in Resources */,
 				546EED001E95E20900E1E99F /* YMHeadFootView.xib in Resources */,
-				541128621E7276AF0050C301 /* YMTeamListController.xib in Resources */,
 				54D07E811E8C9FE300CAA5ED /* YMMainController.xib in Resources */,
 				541128351E6FF8380050C301 /* YMForgetFirstController.xib in Resources */,
 				54AC91B11E6CF3F600F78596 /* YMResetPasswordController.xib in Resources */,
@@ -2443,6 +2437,7 @@
 				54D07EC81E8E1E4600CAA5ED /* YMMainHeadCell.xib in Resources */,
 				541128531E7276580050C301 /* YMFeedBackController.xib in Resources */,
 				546EECEC1E948C6D00E1E99F /* YMMeWalletCell.xib in Resources */,
+				54FF81E31EADF9260093503D /* YMRegistWebController.xib in Resources */,
 				546EED641EA0BC6C00E1E99F /* YMTaskBaseController.xib in Resources */,
 				5406D3AC1E6515F300DE565B /* YMTaskDetailController.xib in Resources */,
 				546EED231E9B929600E1E99F /* BaseWebViewController.xib in Resources */,
@@ -2460,9 +2455,11 @@
 				186F41871E5A96EF002F4CDC /* Info.plist in Resources */,
 				5415541C1E7BBE5D00E85A86 /* plus.png in Resources */,
 				546EED561E9FAC4200E1E99F /* guide_page_1@3x.png in Resources */,
+				54FF81F61EB18A3D0093503D /* YMWKWebViewController.xib in Resources */,
 				541128761E7280930050C301 /* YMSignOutCell.xib in Resources */,
 				54DFB7551E6E90BC0089E06B /* YMWebViewController.xib in Resources */,
 				546EED091E9B385900E1E99F /* YMRedBagController.xib in Resources */,
+				54FF82031EB1EDAB0093503D /* SSKeychain.strings in Resources */,
 				5415541A1E7BBE5D00E85A86 /* ico_check_select@2x.png in Resources */,
 				5415541E1E7BBE5D00E85A86 /* plus@3x.png in Resources */,
 				546EED591E9FAC4200E1E99F /* guide_page_3@2x.png in Resources */,
@@ -2583,6 +2580,7 @@
 				541553FA1E7BBD8800E85A86 /* JJPhotoManeger.m in Sources */,
 				186F42271E5AFC31002F4CDC /* BaseViewController.m in Sources */,
 				186F41C11E5ABA68002F4CDC /* YMNavigationController.m in Sources */,
+				54FF81FB1EB1BAB90093503D /* IMY_NJKWebViewProgress.m in Sources */,
 				54D07EAB1E8CEB2E00CAA5ED /* UIView+SDExtension.m in Sources */,
 				186F41A71E5A9A42002F4CDC /* NSString+Catogory.m in Sources */,
 				18D68E471E5BD8E700A42FE0 /* SDBrowserImageView.m in Sources */,
@@ -2595,6 +2593,7 @@
 				54D07EA71E8CEB2E00CAA5ED /* TADotView.m in Sources */,
 				186F422A1E5AFC47002F4CDC /* BaseView.m in Sources */,
 				54C452961E5D6AFB00E5B5A1 /* HttpManger.m in Sources */,
+				54FF82041EB1EDAB0093503D /* SSKeychainQuery.m in Sources */,
 				186F41A81E5A9A42002F4CDC /* NSString+Hash.m in Sources */,
 				5414B6891E6672C5002403B9 /* YMDetailButtonView.m in Sources */,
 				546EED361E9CEAC500E1E99F /* YMSetPhoneTwiceController.m in Sources */,
@@ -2604,6 +2603,7 @@
 				541554051E7BBDF700E85A86 /* HWPublishBaseController.m in Sources */,
 				5406D3901E64163F00DE565B /* YMTaskInvalidCell.m in Sources */,
 				541554011E7BBD8800E85A86 /* MShowAllGroup.m in Sources */,
+				54FF81FC1EB1BAB90093503D /* IMYWebView.m in Sources */,
 				546EECF91E94EB8300E1E99F /* YMWithdrawModel.m in Sources */,
 				186F41BB1E5AB8AE002F4CDC /* HKTabBar.m in Sources */,
 				5489FDA41E7A624C00ABB3EF /* YMWithdrawController.m in Sources */,
@@ -2650,6 +2650,7 @@
 				546EED3D1E9E12EA00E1E99F /* TestActionProxy.m in Sources */,
 				54D07EA61E8CEB2E00CAA5ED /* TAAnimatedDotView.m in Sources */,
 				546EED3A1E9DFDC500E1E99F /* JSObjectUtil.m in Sources */,
+				54FF82071EB3114B0093503D /* RegExCategories.m in Sources */,
 				186F421A1E5AF40C002F4CDC /* ReachStateUnReachable.m in Sources */,
 				186F42181E5AF40C002F4CDC /* ReachStateLoading.m in Sources */,
 				541128661E7277320050C301 /* YMWalletController.m in Sources */,
@@ -2671,7 +2672,6 @@
 				18D68E561E5BDD8D00A42FE0 /* YMMeViewController.m in Sources */,
 				546EED791EA0C26300E1E99F /* GRBPayPsdInputView.m in Sources */,
 				5423E29A1E84F49D003CD02E /* NSArray+ ZXPUnicode.m in Sources */,
-				5414B6A91E66D75E002403B9 /* YMCommissionCell.m in Sources */,
 				186F41821E5A9673002F4CDC /* AppDelegate.mm in Sources */,
 				541554671E80DCE100E85A86 /* UIControl+Custom.m in Sources */,
 				541553F21E7BBD8800E85A86 /* MHeaderImaCell.m in Sources */,
@@ -2680,6 +2680,7 @@
 				54AC91B41E6CFBEC00F78596 /* HyperlinksButton.m in Sources */,
 				186F41C41E5ABDBC002F4CDC /* UserModel.m in Sources */,
 				546EED1B1E9B8CF500E1E99F /* NSTimer+addition.m in Sources */,
+				54FF82021EB1EDAB0093503D /* SSKeychain.m in Sources */,
 				5414B6B31E67E087002403B9 /* YMContentCell.m in Sources */,
 				54D07E801E8C9FE300CAA5ED /* YMMainController.m in Sources */,
 				541128871E77DA950050C301 /* YMQRGenator.m in Sources */,
@@ -2689,7 +2690,6 @@
 				542484741E5EE357009CAA6C /* MainItemButton.m in Sources */,
 				54D07EDC1E8F5C6B00CAA5ED /* YMModifyPasswdController.m in Sources */,
 				5406D3AB1E6515F300DE565B /* YMTaskDetailController.m in Sources */,
-				541128611E7276AF0050C301 /* YMTeamListController.m in Sources */,
 				546EED181E9B8C0700E1E99F /* YMWebProgressLayer.m in Sources */,
 				186F42211E5AF40C002F4CDC /* RealReachability.m in Sources */,
 				18D68E4F1E5BDA2700A42FE0 /* UIImage+Extension.m in Sources */,
@@ -2733,6 +2733,7 @@
 				54D07EC71E8E1E4600CAA5ED /* YMMainHeadCell.m in Sources */,
 				541553F81E7BBD8800E85A86 /* JJOneScrollView.m in Sources */,
 				54D07EB31E8CF17C00CAA5ED /* CateButton.m in Sources */,
+				54FF81E21EADF9260093503D /* YMRegistWebController.m in Sources */,
 				186F42171E5AF40C002F4CDC /* ReachState.m in Sources */,
 				186F421C1E5AF40C002F4CDC /* ReachStateWWAN.m in Sources */,
 				5411283B1E715AE90050C301 /* YMTaskNumModel.m in Sources */,
@@ -2742,6 +2743,7 @@
 				5423E2AD1E88F487003CD02E /* BRPlaceholderTextView.m in Sources */,
 				54D07EAA1E8CEB2E00CAA5ED /* SDCycleScrollView.m in Sources */,
 				54DFB7541E6E90BC0089E06B /* YMWebViewController.m in Sources */,
+				54FF81F51EB18A3D0093503D /* YMWKWebViewController.m in Sources */,
 				542484661E5E93B3009CAA6C /* YMLocationButton.m in Sources */,
 				18D68E6D1E5C027800A42FE0 /* YMLoginController.m in Sources */,
 				541553F41E7BBD8800E85A86 /* HWCollectionViewCell.m in Sources */,
@@ -2860,7 +2862,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2902,7 +2904,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2919,7 +2921,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = CloudPush/CloudPush.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = NAZESGN55V;
+				DEVELOPMENT_TEAM = BXNJAEDFYS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2940,6 +2942,7 @@
 					"$(PROJECT_DIR)/CloudPush/Public/Frame/JPush",
 					"$(PROJECT_DIR)/CloudPush/Public/Frame/BankCardVerify",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2961,7 +2964,7 @@
 					"-Objc",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.youmeng.CloudPush;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youmeng.shangDuoDuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2978,7 +2981,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = CloudPush/CloudPush.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = NAZESGN55V;
+				DEVELOPMENT_TEAM = BXNJAEDFYS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2999,6 +3002,7 @@
 					"$(PROJECT_DIR)/CloudPush/Public/Frame/JPush",
 					"$(PROJECT_DIR)/CloudPush/Public/Frame/BankCardVerify",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -3020,7 +3024,7 @@
 					"-Objc",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.youmeng.CloudPush;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youmeng.shangDuoDuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3088,7 +3092,7 @@
 				186F41631E5A9524002F4CDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		186F41641E5A9524002F4CDC /* Build configuration list for PBXNativeTarget "CloudPush" */ = {
 			isa = XCConfigurationList;
@@ -3097,7 +3101,7 @@
 				186F41661E5A9524002F4CDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		186F41671E5A9524002F4CDC /* Build configuration list for PBXNativeTarget "CloudPushTests" */ = {
 			isa = XCConfigurationList;
@@ -3106,7 +3110,7 @@
 				186F41691E5A9524002F4CDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		186F416A1E5A9524002F4CDC /* Build configuration list for PBXNativeTarget "CloudPushUITests" */ = {
 			isa = XCConfigurationList;
@@ -3115,7 +3119,7 @@
 				186F416C1E5A9524002F4CDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

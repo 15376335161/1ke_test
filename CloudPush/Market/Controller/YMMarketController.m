@@ -125,7 +125,7 @@
     self.messageBtn = [Factory createNavBarButtonWithImageStr:@"news" target:self selector:@selector(messageBtnClick:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_messageBtn];
     
-    _mesgNumLabel = [Factory createCircleLabelWithFrame:CGRectMake(CGRectGetWidth(_messageBtn.frame) - 5 , -5, 14, 14) text:@"9" textColor:WhiteColor fontSize:10 bgColor:RedColor borderColor:RedColor borderWidth:1];
+    _mesgNumLabel = [Factory createCircleLabelWithFrame:CGRectMake(CGRectGetWidth(_messageBtn.frame) - 5 , -5, 14, 14) text:@"0" textColor:WhiteColor fontSize:10 bgColor:RedColor borderColor:RedColor borderWidth:1];
      [_messageBtn addSubview:_mesgNumLabel];
 }
 -(void)messageBtnClick:(UIButton* )btn{

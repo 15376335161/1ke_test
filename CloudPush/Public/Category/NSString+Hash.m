@@ -234,6 +234,22 @@
 }
 
 
-
+//一般加密都是对二进制进行编码
+//给一个字符串,进行base64 编码,返回结果
+-(NSString *)base64Endcode:(NSString *)string{
+    //1.将字符串转成二进制数据
+    NSData * data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    //2.返回base64编码的结构
+    return  [data base64EncodedStringWithOptions:0];
+}
+/**
+ *  解码
+ */
+-(NSString *)base64Decode:(NSString *)string{
+    //1.将base64 编码后的字符串,转成二进制
+    NSData * data = [[NSData alloc] initWithBase64EncodedString:string options:0];
+    //2.返回字符串
+    return  [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
 
 @end
