@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'BA440F5C887BC7688C7744CBFDAE073B'
+               BlueprintIdentifier = '24C3E41B7DBA809355CD6A1E4DB0046B'
                BlueprintName = 'Pods-CloudPush'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPods-CloudPush.a'>

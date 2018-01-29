@@ -15,9 +15,10 @@
 
 #import "YMMainController.h"
 #import "YMPartnerController.h"
-
-
+//imyWebView
 #import "YMWKWebViewController.h"
+//wkwebView
+#import "WKWebViewController.h"
 
 @interface YMTabBarController ()
 
@@ -63,10 +64,8 @@
     [self addChildViewController:naVc];
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-   
 }
 
 

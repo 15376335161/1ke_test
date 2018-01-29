@@ -89,7 +89,7 @@
          imgView.hidden = NO;
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
-        [imgView sd_setImageWithURL:[NSURL URLWithString:_picPathStringsArray[0]] placeholderImage:[UIImage imageNamed:@"management"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imgView sd_setImageWithURL:[NSURL URLWithString:_picPathStringsArray[0]] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (image.size.width) {
                 itemH = image.size.height / image.size.width * itemW;
             }

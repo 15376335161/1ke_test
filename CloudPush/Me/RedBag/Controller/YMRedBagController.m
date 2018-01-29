@@ -33,25 +33,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //红包 和 签到页
-    //redirectSiteIndex
-    self.isLoginStatusChanged = [kUserDefaults valueForKey:kisRefresh];
+    // redirectSiteIndex
+    // self.isLoginStatusChanged = [kUserDefaults boolForKey:kisRefresh];
     //设置返回按钮
     [self setLeftBackButton];
- 
     //加载界面
     self.webView.delegate = self;
     self.webView.userInteractionEnabled = YES;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]]];
-
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //消息中心
-    if (self.isLoginStatusChanged != [kUserDefaults boolForKey:kisRefresh]) {
-        NSString* urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",UserSignListURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
-        self.isLoginStatusChanged = [kUserDefaults boolForKey:kisRefresh];
-    }
 }
 //设置返回按钮
 -(void)setLeftBackButton{
@@ -132,11 +124,6 @@
         [self presentViewController:nav animated:YES completion:nil];
     });
     
-    //    YMRegistViewController* lvc = [[YMRegistViewController alloc]init];
-    //    YMNavigationController* nav = [[YMNavigationController alloc]initWithRootViewController:lvc];
-    //    DDLog(@"登录");
-    //    lvc.title = @"注册";
-    //    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

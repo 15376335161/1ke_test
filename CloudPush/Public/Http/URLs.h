@@ -15,7 +15,7 @@
 #define TOKEN_TIMEOUT   @"-999999"
 #define FAILURE_TOKEN   @"API_FAILURE_TOKEN"
 
-#define  BaseApi          @"http://192.168.10.31:8081/" //@"http://apiyzt.youmeng.com/"  //
+#define  BaseApi         @"http://apiyzt.youmeng.com/"  //@"http://192.168.10.31:8081/" //
 
 //请求首页数据
 #define HomeDataURL        [NSString stringWithFormat:@"%@%@",BaseApi,@"Api/home"]
@@ -27,8 +27,7 @@
 #define RegistProtocalURL    [NSString stringWithFormat:@"%@%@",BaseApi,@"Reg/agrement"]
 //@"http://apiyzt.youmeng.com/Reg/agrement"
 //关于我们
-#define AboutUsURL           @"http://sdd.youmeng.com/about.html"
-
+#define AboutUsURL              @"http://sdd.youmeng.com/about.html"
 
 //忘密码 图形验证码
 #define ForgetImgCodeCheckURL   @"http://passport.youmeng.com/find/checkfindcaptcha"

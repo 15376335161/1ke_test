@@ -15,13 +15,12 @@
 #import "YMProductModel.h"
 #import "YMBannerModel.h"
 #import "YMHeadFootView.h"
-#import "YMWebViewController.h"
 #import "BaseWebViewController.h"
 #import "YMRedBagController.h"
 #import "BaseWebViewController.h"
 #import "YMMsgListController.h"
 #import "YMPartnerController.h"
-
+#import "YMSignUpController.h"
 
 
 @interface YMMainController ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate>
@@ -221,7 +220,7 @@
                     case 0:
                     {
                         DDLog(@"签到领一元");
-                        YMRedBagController* wvc = [[YMRedBagController alloc]init];
+                        YMSignUpController* wvc = [[YMSignUpController alloc]init];
                         wvc.urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",UserSignListURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]] ;
                         wvc.title = @"签到领一元";
                         wvc.hidesBottomBarWhenPushed = YES;
@@ -261,15 +260,15 @@
         {
             if (self.newsProductListArr.count > 0) {//新手推荐
                  prodctCell.model = self.newsProductListArr[indexPath.row];
-                if (indexPath.row == self.newsProductListArr.count - 1) {
-                    prodctCell.height += 10;
-                }
+//                if (indexPath.row == self.newsProductListArr.count - 1) {
+//                    prodctCell.height += 10;
+//                }
             }else{
                  // 热门推荐
                  prodctCell.model = self.hostProdtListArr[indexPath.row];
-                if (indexPath.row == self.hostProdtListArr.count - 1) {
-                    prodctCell.height += 10;
-                }
+//                if (indexPath.row == self.hostProdtListArr.count - 1) {
+//                    prodctCell.height += 10;
+//                }
             }
             return prodctCell;
         }

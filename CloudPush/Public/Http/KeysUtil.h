@@ -96,15 +96,17 @@ static BOOL kIsProduct = YES;
 #define ClearColor      [UIColor clearColor]
 //背景色
 #define BackGroundColor       HEX(@"F0F0F0")// RGBA(239, 239, 244, 1)
-//按钮的颜色
+//按钮的颜色 --- tabBar 选中的颜色
 #define NavBarTintColor       HEX(@"ef5316")//RGBA(90, 162, 238, 1)  HEX(@"2196F3")
+//不可点击颜色
+#define NavBar_UnabelColor    HEX(@"bebebe")
 
+//导航栏背景颜色
 #define DefaultNavBarColor    HEX(@"414b4d")
 
 #define TabBarTintColor       HEX(@"ef5316")
 
-//不可点击颜色
-#define NavBar_UnabelColor    HEX(@"bebebe")
+
 
 //传入RGB三个参数，得到颜色
 #define RGB(r,g,b) RGBA(r,g,b,1.f)

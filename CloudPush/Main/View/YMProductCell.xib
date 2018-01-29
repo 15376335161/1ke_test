@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -110,7 +110,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预期年化收益率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kd7-Qj-4fm">
-                        <rect key="frame" x="21" y="137" width="93" height="16"/>
+                        <rect key="frame" x="21" y="140" width="93" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -122,20 +122,20 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="首次投资返现" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osY-OO-HvU">
-                        <rect key="frame" x="150.5" y="137" width="80" height="16"/>
+                        <rect key="frame" x="150.5" y="140" width="80" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBV-mC-x0D">
-                        <rect key="frame" x="133" y="92" width="1" height="61"/>
+                        <rect key="frame" x="133" y="92" width="1" height="64"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="iBP-Sy-P9U"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000元起投" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2CZ-lb-vzY">
-                        <rect key="frame" x="297" y="114.5" width="67" height="16"/>
+                        <rect key="frame" x="297" y="119" width="67" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="b8Q-ye-urb"/>
                         </constraints>
@@ -144,7 +144,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUM-R3-LdO">
-                        <rect key="frame" x="25" y="178" width="324" height="37"/>
+                        <rect key="frame" x="25" y="181" width="324" height="37"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.32549019610000002" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="37" id="OhS-xV-NYc"/>
@@ -180,13 +180,13 @@
                     <constraint firstItem="RXd-cw-oyY" firstAttribute="top" secondItem="jbX-ZA-tON" secondAttribute="bottom" constant="25" id="chH-q0-h3J"/>
                     <constraint firstItem="jbX-ZA-tON" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="gRf-Hd-7bR"/>
                     <constraint firstAttribute="trailing" secondItem="krJ-8D-d1d" secondAttribute="trailing" constant="15" id="jPQ-Zz-mut"/>
-                    <constraint firstItem="2CZ-lb-vzY" firstAttribute="centerY" secondItem="hBV-mC-x0D" secondAttribute="centerY" id="mO2-uo-zKj"/>
+                    <constraint firstItem="2CZ-lb-vzY" firstAttribute="centerY" secondItem="hBV-mC-x0D" secondAttribute="centerY" constant="3" id="mO2-uo-zKj"/>
                     <constraint firstAttribute="trailing" secondItem="jbX-ZA-tON" secondAttribute="trailing" constant="90" id="tCL-Qc-cgN"/>
                     <constraint firstItem="krJ-8D-d1d" firstAttribute="top" secondItem="q6x-1d-1zg" secondAttribute="bottom" id="uiX-tU-d4p"/>
                     <constraint firstItem="krJ-8D-d1d" firstAttribute="top" secondItem="Gm9-l7-Lx9" secondAttribute="bottom" constant="5" id="wXC-E9-Ri5"/>
                     <constraint firstItem="jbX-ZA-tON" firstAttribute="top" secondItem="krJ-8D-d1d" secondAttribute="bottom" constant="10" id="zQo-j3-GE6"/>
                     <constraint firstItem="kd7-Qj-4fm" firstAttribute="centerX" secondItem="RXd-cw-oyY" secondAttribute="centerX" id="zSp-uN-AHs"/>
-                    <constraint firstItem="kd7-Qj-4fm" firstAttribute="top" secondItem="RXd-cw-oyY" secondAttribute="bottom" constant="15" id="zSv-bF-9Zy"/>
+                    <constraint firstItem="kd7-Qj-4fm" firstAttribute="top" secondItem="RXd-cw-oyY" secondAttribute="bottom" constant="18" id="zSv-bF-9Zy"/>
                     <constraint firstItem="vUM-R3-LdO" firstAttribute="top" secondItem="osY-OO-HvU" secondAttribute="bottom" constant="25" id="zTu-jQ-jJd"/>
                 </constraints>
             </tableViewCellContentView>

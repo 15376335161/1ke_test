@@ -12,7 +12,6 @@
 #import "YMRegistViewController.h"
 
 
-
 @protocol JSObjcDelegate <JSExport>
 
 -(void)needLogin:(NSString* )loginString;
@@ -45,7 +44,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //点完登录 刷新界面 --  这里会有bug
+    //点完登录 刷新界面 -- 这里会有bug
     if (self.isLoginStatusChanged != [kUserDefaults boolForKey:kisRefresh]) {
         NSString* urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",UserSignListURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
@@ -71,12 +70,15 @@
 #pragma mark - UIWebViewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     DDLog(@"开始加载数据 request == %@",request);
+  
     return YES;
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     DDLog(@"开始加载数据");
+     [self.progressLayer startLoad];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [self.progressLayer finishedLoad];
     //加载完毕后，进度条完成
     self.jsContext = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     self.jsContext.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue) {
@@ -95,6 +97,7 @@
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     DDLog(@"errror === %@",error);
+     [self.progressLayer finishedLoad];
 }
 
 #pragma mark - JSExportDelegate

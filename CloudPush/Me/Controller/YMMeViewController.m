@@ -21,6 +21,8 @@
 #import "YMRedBagController.h"
 #import "YMTaskBaseController.h"
 #import "YMPartnerController.h"
+#import "YMRegistWebController.h"
+#import "SDAutoLayout.h"
 
 
 @interface YMMeViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
@@ -48,18 +50,24 @@
 
 //显示框
 @property(nonatomic,strong)MBProgressHUD* HUD;
+
 @end
 
 @implementation YMMeViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     //调整 设置 修改 view
     [self modifyView];
-    
+   
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (_barImageView ) {
+        _barImageView = self.navigationController.navigationBar.subviews.firstObject;
+        _barImageView.alpha = 0;
+    }
      //再定义一个imageview来等同于这个黑线
      navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
      navBarHairlineImageView.hidden = YES;
@@ -80,6 +88,8 @@
 {
     [super viewWillDisappear:animated];
     navBarHairlineImageView.hidden = NO;
+    //恢复之前的导航色
+    _barImageView.alpha = 1;
 }
 
 //通过一个方法来找到这个黑线(findHairlineImageViewUnder):
@@ -109,10 +119,26 @@
     self.tableView.tableFooterView = [UIView new];
     self.view.backgroundColor = NavBarTintColor;
     
-    //iOS 4s 适配问题
-    if (SCREEN_HEGIHT == 480) {
-        self.tableView.scrollEnabled = YES;
-    }
+    //处理导航 透明问题
+    _barImageView = self.navigationController.navigationBar.subviews.firstObject;
+    _barImageView.alpha = 0;
+    
+    //设置背景
+    UIView* topBgView = [[UIView alloc]init];
+    topBgView.backgroundColor = DefaultNavBarColor;
+    [self.view insertSubview:topBgView atIndex:1];
+    topBgView.sd_layout.topSpaceToView(self.view, -64).leftEqualToView(self.view).rightEqualToView(self.view).heightIs(self.view.height/2);
+    
+    //调整tabBar 背景
+    self.tableView.sd_layout.bottomSpaceToView(self.view, 48);
+    [self.view bringSubviewToFront:self.tableView];
+    //    UIVisualEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    //    UIVisualEffectView *vew = [[UIVisualEffectView alloc]initWithEffect:blur];
+    self.tabBarController.tabBar.backgroundColor = WhiteColor;
+    self.view.backgroundColor = BackGroundColor;
+
+    self.tableView.scrollEnabled = YES;
+
     YMWeakSelf;
     _headIconCell = [[[NSBundle mainBundle]loadNibNamed:@"YMMeIconCell" owner:nil options:nil] lastObject];
     _headIconCell.changeIconBlock = ^{
@@ -145,7 +171,7 @@
     if (section == 0) {
         return 2;
     }else{
-        return 4;
+        return 5;
     }
 }
 -(UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -236,6 +262,12 @@
                     tvc.title = @"意见反馈";
                     tvc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:tvc animated:YES];
+                }else{
+                    YMRegistWebController* svc = [[YMRegistWebController alloc]init];
+                    svc.title = @"关于我们";
+                    svc.urlStr = AboutUsURL;
+                    svc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:svc animated:YES];
                 }
             }
                 break;
@@ -269,7 +301,6 @@
     [param setObject:[kUserDefaults valueForKey:kUid] forKey:@"uid"]; //                               //[kUserDefaults valueForKey:kUid]
     [param setObject:[kUserDefaults valueForKey:kToken] forKey:@"ssotoken"];//@"4a70ef79952fbb9cd62eefd0edc139a6"
     [[HttpManger sharedInstance]callHTTPReqAPI:UserPayInfoURL params:param view:self.view loading:YES tableView:nil completionHandler:^(id task, id responseObject, NSError *error) {
-        
          weakSelf.usrModel = [UserModel mj_objectWithKeyValues:responseObject[@"data"]];
         //存储用户信息
         [[YMUserManager shareInstance] saveUserInfoByUsrModel:weakSelf.usrModel];
@@ -369,13 +400,13 @@
 #pragma mark - lazy
 -(NSArray *)titileArr{
     if (!_titileArr) {
-        _titileArr = @[@"我的钱包",@"参与记录",@"我的红包",@"消息中心",@"意见反馈"];
+        _titileArr = @[@"我的钱包",@"参与记录",@"我的红包",@"消息中心",@"意见反馈",@"关于我们"];
     }
     return _titileArr;
 }
 -(NSArray *)iconArr{
     if (!_iconArr) {
-        _iconArr = @[@"my_cont_wallet",@"my_cont_record",@"my_cont_red packe",@"my_cont_news",@"my_cont_feedback"];
+        _iconArr = @[@"my_cont_wallet",@"my_cont_record",@"my_cont_red packe",@"my_cont_news",@"my_cont_feedback",@"aboutUs"];
     }
     return _iconArr;
 }

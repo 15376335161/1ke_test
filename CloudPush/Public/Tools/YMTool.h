@@ -25,8 +25,7 @@
 //系统方法判断网络情况
 + (NSString *)getNetWorkStates;
 
-//这个是用第三方RealReachability监听
-+(BOOL)isNetConnect;
+
 
 //是否开启了定位权限
 + (BOOL)isOnLocation;

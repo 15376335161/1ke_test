@@ -26,20 +26,6 @@
 		186F41C41E5ABDBC002F4CDC /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F41C31E5ABDBC002F4CDC /* UserModel.m */; };
 		186F41C71E5ABDF7002F4CDC /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F41C61E5ABDF7002F4CDC /* BaseModel.m */; };
 		186F41CA1E5AE171002F4CDC /* YMTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F41C91E5AE171002F4CDC /* YMTool.m */; };
-		186F42141E5AF40C002F4CDC /* LocalConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F41F81E5AF40B002F4CDC /* LocalConnection.m */; };
-		186F42151E5AF40C002F4CDC /* FSMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F41FC1E5AF40B002F4CDC /* FSMEngine.m */; };
-		186F42161E5AF40C002F4CDC /* FSMStateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F41FE1E5AF40B002F4CDC /* FSMStateUtil.m */; };
-		186F42171E5AF40C002F4CDC /* ReachState.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F42001E5AF40B002F4CDC /* ReachState.m */; };
-		186F42181E5AF40C002F4CDC /* ReachStateLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F42021E5AF40B002F4CDC /* ReachStateLoading.m */; };
-		186F42191E5AF40C002F4CDC /* ReachStateUnloaded.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F42041E5AF40B002F4CDC /* ReachStateUnloaded.m */; };
-		186F421A1E5AF40C002F4CDC /* ReachStateUnReachable.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F42061E5AF40C002F4CDC /* ReachStateUnReachable.m */; };
-		186F421B1E5AF40C002F4CDC /* ReachStateWIFI.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F42081E5AF40C002F4CDC /* ReachStateWIFI.m */; };
-		186F421C1E5AF40C002F4CDC /* ReachStateWWAN.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F420A1E5AF40C002F4CDC /* ReachStateWWAN.m */; };
-		186F421D1E5AF40C002F4CDC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 186F420B1E5AF40C002F4CDC /* Info.plist */; };
-		186F421E1E5AF40C002F4CDC /* PingFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F420E1E5AF40C002F4CDC /* PingFoundation.m */; };
-		186F421F1E5AF40C002F4CDC /* PingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F42101E5AF40C002F4CDC /* PingHelper.m */; };
-		186F42201E5AF40C002F4CDC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 186F42111E5AF40C002F4CDC /* README.md */; };
-		186F42211E5AF40C002F4CDC /* RealReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F42131E5AF40C002F4CDC /* RealReachability.m */; };
 		186F42241E5AF4E4002F4CDC /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F42231E5AF4E4002F4CDC /* MBProgressHUD+Add.m */; };
 		186F42271E5AFC31002F4CDC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F42261E5AFC31002F4CDC /* BaseViewController.m */; };
 		186F422A1E5AFC47002F4CDC /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F42291E5AFC47002F4CDC /* BaseView.m */; };
@@ -209,6 +195,19 @@
 		542484811E601AD4009CAA6C /* YMMeIconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5424847F1E601AD4009CAA6C /* YMMeIconCell.xib */; };
 		542484851E6045FA009CAA6C /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542484831E6045FA009CAA6C /* TencentOpenAPI.framework */; };
 		542484861E6045FA009CAA6C /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 542484841E6045FA009CAA6C /* TencentOpenApi_IOS_Bundle.bundle */; };
+		5433AAA51ECD4B1800155EC8 /* YMSignUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5433AAA31ECD4B1800155EC8 /* YMSignUpController.m */; };
+		5433AAA61ECD4B1800155EC8 /* YMSignUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5433AAA41ECD4B1800155EC8 /* YMSignUpController.xib */; };
+		5433AAB21ECD4B5300155EC8 /* WeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5433AAA81ECD4B5300155EC8 /* WeakScriptMessageDelegate.m */; };
+		5433AAB31ECD4B5300155EC8 /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5433AAAA1ECD4B5300155EC8 /* WKWebViewController.m */; };
+		5433AAB41ECD4B5300155EC8 /* WKWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5433AAAB1ECD4B5300155EC8 /* WKWebViewController.xib */; };
+		5433AAB51ECD4B5300155EC8 /* YMRegistWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5433AAAD1ECD4B5300155EC8 /* YMRegistWebController.m */; };
+		5433AAB61ECD4B5300155EC8 /* YMRegistWebController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5433AAAE1ECD4B5300155EC8 /* YMRegistWebController.xib */; };
+		5433AAB71ECD4B5300155EC8 /* YMWKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5433AAB01ECD4B5300155EC8 /* YMWKWebViewController.m */; };
+		5433AAB81ECD4B5300155EC8 /* YMWKWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5433AAB11ECD4B5300155EC8 /* YMWKWebViewController.xib */; };
+		5433AABC1ECD4E2200155EC8 /* YMWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5433AABA1ECD4E2200155EC8 /* YMWebViewController.m */; };
+		5433AABD1ECD4E2200155EC8 /* YMWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5433AABB1ECD4E2200155EC8 /* YMWebViewController.xib */; };
+		5433AAC01ECD6AF600155EC8 /* YMCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 5433AABF1ECD6AF600155EC8 /* YMCoding.m */; };
+		54370D7F1ECA978B00A3E60F /* WYWeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 54370D7E1ECA978B00A3E60F /* WYWeakScriptMessageDelegate.m */; };
 		546DEBDA1E691BB70007567F /* YMTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 546DEBD91E691BB70007567F /* YMTaskModel.m */; };
 		546EECEB1E948C6D00E1E99F /* YMMeWalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 546EECE91E948C6D00E1E99F /* YMMeWalletCell.m */; };
 		546EECEC1E948C6D00E1E99F /* YMMeWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546EECEA1E948C6D00E1E99F /* YMMeWalletCell.xib */; };
@@ -315,8 +314,6 @@
 		54DFB7481E6D5D3D0089E06B /* YMPaySecrectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DFB7461E6D5D3D0089E06B /* YMPaySecrectController.m */; };
 		54DFB7491E6D5D3D0089E06B /* YMPaySecrectController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54DFB7471E6D5D3D0089E06B /* YMPaySecrectController.xib */; };
 		54DFB7501E6E5C890089E06B /* YMTaskStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DFB74F1E6E5C890089E06B /* YMTaskStatusModel.m */; };
-		54DFB7541E6E90BC0089E06B /* YMWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DFB7521E6E90BC0089E06B /* YMWebViewController.m */; };
-		54DFB7551E6E90BC0089E06B /* YMWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54DFB7531E6E90BC0089E06B /* YMWebViewController.xib */; };
 		54DFB7581E6EB4CD0089E06B /* YMUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DFB7571E6EB4CD0089E06B /* YMUserManager.m */; };
 		54F8EAEC1E5D8E640067DB54 /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F8EAEB1E5D8E640067DB54 /* BaiduMapAPI_Search.framework */; };
 		54F8EAF61E5E6FE30067DB54 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 54F8EAF11E5E6FE30067DB54 /* README.txt */; };
@@ -329,10 +326,6 @@
 		54FF81DA1EADE22C0093503D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FF81D91EADE22C0093503D /* libssl.a */; };
 		54FF81DC1EADE2A10093503D /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FF81DB1EADE2A10093503D /* libWeChatSDK.a */; };
 		54FF81DE1EADE35C0093503D /* libXLYBankCardMessage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FF81DD1EADE35C0093503D /* libXLYBankCardMessage.a */; };
-		54FF81E21EADF9260093503D /* YMRegistWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF81E01EADF9260093503D /* YMRegistWebController.m */; };
-		54FF81E31EADF9260093503D /* YMRegistWebController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54FF81E11EADF9260093503D /* YMRegistWebController.xib */; };
-		54FF81F51EB18A3D0093503D /* YMWKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF81F31EB18A3D0093503D /* YMWKWebViewController.m */; };
-		54FF81F61EB18A3D0093503D /* YMWKWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54FF81F41EB18A3D0093503D /* YMWKWebViewController.xib */; };
 		54FF81FB1EB1BAB90093503D /* IMY_NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF81F81EB1BAB90093503D /* IMY_NJKWebViewProgress.m */; };
 		54FF81FC1EB1BAB90093503D /* IMYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF81FA1EB1BAB90093503D /* IMYWebView.m */; };
 		54FF82021EB1EDAB0093503D /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FF81FE1EB1EDAB0093503D /* SSKeychain.m */; };
@@ -397,33 +390,6 @@
 		186F41C61E5ABDF7002F4CDC /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		186F41C81E5AE171002F4CDC /* YMTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMTool.h; sourceTree = "<group>"; };
 		186F41C91E5AE171002F4CDC /* YMTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMTool.m; sourceTree = "<group>"; };
-		186F41F71E5AF40B002F4CDC /* LocalConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalConnection.h; sourceTree = "<group>"; };
-		186F41F81E5AF40B002F4CDC /* LocalConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalConnection.m; sourceTree = "<group>"; };
-		186F41FA1E5AF40B002F4CDC /* FSMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMDefines.h; sourceTree = "<group>"; };
-		186F41FB1E5AF40B002F4CDC /* FSMEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMEngine.h; sourceTree = "<group>"; };
-		186F41FC1E5AF40B002F4CDC /* FSMEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMEngine.m; sourceTree = "<group>"; };
-		186F41FD1E5AF40B002F4CDC /* FSMStateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMStateUtil.h; sourceTree = "<group>"; };
-		186F41FE1E5AF40B002F4CDC /* FSMStateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMStateUtil.m; sourceTree = "<group>"; };
-		186F41FF1E5AF40B002F4CDC /* ReachState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachState.h; sourceTree = "<group>"; };
-		186F42001E5AF40B002F4CDC /* ReachState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachState.m; sourceTree = "<group>"; };
-		186F42011E5AF40B002F4CDC /* ReachStateLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateLoading.h; sourceTree = "<group>"; };
-		186F42021E5AF40B002F4CDC /* ReachStateLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateLoading.m; sourceTree = "<group>"; };
-		186F42031E5AF40B002F4CDC /* ReachStateUnloaded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateUnloaded.h; sourceTree = "<group>"; };
-		186F42041E5AF40B002F4CDC /* ReachStateUnloaded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateUnloaded.m; sourceTree = "<group>"; };
-		186F42051E5AF40C002F4CDC /* ReachStateUnReachable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateUnReachable.h; sourceTree = "<group>"; };
-		186F42061E5AF40C002F4CDC /* ReachStateUnReachable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateUnReachable.m; sourceTree = "<group>"; };
-		186F42071E5AF40C002F4CDC /* ReachStateWIFI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateWIFI.h; sourceTree = "<group>"; };
-		186F42081E5AF40C002F4CDC /* ReachStateWIFI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateWIFI.m; sourceTree = "<group>"; };
-		186F42091E5AF40C002F4CDC /* ReachStateWWAN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateWWAN.h; sourceTree = "<group>"; };
-		186F420A1E5AF40C002F4CDC /* ReachStateWWAN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateWWAN.m; sourceTree = "<group>"; };
-		186F420B1E5AF40C002F4CDC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		186F420D1E5AF40C002F4CDC /* PingFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingFoundation.h; sourceTree = "<group>"; };
-		186F420E1E5AF40C002F4CDC /* PingFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingFoundation.m; sourceTree = "<group>"; };
-		186F420F1E5AF40C002F4CDC /* PingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingHelper.h; sourceTree = "<group>"; };
-		186F42101E5AF40C002F4CDC /* PingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingHelper.m; sourceTree = "<group>"; };
-		186F42111E5AF40C002F4CDC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		186F42121E5AF40C002F4CDC /* RealReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealReachability.h; sourceTree = "<group>"; };
-		186F42131E5AF40C002F4CDC /* RealReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealReachability.m; sourceTree = "<group>"; };
 		186F42221E5AF4E4002F4CDC /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
 		186F42231E5AF4E4002F4CDC /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		186F42251E5AFC31002F4CDC /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -711,6 +677,27 @@
 		5424847F1E601AD4009CAA6C /* YMMeIconCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMMeIconCell.xib; sourceTree = "<group>"; };
 		542484831E6045FA009CAA6C /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		542484841E6045FA009CAA6C /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		5433AAA21ECD4B1800155EC8 /* YMSignUpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSignUpController.h; sourceTree = "<group>"; };
+		5433AAA31ECD4B1800155EC8 /* YMSignUpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSignUpController.m; sourceTree = "<group>"; };
+		5433AAA41ECD4B1800155EC8 /* YMSignUpController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMSignUpController.xib; sourceTree = "<group>"; };
+		5433AAA71ECD4B5300155EC8 /* WeakScriptMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeakScriptMessageDelegate.h; sourceTree = "<group>"; };
+		5433AAA81ECD4B5300155EC8 /* WeakScriptMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakScriptMessageDelegate.m; sourceTree = "<group>"; };
+		5433AAA91ECD4B5300155EC8 /* WKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewController.h; sourceTree = "<group>"; };
+		5433AAAA1ECD4B5300155EC8 /* WKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewController.m; sourceTree = "<group>"; };
+		5433AAAB1ECD4B5300155EC8 /* WKWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKWebViewController.xib; sourceTree = "<group>"; };
+		5433AAAC1ECD4B5300155EC8 /* YMRegistWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMRegistWebController.h; sourceTree = "<group>"; };
+		5433AAAD1ECD4B5300155EC8 /* YMRegistWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMRegistWebController.m; sourceTree = "<group>"; };
+		5433AAAE1ECD4B5300155EC8 /* YMRegistWebController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMRegistWebController.xib; sourceTree = "<group>"; };
+		5433AAAF1ECD4B5300155EC8 /* YMWKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMWKWebViewController.h; sourceTree = "<group>"; };
+		5433AAB01ECD4B5300155EC8 /* YMWKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMWKWebViewController.m; sourceTree = "<group>"; };
+		5433AAB11ECD4B5300155EC8 /* YMWKWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMWKWebViewController.xib; sourceTree = "<group>"; };
+		5433AAB91ECD4E2200155EC8 /* YMWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMWebViewController.h; sourceTree = "<group>"; };
+		5433AABA1ECD4E2200155EC8 /* YMWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMWebViewController.m; sourceTree = "<group>"; };
+		5433AABB1ECD4E2200155EC8 /* YMWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMWebViewController.xib; sourceTree = "<group>"; };
+		5433AABE1ECD6AF600155EC8 /* YMCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMCoding.h; sourceTree = "<group>"; };
+		5433AABF1ECD6AF600155EC8 /* YMCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMCoding.m; sourceTree = "<group>"; };
+		54370D7D1ECA978B00A3E60F /* WYWeakScriptMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYWeakScriptMessageDelegate.h; sourceTree = "<group>"; };
+		54370D7E1ECA978B00A3E60F /* WYWeakScriptMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYWeakScriptMessageDelegate.m; sourceTree = "<group>"; };
 		546DEBD81E691BB70007567F /* YMTaskModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMTaskModel.h; sourceTree = "<group>"; };
 		546DEBD91E691BB70007567F /* YMTaskModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMTaskModel.m; sourceTree = "<group>"; };
 		546EECE81E948C6D00E1E99F /* YMMeWalletCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMMeWalletCell.h; sourceTree = "<group>"; };
@@ -877,9 +864,6 @@
 		54DFB7471E6D5D3D0089E06B /* YMPaySecrectController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMPaySecrectController.xib; sourceTree = "<group>"; };
 		54DFB74E1E6E5C890089E06B /* YMTaskStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMTaskStatusModel.h; sourceTree = "<group>"; };
 		54DFB74F1E6E5C890089E06B /* YMTaskStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMTaskStatusModel.m; sourceTree = "<group>"; };
-		54DFB7511E6E90BC0089E06B /* YMWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMWebViewController.h; sourceTree = "<group>"; };
-		54DFB7521E6E90BC0089E06B /* YMWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMWebViewController.m; sourceTree = "<group>"; };
-		54DFB7531E6E90BC0089E06B /* YMWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMWebViewController.xib; sourceTree = "<group>"; };
 		54DFB7561E6EB4CD0089E06B /* YMUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMUserManager.h; sourceTree = "<group>"; };
 		54DFB7571E6EB4CD0089E06B /* YMUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMUserManager.m; sourceTree = "<group>"; };
 		54F8EAEB1E5D8E640067DB54 /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
@@ -896,12 +880,6 @@
 		54FF81D91EADE22C0093503D /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		54FF81DB1EADE2A10093503D /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		54FF81DD1EADE35C0093503D /* libXLYBankCardMessage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXLYBankCardMessage.a; sourceTree = "<group>"; };
-		54FF81DF1EADF9260093503D /* YMRegistWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMRegistWebController.h; sourceTree = "<group>"; };
-		54FF81E01EADF9260093503D /* YMRegistWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMRegistWebController.m; sourceTree = "<group>"; };
-		54FF81E11EADF9260093503D /* YMRegistWebController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMRegistWebController.xib; sourceTree = "<group>"; };
-		54FF81F21EB18A3D0093503D /* YMWKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMWKWebViewController.h; sourceTree = "<group>"; };
-		54FF81F31EB18A3D0093503D /* YMWKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMWKWebViewController.m; sourceTree = "<group>"; };
-		54FF81F41EB18A3D0093503D /* YMWKWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMWKWebViewController.xib; sourceTree = "<group>"; };
 		54FF81F71EB1BAB90093503D /* IMY_NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMY_NJKWebViewProgress.h; sourceTree = "<group>"; };
 		54FF81F81EB1BAB90093503D /* IMY_NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMY_NJKWebViewProgress.m; sourceTree = "<group>"; };
 		54FF81F91EB1BAB90093503D /* IMYWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMYWebView.h; sourceTree = "<group>"; };
@@ -1052,6 +1030,7 @@
 		186F416D1E5A95D4002F4CDC /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				5433AAA11ECD4AAC00155EC8 /* WebView */,
 				18D68E311E5BD3CE00A42FE0 /* CustomView */,
 				186F41CB1E5AF34E002F4CDC /* Frame */,
 				186F419C1E5A9A24002F4CDC /* Other */,
@@ -1169,9 +1148,6 @@
 				54AC91AD1E6CF3F600F78596 /* YMResetPasswordController.h */,
 				54AC91AE1E6CF3F600F78596 /* YMResetPasswordController.m */,
 				54AC91AF1E6CF3F600F78596 /* YMResetPasswordController.xib */,
-				54DFB7511E6E90BC0089E06B /* YMWebViewController.h */,
-				54DFB7521E6E90BC0089E06B /* YMWebViewController.m */,
-				54DFB7531E6E90BC0089E06B /* YMWebViewController.xib */,
 				54D07ED91E8F5C6A00CAA5ED /* YMModifyPasswdController.h */,
 				54D07EDA1E8F5C6A00CAA5ED /* YMModifyPasswdController.m */,
 				54D07EDB1E8F5C6B00CAA5ED /* YMModifyPasswdController.xib */,
@@ -1233,12 +1209,11 @@
 				546EED1F1E9B929500E1E99F /* BaseWebViewController.h */,
 				546EED201E9B929600E1E99F /* BaseWebViewController.m */,
 				546EED211E9B929600E1E99F /* BaseWebViewController.xib */,
-				54FF81DF1EADF9260093503D /* YMRegistWebController.h */,
-				54FF81E01EADF9260093503D /* YMRegistWebController.m */,
-				54FF81E11EADF9260093503D /* YMRegistWebController.xib */,
-				54FF81F21EB18A3D0093503D /* YMWKWebViewController.h */,
-				54FF81F31EB18A3D0093503D /* YMWKWebViewController.m */,
-				54FF81F41EB18A3D0093503D /* YMWKWebViewController.xib */,
+				5433AAB91ECD4E2200155EC8 /* YMWebViewController.h */,
+				5433AABA1ECD4E2200155EC8 /* YMWebViewController.m */,
+				5433AABB1ECD4E2200155EC8 /* YMWebViewController.xib */,
+				5433AABE1ECD6AF600155EC8 /* YMCoding.h */,
+				5433AABF1ECD6AF600155EC8 /* YMCoding.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1274,67 +1249,8 @@
 				54C452991E5D737A00E5B5A1 /* BaiduMap_IOSSDK_v3 */,
 				18D68E6F1E5C08C000A42FE0 /* SDAutoLayout */,
 				18D68E3F1E5BD8E700A42FE0 /* SDPhotoBrowser */,
-				186F41F51E5AF40B002F4CDC /* RealReachability */,
 			);
 			path = Frame;
-			sourceTree = "<group>";
-		};
-		186F41F51E5AF40B002F4CDC /* RealReachability */ = {
-			isa = PBXGroup;
-			children = (
-				186F41F61E5AF40B002F4CDC /* Connection */,
-				186F41F91E5AF40B002F4CDC /* FSM */,
-				186F420B1E5AF40C002F4CDC /* Info.plist */,
-				186F420C1E5AF40C002F4CDC /* Ping */,
-				186F42121E5AF40C002F4CDC /* RealReachability.h */,
-				186F42131E5AF40C002F4CDC /* RealReachability.m */,
-			);
-			path = RealReachability;
-			sourceTree = "<group>";
-		};
-		186F41F61E5AF40B002F4CDC /* Connection */ = {
-			isa = PBXGroup;
-			children = (
-				186F41F71E5AF40B002F4CDC /* LocalConnection.h */,
-				186F41F81E5AF40B002F4CDC /* LocalConnection.m */,
-			);
-			path = Connection;
-			sourceTree = "<group>";
-		};
-		186F41F91E5AF40B002F4CDC /* FSM */ = {
-			isa = PBXGroup;
-			children = (
-				186F41FA1E5AF40B002F4CDC /* FSMDefines.h */,
-				186F41FB1E5AF40B002F4CDC /* FSMEngine.h */,
-				186F41FC1E5AF40B002F4CDC /* FSMEngine.m */,
-				186F41FD1E5AF40B002F4CDC /* FSMStateUtil.h */,
-				186F41FE1E5AF40B002F4CDC /* FSMStateUtil.m */,
-				186F41FF1E5AF40B002F4CDC /* ReachState.h */,
-				186F42001E5AF40B002F4CDC /* ReachState.m */,
-				186F42011E5AF40B002F4CDC /* ReachStateLoading.h */,
-				186F42021E5AF40B002F4CDC /* ReachStateLoading.m */,
-				186F42031E5AF40B002F4CDC /* ReachStateUnloaded.h */,
-				186F42041E5AF40B002F4CDC /* ReachStateUnloaded.m */,
-				186F42051E5AF40C002F4CDC /* ReachStateUnReachable.h */,
-				186F42061E5AF40C002F4CDC /* ReachStateUnReachable.m */,
-				186F42071E5AF40C002F4CDC /* ReachStateWIFI.h */,
-				186F42081E5AF40C002F4CDC /* ReachStateWIFI.m */,
-				186F42091E5AF40C002F4CDC /* ReachStateWWAN.h */,
-				186F420A1E5AF40C002F4CDC /* ReachStateWWAN.m */,
-			);
-			path = FSM;
-			sourceTree = "<group>";
-		};
-		186F420C1E5AF40C002F4CDC /* Ping */ = {
-			isa = PBXGroup;
-			children = (
-				186F420D1E5AF40C002F4CDC /* PingFoundation.h */,
-				186F420E1E5AF40C002F4CDC /* PingFoundation.m */,
-				186F420F1E5AF40C002F4CDC /* PingHelper.h */,
-				186F42101E5AF40C002F4CDC /* PingHelper.m */,
-				186F42111E5AF40C002F4CDC /* README.md */,
-			);
-			path = Ping;
 			sourceTree = "<group>";
 		};
 		18D68E251E5BCEF900A42FE0 /* Market */ = {
@@ -1524,6 +1440,8 @@
 		18D68E311E5BD3CE00A42FE0 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				54370D7D1ECA978B00A3E60F /* WYWeakScriptMessageDelegate.h */,
+				54370D7E1ECA978B00A3E60F /* WYWeakScriptMessageDelegate.m */,
 				54FF81F71EB1BAB90093503D /* IMY_NJKWebViewProgress.h */,
 				54FF81F81EB1BAB90093503D /* IMY_NJKWebViewProgress.m */,
 				54FF81F91EB1BAB90093503D /* IMYWebView.h */,
@@ -1936,6 +1854,27 @@
 				542484841E6045FA009CAA6C /* TencentOpenApi_IOS_Bundle.bundle */,
 			);
 			path = Tencent;
+			sourceTree = "<group>";
+		};
+		5433AAA11ECD4AAC00155EC8 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				5433AAA21ECD4B1800155EC8 /* YMSignUpController.h */,
+				5433AAA31ECD4B1800155EC8 /* YMSignUpController.m */,
+				5433AAA41ECD4B1800155EC8 /* YMSignUpController.xib */,
+				5433AAA71ECD4B5300155EC8 /* WeakScriptMessageDelegate.h */,
+				5433AAA81ECD4B5300155EC8 /* WeakScriptMessageDelegate.m */,
+				5433AAA91ECD4B5300155EC8 /* WKWebViewController.h */,
+				5433AAAA1ECD4B5300155EC8 /* WKWebViewController.m */,
+				5433AAAB1ECD4B5300155EC8 /* WKWebViewController.xib */,
+				5433AAAC1ECD4B5300155EC8 /* YMRegistWebController.h */,
+				5433AAAD1ECD4B5300155EC8 /* YMRegistWebController.m */,
+				5433AAAE1ECD4B5300155EC8 /* YMRegistWebController.xib */,
+				5433AAAF1ECD4B5300155EC8 /* YMWKWebViewController.h */,
+				5433AAB01ECD4B5300155EC8 /* YMWKWebViewController.m */,
+				5433AAB11ECD4B5300155EC8 /* YMWKWebViewController.xib */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		546EED011E9B383200E1E99F /* RedBag */ = {
@@ -2403,6 +2342,7 @@
 				541554151E7BBE5D00E85A86 /* close@3x.png in Resources */,
 				5411286C1E72798C0050C301 /* YMSetController.xib in Resources */,
 				54D07ECD1E8E35D800CAA5ED /* YMSectionCell.xib in Resources */,
+				5433AAB81ECD4B5300155EC8 /* YMWKWebViewController.xib in Resources */,
 				186F414A1E5A9524002F4CDC /* LaunchScreen.storyboard in Resources */,
 				5414B6AF1E67CD12002403B9 /* YMMYTaskDetailController.xib in Resources */,
 				546EED6E1EA0BD0A00E1E99F /* YMTaskInfoCell.xib in Resources */,
@@ -2422,6 +2362,7 @@
 				542484861E6045FA009CAA6C /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				5411287B1E7291B50050C301 /* YMSpecTitleCell.xib in Resources */,
 				5415546C1E8280F700E85A86 /* YMTitleActionCell.xib in Resources */,
+				5433AAA61ECD4B1800155EC8 /* YMSignUpController.xib in Resources */,
 				546EED551E9FAC4200E1E99F /* guide_page_1@2x.png in Resources */,
 				541128671E7277320050C301 /* YMWalletController.xib in Resources */,
 				5414B6A51E66D5AA002403B9 /* YMTaskTitleCell.xib in Resources */,
@@ -2429,6 +2370,7 @@
 				5424846E1E5ECEB8009CAA6C /* YMTaskCell.xib in Resources */,
 				54D07EB01E8CF05D00CAA5ED /* YMHeadItemCell.xib in Resources */,
 				546EED281E9C713200E1E99F /* YMSetLoginPswdController.xib in Resources */,
+				5433AAB61ECD4B5300155EC8 /* YMRegistWebController.xib in Resources */,
 				5414B69B1E66CE1E002403B9 /* YMReceHeadCell.xib in Resources */,
 				5414B68E1E6694EB002403B9 /* YMTaskInfoController.xib in Resources */,
 				546EECF61E94E62300E1E99F /* YMWithdrawDetailCell.xib in Resources */,
@@ -2437,10 +2379,10 @@
 				54D07EC81E8E1E4600CAA5ED /* YMMainHeadCell.xib in Resources */,
 				541128531E7276580050C301 /* YMFeedBackController.xib in Resources */,
 				546EECEC1E948C6D00E1E99F /* YMMeWalletCell.xib in Resources */,
-				54FF81E31EADF9260093503D /* YMRegistWebController.xib in Resources */,
 				546EED641EA0BC6C00E1E99F /* YMTaskBaseController.xib in Resources */,
 				5406D3AC1E6515F300DE565B /* YMTaskDetailController.xib in Resources */,
 				546EED231E9B929600E1E99F /* BaseWebViewController.xib in Resources */,
+				5433AABD1ECD4E2200155EC8 /* YMWebViewController.xib in Resources */,
 				5414B6B41E67E087002403B9 /* YMContentCell.xib in Resources */,
 				541553FB1E7BBD8800E85A86 /* none.png in Resources */,
 				541554401E7F9C1000E85A86 /* YMMsgCell.xib in Resources */,
@@ -2455,9 +2397,7 @@
 				186F41871E5A96EF002F4CDC /* Info.plist in Resources */,
 				5415541C1E7BBE5D00E85A86 /* plus.png in Resources */,
 				546EED561E9FAC4200E1E99F /* guide_page_1@3x.png in Resources */,
-				54FF81F61EB18A3D0093503D /* YMWKWebViewController.xib in Resources */,
 				541128761E7280930050C301 /* YMSignOutCell.xib in Resources */,
-				54DFB7551E6E90BC0089E06B /* YMWebViewController.xib in Resources */,
 				546EED091E9B385900E1E99F /* YMRedBagController.xib in Resources */,
 				54FF82031EB1EDAB0093503D /* SSKeychain.strings in Resources */,
 				5415541A1E7BBE5D00E85A86 /* ico_check_select@2x.png in Resources */,
@@ -2468,7 +2408,6 @@
 				541553FF1E7BBD8800E85A86 /* MImaCell.xib in Resources */,
 				541128711E727EBF0050C301 /* YMSetTitileCell.xib in Resources */,
 				541554171E7BBE5D00E85A86 /* ico_check_nomal@2x.png in Resources */,
-				186F421D1E5AF40C002F4CDC /* Info.plist in Resources */,
 				5406D3961E641BBB00DE565B /* YMTaskCheckCell.xib in Resources */,
 				54D07E8A1E8CA38800CAA5ED /* YMPartnerController.xib in Resources */,
 				5415541B1E7BBE5D00E85A86 /* ico_check_select@3x.png in Resources */,
@@ -2489,6 +2428,7 @@
 				5406D3851E63F8DE00DE565B /* YMMarketController.xib in Resources */,
 				5489FDB71E7A8CE500ABB3EF /* YMWithdrawCell.xib in Resources */,
 				541553FD1E7BBD8800E85A86 /* MGroupCell.xib in Resources */,
+				5433AAB41ECD4B5300155EC8 /* WKWebViewController.xib in Resources */,
 				5414B6961E66CDCE002403B9 /* YMReceSuccessController.xib in Resources */,
 				5489FDA51E7A624C00ABB3EF /* YMWithdrawController.xib in Resources */,
 				5414B6BE1E6800AE002403B9 /* YMRegistViewController.xib in Resources */,
@@ -2519,12 +2459,9 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CloudPush/Pods-CloudPush-resources.sh",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2552,16 +2489,13 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CloudPush-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2572,6 +2506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5415543F1E7F9C1000E85A86 /* YMMsgCell.m in Sources */,
+				5433AAB71ECD4B5300155EC8 /* YMWKWebViewController.m in Sources */,
 				186F41BE1E5AB973002F4CDC /* UIView+Addition.m in Sources */,
 				546EED841EA3689600E1E99F /* UIView+Placeholder.m in Sources */,
 				542484801E601AD4009CAA6C /* YMMeIconCell.m in Sources */,
@@ -2613,7 +2548,6 @@
 				546EECF91E94EB8300E1E99F /* YMWithdrawModel.m in Sources */,
 				186F41BB1E5AB8AE002F4CDC /* HKTabBar.m in Sources */,
 				5489FDA41E7A624C00ABB3EF /* YMWithdrawController.m in Sources */,
-				186F421B1E5AF40C002F4CDC /* ReachStateWIFI.m in Sources */,
 				5489FDB61E7A8CE500ABB3EF /* YMWithdrawCell.m in Sources */,
 				546EED6D1EA0BD0A00E1E99F /* YMTaskInfoCell.m in Sources */,
 				541554531E80C97F00E85A86 /* LargeImageDispose.m in Sources */,
@@ -2652,13 +2586,10 @@
 				5424847B1E6017C0009CAA6C /* YMTitleCell.m in Sources */,
 				18D68E371E5BD40100A42FE0 /* RadiusView.m in Sources */,
 				546EED271E9C713200E1E99F /* YMSetLoginPswdController.m in Sources */,
-				186F42141E5AF40C002F4CDC /* LocalConnection.m in Sources */,
 				546EED3D1E9E12EA00E1E99F /* TestActionProxy.m in Sources */,
 				54D07EA61E8CEB2E00CAA5ED /* TAAnimatedDotView.m in Sources */,
 				546EED3A1E9DFDC500E1E99F /* JSObjectUtil.m in Sources */,
 				54FF82071EB3114B0093503D /* RegExCategories.m in Sources */,
-				186F421A1E5AF40C002F4CDC /* ReachStateUnReachable.m in Sources */,
-				186F42181E5AF40C002F4CDC /* ReachStateLoading.m in Sources */,
 				541128661E7277320050C301 /* YMWalletController.m in Sources */,
 				5489FDA01E79451400ABB3EF /* WXMediaMessage+messageConstruct.m in Sources */,
 				541553F31E7BBD8800E85A86 /* MHeadImaView.m in Sources */,
@@ -2690,18 +2621,16 @@
 				5414B6B31E67E087002403B9 /* YMContentCell.m in Sources */,
 				54D07E801E8C9FE300CAA5ED /* YMMainController.m in Sources */,
 				541128871E77DA950050C301 /* YMQRGenator.m in Sources */,
-				186F421E1E5AF40C002F4CDC /* PingFoundation.m in Sources */,
+				5433AAB51ECD4B5300155EC8 /* YMRegistWebController.m in Sources */,
 				5414B6951E66CDCE002403B9 /* YMReceSuccessController.m in Sources */,
 				54D07ED61E8E669200CAA5ED /* YMHeadFootView.m in Sources */,
 				542484741E5EE357009CAA6C /* MainItemButton.m in Sources */,
 				54D07EDC1E8F5C6B00CAA5ED /* YMModifyPasswdController.m in Sources */,
 				5406D3AB1E6515F300DE565B /* YMTaskDetailController.m in Sources */,
 				546EED181E9B8C0700E1E99F /* YMWebProgressLayer.m in Sources */,
-				186F42211E5AF40C002F4CDC /* RealReachability.m in Sources */,
 				18D68E4F1E5BDA2700A42FE0 /* UIImage+Extension.m in Sources */,
 				5406D3841E63F8DE00DE565B /* YMMarketController.m in Sources */,
 				541128951E7801500050C301 /* ShareModel.m in Sources */,
-				186F42191E5AF40C002F4CDC /* ReachStateUnloaded.m in Sources */,
 				541128751E7280930050C301 /* YMSignOutCell.m in Sources */,
 				546EED7B1EA0C26300E1E99F /* GRBsafeKeyBoard.m in Sources */,
 				541553FC1E7BBD8800E85A86 /* MGroupCell.m in Sources */,
@@ -2709,23 +2638,24 @@
 				541128341E6FF8380050C301 /* YMForgetFirstController.m in Sources */,
 				5415542E1E7BE38300E85A86 /* YMTextField.m in Sources */,
 				5414B69F1E66D327002403B9 /* YMReceFootCell.m in Sources */,
+				54370D7F1ECA978B00A3E60F /* WYWeakScriptMessageDelegate.m in Sources */,
 				546EED781EA0C26300E1E99F /* GRBkeyTextField.m in Sources */,
 				5411287F1E7637DA0050C301 /* YMWalletHeadCell.m in Sources */,
-				186F42201E5AF40C002F4CDC /* README.md in Sources */,
 				5423E29C1E84F49D003CD02E /* NSObject+ZXPUnicode.m in Sources */,
 				546EECFD1E9524A500E1E99F /* YMBalanceCell.m in Sources */,
 				54D07ECC1E8E35D800CAA5ED /* YMSectionCell.m in Sources */,
 				542484691E5ECA70009CAA6C /* Factory.m in Sources */,
 				5411287A1E7291B50050C301 /* YMSpecTitleCell.m in Sources */,
+				5433AAB31ECD4B5300155EC8 /* WKWebViewController.m in Sources */,
 				5406D3951E641BBB00DE565B /* YMTaskCheckCell.m in Sources */,
 				54D07EA81E8CEB2E00CAA5ED /* TAPageControl.m in Sources */,
-				186F42161E5AF40C002F4CDC /* FSMStateUtil.m in Sources */,
 				5415543A1E7BF73100E85A86 /* TPKeyboardAvoidingTableView.m in Sources */,
 				18D68E481E5BD8E700A42FE0 /* SDPhotoBrowser.m in Sources */,
 				186F41AA1E5A9A42002F4CDC /* UIColor+Set.m in Sources */,
 				186F41C71E5ABDF7002F4CDC /* BaseModel.m in Sources */,
 				541553F61E7BBD8800E85A86 /* HWImagePickerSheet.m in Sources */,
 				541128701E727EBF0050C301 /* YMSetTitileCell.m in Sources */,
+				5433AAC01ECD6AF600155EC8 /* YMCoding.m in Sources */,
 				541553F11E7BBD8800E85A86 /* MFlowLayOut.m in Sources */,
 				54D07EA51E8CEB2E00CAA5ED /* TAAbstractDotView.m in Sources */,
 				5414B6911E66A37C002403B9 /* YMTitleView.m in Sources */,
@@ -2739,17 +2669,12 @@
 				54D07EC71E8E1E4600CAA5ED /* YMMainHeadCell.m in Sources */,
 				541553F81E7BBD8800E85A86 /* JJOneScrollView.m in Sources */,
 				54D07EB31E8CF17C00CAA5ED /* CateButton.m in Sources */,
-				54FF81E21EADF9260093503D /* YMRegistWebController.m in Sources */,
-				186F42171E5AF40C002F4CDC /* ReachState.m in Sources */,
-				186F421C1E5AF40C002F4CDC /* ReachStateWWAN.m in Sources */,
 				5411283B1E715AE90050C301 /* YMTaskNumModel.m in Sources */,
-				186F421F1E5AF40C002F4CDC /* PingHelper.m in Sources */,
 				54D07ED31E8E4F3900CAA5ED /* YMBannerModel.m in Sources */,
 				546EECF51E94E62300E1E99F /* YMWithdrawDetailCell.m in Sources */,
 				5423E2AD1E88F487003CD02E /* BRPlaceholderTextView.m in Sources */,
+				5433AABC1ECD4E2200155EC8 /* YMWebViewController.m in Sources */,
 				54D07EAA1E8CEB2E00CAA5ED /* SDCycleScrollView.m in Sources */,
-				54DFB7541E6E90BC0089E06B /* YMWebViewController.m in Sources */,
-				54FF81F51EB18A3D0093503D /* YMWKWebViewController.m in Sources */,
 				542484661E5E93B3009CAA6C /* YMLocationButton.m in Sources */,
 				18D68E6D1E5C027800A42FE0 /* YMLoginController.m in Sources */,
 				541553F41E7BBD8800E85A86 /* HWCollectionViewCell.m in Sources */,
@@ -2763,12 +2688,13 @@
 				54D07E8E1E8CAA0600CAA5ED /* YMProductCell.m in Sources */,
 				5423E2B11E88F487003CD02E /* UIView+YSTextInputKeyboard.m in Sources */,
 				5411288A1E77F3910050C301 /* YMShareManager.m in Sources */,
+				5433AAB21ECD4B5300155EC8 /* WeakScriptMessageDelegate.m in Sources */,
 				5489FDA91E7A63B900ABB3EF /* YMWithdrawStyleController.m in Sources */,
 				54D07E891E8CA38800CAA5ED /* YMPartnerController.m in Sources */,
 				18D68E3D1E5BD70C00A42FE0 /* CWStarRateView.m in Sources */,
 				5411285C1E7276960050C301 /* YZTShareController.m in Sources */,
 				546EED631EA0BC6C00E1E99F /* YMTaskBaseController.m in Sources */,
-				186F42151E5AF40C002F4CDC /* FSMEngine.m in Sources */,
+				5433AAA51ECD4B1800155EC8 /* YMSignUpController.m in Sources */,
 				5489FDBB1E7A93DE00ABB3EF /* YMButtonFootCell.m in Sources */,
 				5411288D1E77FB960050C301 /* ShareButton.m in Sources */,
 				5414B6781E655324002403B9 /* YMBusinessView.m in Sources */,
@@ -2927,7 +2853,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = CloudPush/CloudPush.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BXNJAEDFYS;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2987,7 +2913,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = CloudPush/CloudPush.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BXNJAEDFYS;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -7,7 +7,6 @@
 //
 
 #import "YMTool.h"
-#import "RealReachability.h"
 #import <CoreLocation/CoreLocation.h>
 
 
@@ -39,26 +38,6 @@
     BOOL isReachable = flags & kSCNetworkFlagsReachable;   //是否已经链接
     BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;  //是否需要连接
     return (isReachable&&!needsConnection) ? YES : NO;
-}
-//这个是用第三方RealReachability监听
-+(BOOL)isNetConnect{
-    ReachabilityStatus status = [GLobalRealReachability currentReachabilityStatus];
-    if (status == RealStatusNotReachable)
-    {
-        return NO;
-    }
-    if (status == RealStatusViaWiFi)
-    {
-       return YES;
-    }
-    if (status == RealStatusViaWWAN)
-    {
-         return YES;
-    }
-    //可能会有未知网络情况
-    else{
-        return YES;
-    }
 }
 
 +(NSInteger)getNetTypeByAFN{

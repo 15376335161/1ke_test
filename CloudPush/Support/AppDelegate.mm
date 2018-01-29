@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "RealReachability.h"
 #import "YMTool.h"
 #import "YMTabBarController.h"
 #import "YMWelcomeController.h"
@@ -58,8 +57,8 @@
     [[UINavigationBar appearance]setTintColor:NavBarTintColor];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     //监听网络情况
-    [GLobalRealReachability startNotifier];
-    if (![YMTool isNetConnect]) {
+    
+    if (![YMTool connectedToNetwork]) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"请连接网络" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
@@ -329,7 +328,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     YMMsgListController* mvc = [[YMMsgListController alloc]init];
     mvc.title       = @"消息中心";
     YMNavigationController* nav = [[YMNavigationController alloc]initWithRootViewController:mvc];
-    
     //window找到根控制器
     UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     while (topRootViewController.presentedViewController)
@@ -343,7 +341,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     }else{
         [topRootViewController.navigationController pushViewController:nav animated:YES];
     }
-    
 }
 
 -(void)pushToRedListController{

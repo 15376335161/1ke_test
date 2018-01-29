@@ -36,7 +36,7 @@
     return 1;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 3;
 }
 -(UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     YMSetTitileCell *cell = [YMSetTitileCell cellDequeueReusableCellWithTableView:tableView];
@@ -48,9 +48,6 @@
             cell.titlLabel.text = @"密保手机";
             break;
         case 2:
-            cell.titlLabel.text = @"关于我们";
-            break;
-        case 3:
         {
             YMSignOutCell* cell = [YMSignOutCell cellDequeueReusableCellWithTableView:tableView];
             //去掉分割线
@@ -96,15 +93,9 @@
             svc.title = @"密保手机";
             [self.navigationController pushViewController:svc animated:YES];
         }
-        //密保手机
-        if (indexPath.section == 2) {
-            YMRegistWebController* svc = [[YMRegistWebController alloc]init];
-            svc.title = @"关于我们";
-            svc.urlStr = AboutUsURL;
-            [self.navigationController pushViewController:svc animated:YES];
-        }
+        
         //推出登录
-        else if (indexPath.section == 3){
+        else if (indexPath.section == 2){
             DDLog(@"退出登录");
             [[YMUserManager shareInstance]removeUserInfo];
             [kUserDefaults setBool:NO forKey:kisRefresh];

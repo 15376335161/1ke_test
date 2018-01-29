@@ -253,6 +253,10 @@
     self.jsContext[@"callservice"] = ^(NSString* tel){
         DDLog(@"打客服电话");
     };
+    
+    self.jsContext[@"returnHome"] = ^(){
+        DDLog(@"返回首页");
+    };
 }
 
 #pragma mark - JSExportDelegate

@@ -35,13 +35,17 @@
 @end
 
 @interface YMPartnerController ()<UIWebViewDelegate,JSObjcDelegate>
+{
+    UIImageView *navBarHairlineImageView;
+}
 @property (nonatomic, strong) JSContext *jsContext;
 @property(nonatomic,strong)YMWebProgressLayer *progressLayer; ///< 网页加载进度条
 
 //是否刷新登录状态
 @property(nonatomic,assign)BOOL isLoginStatusChanged;
 
-
+//去掉导航
+//@property(nonatomic,strong)UIImageView* barImageView;
 @end
 
 @implementation YMPartnerController
@@ -50,7 +54,6 @@
     [super viewDidLoad];
     
     self.isLoginStatusChanged = [kUserDefaults boolForKey:kisRefresh];
-    
     _progressLayer = [YMWebProgressLayer new];
     _progressLayer.frame = CGRectMake(0, 42, SCREEN_WIDTH, 2);
     [self.navigationController.navigationBar.layer addSublayer:_progressLayer];
@@ -67,19 +70,49 @@
     //背景色
     self.webView.backgroundColor = ClearColor;
     self.webView.opaque = NO;//这句话很重要，webView是否是不透明的，no为透明 在webView下添加个imageView展示图片就可以了
-    
+    //处理导航 透明问题
+//    _barImageView = self.navigationController.navigationBar.subviews.firstObject;
+//    _barImageView.alpha = 0;
 }
+    
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    //再定义一个imageview来等同于这个黑线
+    navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
+    navBarHairlineImageView.hidden = YES;
+//    if (_barImageView ) {
+//        _barImageView = self.navigationController.navigationBar.subviews.firstObject;
+//        _barImageView.alpha = 0;
+//    }
   //  if (self.isLoginStatusChanged != [kUserDefaults boolForKey:kisRefresh]) {
         self.urlStr = [NSString stringWithFormat:@"%@?uid=%@&ssotoken=%@",InviteFriendsURL,[kUserDefaults valueForKey:kUid],[kUserDefaults valueForKey:kToken]];
-        
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]]];
         self.isLoginStatusChanged = [kUserDefaults boolForKey:kisRefresh];
   //  }
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    navBarHairlineImageView.hidden = NO;
+    //恢复之前的导航色
+    // _barImageView.alpha = 1;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+//通过一个方法来找到这个黑线(findHairlineImageViewUnder):
+- (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
+    if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0) {
+        return (UIImageView *)view;
+    }
+    for (UIView *subview in view.subviews) {
+        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
+        if (imageView) {
+            return imageView;
+        }
+    }
+    return nil;
 }
 
 -(void)dealloc{
